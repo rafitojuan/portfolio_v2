@@ -25,38 +25,37 @@
 </script>
 
 <section id="experience" class="py-12 border-b border-zinc-900">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 class="text-2xl font-bold text-white mb-8">Experience</h2>
+  <div class="max-w-3xl mx-auto px-4 sm:px-6">
+    <h2 class="text-xl font-bold text-white mb-8">Experience</h2>
     
-    <div class="space-y-8">
+    <div class="space-y-12">
       {#each experiences as exp}
-        <div class="relative pl-8 md:pl-0">
-          <!-- Timeline Line for Mobile -->
-          <div class="absolute left-3 top-3 bottom-0 w-px bg-zinc-800 md:hidden"></div>
+        <div class="group relative flex gap-6">
+          <!-- Timeline Line -->
+          <div class="absolute left-[27px] top-14 bottom-0 w-px bg-zinc-800 -mb-6 last:hidden"></div>
           
-          <div class="flex flex-col md:flex-row gap-6 group">
-            <!-- Logo Column -->
-            <div class="flex-shrink-0 relative z-10">
-              <div class="w-12 h-12 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 font-bold group-hover:border-zinc-600 group-hover:text-white transition-colors">
-                {exp.logo}
-              </div>
+          <!-- Logo -->
+          <div class="relative shrink-0">
+            <div class="w-14 h-14 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 font-bold group-hover:border-zinc-700 group-hover:text-white transition-colors">
+              {exp.logo}
             </div>
+          </div>
 
-            <!-- Content Column -->
-            <div class="flex-1 pt-1">
-              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-baseline mb-2">
-                <h3 class="text-lg font-semibold text-white group-hover:text-blue-400 transition-colors">
+          <!-- Content -->
+          <div class="flex-1 pt-1">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
+              <div>
+                <h3 class="font-semibold text-white group-hover:text-zinc-200 transition-colors">
                   {exp.company}
                 </h3>
-                <span class="text-sm font-mono text-zinc-500">{exp.period}</span>
+                <div class="text-sm text-zinc-500">{exp.role}</div>
               </div>
-              
-              <div class="text-zinc-400 font-medium text-sm mb-3">{exp.role}</div>
-              
-              <p class="text-zinc-500 text-sm leading-relaxed">
-                {exp.description}
-              </p>
+              <span class="text-xs font-mono text-zinc-500 pt-1">{exp.period}</span>
             </div>
+            
+            <p class="text-sm text-zinc-400 leading-relaxed">
+              {exp.description}
+            </p>
           </div>
         </div>
       {/each}

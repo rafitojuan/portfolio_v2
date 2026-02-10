@@ -1,4 +1,6 @@
 <script>
+  import { isSearchOpen } from '../stores/search.js';
+  
   let isOpen = false;
   let isDark = true;
 
@@ -33,7 +35,10 @@
     <!-- Actions -->
     <div class="flex items-center gap-2 ml-4">
       <!-- Search Button -->
-      <button class="inline-flex items-center justify-center h-8 gap-2 rounded-full border border-zinc-800 bg-zinc-900 px-3 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-50 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-700">
+      <button 
+        class="inline-flex items-center justify-center h-8 gap-2 rounded-full border border-zinc-800 bg-zinc-900 px-3 text-zinc-400 hover:bg-zinc-800 hover:text-zinc-50 transition-colors focus:outline-none focus:ring-2 focus:ring-zinc-700"
+        on:click={() => $isSearchOpen = true}
+      >
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" class="w-4 h-4">
           <path d="M10.278 11.514a5.824 5.824 0 1 1 1.235-1.235l3.209 3.208A.875.875 0 0 1 14.111 15a.875.875 0 0 1-.624-.278l-3.209-3.208Zm.623-4.69a4.077 4.077 0 1 1-8.154 0 4.077 4.077 0 0 1 8.154 0Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
         </svg>
