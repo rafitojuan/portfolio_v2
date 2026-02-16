@@ -4,9 +4,9 @@
       &copy; {new Date().getFullYear()} Abdul Rehman. All rights reserved.
     </div>
     <div class="flex space-x-6">
-      <a href="#" class="text-zinc-500 hover:text-zinc-300 text-sm transition-colors">GitHub</a>
-      <a href="#" class="text-zinc-500 hover:text-zinc-300 text-sm transition-colors">LinkedIn</a>
-      <a href="#" class="text-zinc-500 hover:text-zinc-300 text-sm transition-colors">Twitter</a>
+      <a href="https://github.com/rafitojuan" target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-zinc-300 text-sm transition-colors">GitHub</a>
+      <a href="https://www.linkedin.com/in/rafitojuan/" target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-zinc-300 text-sm transition-colors">LinkedIn</a>
+      <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-zinc-300 text-sm transition-colors">Twitter</a>
     </div>
   </div>
 </footer>

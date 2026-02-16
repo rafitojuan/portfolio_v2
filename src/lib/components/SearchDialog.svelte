@@ -93,7 +93,7 @@
 {#if $isSearchOpen}
   <!-- Overlay -->
   <div 
-    class="fixed inset-0 z-[60] bg-black/80 backdrop-blur-sm"
+    class="fixed inset-0 z-60 bg-black/80 backdrop-blur-sm"
     transition:fade={{ duration: 150 }}
     on:click={close}
     role="presentation"
@@ -104,12 +104,12 @@
     role="dialog" 
     id="search-dialog"
     aria-modal="true"
-    class="fixed top-1/2 left-1/2 z-[60] grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-2xl shadow-2xl ring-1 ring-zinc-800 duration-200 sm:max-w-lg overflow-hidden bg-zinc-950 p-0 max-sm:top-16 max-sm:translate-y-0"
+    class="fixed top-1/2 left-1/2 z-60 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-2xl shadow-2xl ring-1 ring-zinc-800 duration-200 sm:max-w-lg overflow-hidden bg-zinc-950 p-0 max-sm:top-16 max-sm:translate-y-0"
     tabindex="-1" 
     style="pointer-events: auto;"
     transition:scale={{ duration: 150, start: 0.95 }}
   >
-    <div tabindex="-1" data-slot="command" class="flex h-full w-full flex-col overflow-hidden text-zinc-50" cmdk-root="">
+    <div tabindex="-1" data-slot="command" class="flex h-full w-full flex-col overflow-hidden text-zinc-50" data-cmdk-root="">
       
       <!-- Input -->
       <div data-slot="command-input-wrapper" class="flex h-12 items-center gap-2 border-b border-zinc-800 px-4">
@@ -126,12 +126,14 @@
           spellcheck="false" 
           aria-autocomplete="list" 
           role="combobox" 
-          aria-expanded="true" 
+          aria-expanded="true"
+          aria-controls="search-results"
         >
         {#if query}
           <button 
             on:click={() => { query = ''; inputElement.focus(); }}
             class="p-1 rounded-sm hover:bg-zinc-800 text-zinc-500 hover:text-zinc-300 transition-colors"
+            aria-label="Clear search"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -141,7 +143,7 @@
       </div>
 
       <!-- List -->
-      <div data-slot="command-list" class="max-h-80 scroll-py-0 overflow-x-hidden overflow-y-auto min-h-[300px]" role="listbox">
+      <div id="search-results" data-slot="command-list" class="max-h-80 scroll-py-0 overflow-x-hidden overflow-y-auto min-h-[300px]" role="listbox">
         
         {#if filteredItems.length === 0}
             <div class="py-6 text-center text-sm text-zinc-500">No results found.</div>
