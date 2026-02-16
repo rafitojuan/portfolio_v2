@@ -72,7 +72,6 @@
     }
   }
 
-  // Focus input when opened
   $: if ($isSearchOpen && inputElement) {
     setTimeout(() => inputElement.focus(), 50);
   }
@@ -91,7 +90,6 @@
 <svelte:window on:keydown={handleKeydown} />
 
 {#if $isSearchOpen}
-  <!-- Overlay -->
   <div 
     class="fixed inset-0 z-60 bg-black/80 backdrop-blur-sm"
     transition:fade={{ duration: 150 }}
@@ -99,7 +97,6 @@
     role="presentation"
   ></div>
 
-  <!-- Dialog -->
   <div 
     role="dialog" 
     id="search-dialog"
@@ -111,7 +108,6 @@
   >
     <div tabindex="-1" data-slot="command" class="flex h-full w-full flex-col overflow-hidden text-zinc-50" data-cmdk-root="">
       
-      <!-- Input -->
       <div data-slot="command-input-wrapper" class="flex h-12 items-center gap-2 border-b border-zinc-800 px-4">
         <svg class="size-4 shrink-0 opacity-50 text-zinc-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16" aria-hidden="true">
           <path d="M10.278 11.514a5.824 5.824 0 1 1 1.235-1.235l3.209 3.208A.875.875 0 0 1 14.111 15a.875.875 0 0 1-.624-.278l-3.209-3.208Zm.623-4.69a4.077 4.077 0 1 1-8.154 0 4.077 4.077 0 0 1 8.154 0Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
@@ -142,7 +138,6 @@
         {/if}
       </div>
 
-      <!-- List -->
       <div id="search-results" data-slot="command-list" class="max-h-80 scroll-py-0 overflow-x-hidden overflow-y-auto min-h-[300px]" role="listbox">
         
         {#if filteredItems.length === 0}
@@ -175,14 +170,11 @@
 
       </div>
 
-      <!-- Footer -->
       <div class="border-t border-zinc-800 bg-zinc-900/50 p-2 px-4 flex items-center justify-between">
-        <!-- Logo -->
         <div class="text-zinc-500 font-bold text-xs tracking-wider">
           RJ
         </div>
         
-        <!-- Shortcuts -->
         <div class="flex items-center gap-4 text-[10px] font-medium text-zinc-500">
           <button 
             class="flex items-center gap-1 hover:text-zinc-300 transition-colors cursor-pointer"

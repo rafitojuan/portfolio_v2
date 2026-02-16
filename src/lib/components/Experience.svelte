@@ -31,17 +31,14 @@
     <div class="space-y-12">
       {#each experiences as exp}
         <div class="group relative flex gap-6">
-          <!-- Timeline Line -->
           <div class="absolute left-[27px] top-14 bottom-0 w-px bg-zinc-800 -mb-6 last:hidden"></div>
           
-          <!-- Logo -->
           <div class="relative shrink-0">
             <div class="w-14 h-14 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 font-bold group-hover:border-zinc-700 group-hover:text-white transition-colors">
               {exp.logo}
             </div>
           </div>
 
-          <!-- Content -->
           <div class="flex-1 pt-1">
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
               <div>

@@ -27,7 +27,6 @@
         <div class="group relative flex items-center justify-center w-12 h-12 bg-zinc-900/50 border border-zinc-800 rounded-xl hover:bg-zinc-800 hover:border-zinc-700 transition-all cursor-default">
           <span class="text-xl filter grayscale group-hover:grayscale-0 transition-all">{tech.icon}</span>
           
-          <!-- Tooltip -->
           <div class="absolute -top-10 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-zinc-800 text-zinc-300 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10">
             {tech.name}
           </div>

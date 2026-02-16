@@ -5,7 +5,6 @@
   let loading = true;
   let totalContributions = 0;
   
-  // Color mapping based on contribution level/count
   function getColor(level) {
     switch(level) {
       case 0: return 'bg-zinc-900';
@@ -23,19 +22,16 @@
       const data = await response.json();
       
       if (data && data.contributions) {
-        // Get the last 52 weeks (364 days) or as much as available
         const allDays = data.contributions;
         const daysToShow = 52 * 7;
         const recentDays = allDays.slice(-daysToShow);
         
-        // Group into weeks
         const weeks = [];
         for (let i = 0; i < recentDays.length; i += 7) {
           weeks.push(recentDays.slice(i, i + 7));
         }
         contributionWeeks = weeks;
         
-        // Calculate total if provided or sum it up
         if (data.total && data.total.lastYear) {
             totalContributions = data.total.lastYear;
         } else {
@@ -44,7 +40,6 @@
       }
     } catch (error) {
       console.error('Failed to fetch GitHub contributions:', error);
-      // Fallback or empty state could be handled here
     } finally {
       loading = false;
     }
@@ -72,7 +67,6 @@
       </p>
     </div>
 
-    <!-- Contribution Graph -->
     <div class="bg-zinc-900/30 p-4 rounded-xl border border-zinc-800 overflow-x-auto">
       <div class="min-w-[600px]">
         <div class="flex justify-between items-end mb-4">
