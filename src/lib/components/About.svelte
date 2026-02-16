@@ -7,12 +7,12 @@
   
   function getColor(level) {
     switch(level) {
-      case 0: return 'bg-zinc-900';
-      case 1: return 'bg-green-900';
-      case 2: return 'bg-green-700';
-      case 3: return 'bg-green-500';
-      case 4: return 'bg-green-400';
-      default: return 'bg-zinc-900';
+      case 0: return 'bg-[#161b22]';
+      case 1: return 'bg-[#0e4429]';
+      case 2: return 'bg-[#006d32]';
+      case 3: return 'bg-[#26a641]';
+      case 4: return 'bg-[#39d353]';
+      default: return 'bg-[#161b22]';
     }
   }
 
@@ -45,7 +45,7 @@
     }
   });
 
-  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 </script>
 
 <section id="about" class="pb-12 border-b border-zinc-900/50">
@@ -68,36 +68,47 @@
     </div>
 
     <div class="bg-zinc-900/30 p-4 rounded-xl border border-zinc-800 overflow-x-auto">
-      <div class="min-w-[600px]">
-        <div class="flex justify-between items-end mb-4">
-           <div class="flex flex-col">
+      <div class="min-w-max">
+        <div class="flex justify-between items-end mb-2">
+           <div class="flex flex-col mb-2">
               <span class="text-xs text-zinc-500">Contributions in the last year</span>
-              <span class="text-white font-bold">{loading ? '...' : totalContributions} total</span>
-           </div>
-           <div class="flex gap-8 text-xs text-zinc-500 font-mono">
-              {#each months as month}
-                <span>{month}</span>
-              {/each}
+              <span class="text-white font-bold text-sm">{loading ? '...' : totalContributions} total</span>
            </div>
         </div>
         
+        {#if !loading}
+        <div class="flex gap-[3px] mb-2 text-[10px] text-zinc-500 h-4">
+             {#each contributionWeeks as week, i}
+                {@const date = new Date(week[0].date)}
+                {@const month = date.toLocaleString('default', { month: 'short' })}
+                {@const prevDate = i > 0 ? new Date(contributionWeeks[i-1][0].date) : null}
+                {@const prevMonth = prevDate ? prevDate.toLocaleString('default', { month: 'short' }) : null}
+                <div class="flex-1 w-[10px] relative overflow-visible">
+                     {#if i === 0 || month !== prevMonth}
+                         <span class="absolute top-0 left-0">{month}</span>
+                     {/if}
+                </div>
+             {/each}
+        </div>
+        {/if}
+
         {#if loading}
-            <div class="flex gap-1 h-[100px] animate-pulse">
+            <div class="flex gap-[3px] h-[84px] animate-pulse">
                 {#each Array(52) as _}
-                    <div class="flex flex-col gap-1 flex-1">
+                    <div class="flex flex-col gap-[3px]">
                         {#each Array(7) as _}
-                            <div class="w-full aspect-square rounded-sm bg-zinc-800"></div>
+                            <div class="w-[10px] h-[10px] rounded-[2px] bg-zinc-800"></div>
                         {/each}
                     </div>
                 {/each}
             </div>
         {:else}
-            <div class="flex gap-1 h-[100px]">
+            <div class="flex gap-[3px]">
               {#each contributionWeeks as week}
-                <div class="flex flex-col gap-1 flex-1">
+                <div class="flex flex-col gap-[3px]">
                   {#each week as day}
                     <div 
-                        class="w-full aspect-square rounded-sm {getColor(day.level)}"
+                        class="w-[10px] h-[10px] rounded-[2px] {getColor(day.level)}"
                         title="{day.count} contributions on {day.date}"
                     ></div>
                   {/each}
@@ -106,13 +117,13 @@
             </div>
         {/if}
 
-        <div class="flex justify-end items-center gap-2 mt-4 text-xs text-zinc-500">
+        <div class="flex justify-end items-center gap-2 mt-4 text-[10px] text-zinc-500">
           <span>Less</span>
-          <div class="w-3 h-3 bg-zinc-900 rounded-sm"></div>
-          <div class="w-3 h-3 bg-green-900 rounded-sm"></div>
-          <div class="w-3 h-3 bg-green-700 rounded-sm"></div>
-          <div class="w-3 h-3 bg-green-500 rounded-sm"></div>
-          <div class="w-3 h-3 bg-green-400 rounded-sm"></div>
+          <div class="w-[10px] h-[10px] rounded-[2px] bg-[#161b22]"></div>
+          <div class="w-[10px] h-[10px] rounded-[2px] bg-[#0e4429]"></div>
+          <div class="w-[10px] h-[10px] rounded-[2px] bg-[#006d32]"></div>
+          <div class="w-[10px] h-[10px] rounded-[2px] bg-[#26a641]"></div>
+          <div class="w-[10px] h-[10px] rounded-[2px] bg-[#39d353]"></div>
           <span>More</span>
         </div>
       </div>
