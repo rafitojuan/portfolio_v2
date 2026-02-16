@@ -53,8 +53,8 @@
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 </script>
 
-<section id="about" class="pb-12 border-b border-zinc-900">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6">
+<section id="about" class="pb-12 border-b border-zinc-900/50">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full">
     <h2 class="text-xl font-bold text-white mb-6">About</h2>
     
     <div class="prose prose-invert prose-zinc max-w-none text-zinc-400 mb-8">

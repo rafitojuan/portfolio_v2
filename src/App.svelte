@@ -11,7 +11,7 @@
   import SearchDialog from './lib/components/SearchDialog.svelte';
 </script>
 
-<main class="antialiased bg-zinc-950 text-zinc-50 min-h-screen selection:bg-zinc-800 selection:text-white">
+<main class="antialiased text-zinc-50 min-h-screen selection:bg-zinc-800 selection:text-white">
   <Navbar />
   <Hero />
   <About />

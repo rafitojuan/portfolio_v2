@@ -64,8 +64,8 @@
   });
 </script>
 
-<section id="home" class="pt-8 pb-8">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6">
+<section id="home" class="pt-8 pb-8 border-b border-zinc-900/50">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full">
     
     <!-- Profile Card -->
     <div class="relative overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-950/50">
@@ -193,7 +193,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
               </svg>
             </div>
-            <a href="https://rafitojuan.my.id" class="hover:text-white transition-colors">rafitojuan.my.id</a>
+            <a href="https://rafitojuan.my.id" target="_blank" class="hover:text-white transition-colors">rafitojuan.my.id</a>
           </div>
 
         </div>

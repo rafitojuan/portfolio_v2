@@ -1,5 +1,5 @@
-<section id="contact" class="py-16 md:py-24 border-t border-zinc-900">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+<section id="contact" class="py-16 md:py-24 border-t border-zinc-900/50">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center border-x border-zinc-900/50 h-full">
     <h2 class="text-3xl font-bold text-zinc-50 mb-6">Let's work together</h2>
     <p class="text-zinc-400 mb-8 max-w-2xl mx-auto">
       I'm always open to discussing product design work or partnership opportunities.

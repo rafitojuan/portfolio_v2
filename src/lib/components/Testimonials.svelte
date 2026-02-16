@@ -1,5 +1,5 @@
 <section class="py-16 md:py-24 bg-zinc-900/50">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 border-x border-zinc-900/50 h-full">
     <div class="grid grid-cols-1 md:grid-cols-3 gap-12">
       <div class="md:col-span-1">
         <h2 class="text-2xl font-bold text-zinc-50 mb-4 sticky top-24">Testimonials</h2>

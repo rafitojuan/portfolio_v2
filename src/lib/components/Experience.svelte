@@ -24,8 +24,8 @@
   ];
 </script>
 
-<section id="experience" class="py-12 border-b border-zinc-900">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6">
+<section id="experience" class="py-12 border-b border-zinc-900/50">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full">
     <h2 class="text-xl font-bold text-white mb-8">Experience</h2>
     
     <div class="space-y-12">

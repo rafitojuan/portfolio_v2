@@ -15,7 +15,7 @@
 </script>
 
 <header class="sticky top-0 z-50 w-full overflow-x-hidden bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800 transition-shadow duration-300">
-  <div class="mx-auto flex h-14 items-center justify-between gap-2 px-4 sm:px-6 md:max-w-3xl">
+  <div class="mx-auto flex h-14 items-center justify-between gap-2 px-4 sm:px-6 md:max-w-3xl border-x border-zinc-900/50">
     <!-- Logo -->
     <a href="#home" class="flex-shrink-0 transition-opacity hover:opacity-80" aria-label="Home">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 512 256" class="h-8 w-auto text-zinc-50">

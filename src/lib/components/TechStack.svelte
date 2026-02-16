@@ -18,8 +18,8 @@
   ];
 </script>
 
-<section class="py-12 border-b border-zinc-900">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6">
+<section class="py-12 border-b border-zinc-900/50">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full">
     <h2 class="text-xl font-bold text-white mb-6">Stack</h2>
     
     <div class="flex flex-wrap gap-3">

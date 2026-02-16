@@ -1,7 +1,7 @@
 <script>
   const projects = [
     {
-      title: 'ShopFlow',
+      title: 'Warteg',
       description: 'Modern SaaS shop management system built with PERN stack (PostgreSQL, Express, React, Node.js) and Prisma ORM. Features real-time dashboard and inventory tracking.',
       tags: ['React', 'Node.js', 'PostgreSQL', 'Prisma'],
       link: '#',
@@ -31,8 +31,8 @@
   ];
 </script>
 
-<section id="projects" class="py-12 border-b border-zinc-900">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6">
+<section id="projects" class="py-12 border-b border-zinc-900/50">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full">
     <div class="flex items-center justify-between mb-8">
       <h2 class="text-xl font-bold text-white">Projects</h2>
       <a href="#" class="text-sm text-zinc-500 hover:text-white transition-colors">View all projects →</a>

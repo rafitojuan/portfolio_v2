@@ -1,5 +1,5 @@
-<footer class="py-8 border-t border-zinc-900 bg-zinc-950">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+<footer class="py-8 border-t border-zinc-900/50 bg-zinc-950">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center border-x border-zinc-900/50 h-full">
     <div class="text-zinc-500 text-sm mb-4 md:mb-0">
       &copy; {new Date().getFullYear()} Abdul Rehman. All rights reserved.
     </div>
