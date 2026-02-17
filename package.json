@@ -19,6 +19,7 @@
   },
   "dependencies": {
     "@fontsource/ibm-plex-sans": "^5.2.8",
-    "non.geist": "^2.0.1"
+    "non.geist": "^2.0.1",
+    "tech-stack-icons": "^3.5.8"
   }
 }

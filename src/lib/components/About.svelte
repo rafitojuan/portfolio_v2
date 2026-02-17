@@ -53,18 +53,34 @@
     <h2 class="text-xl font-bold text-white mb-6">About</h2>
     
     <div class="prose prose-invert prose-zinc max-w-none text-zinc-400 mb-8">
-      <p>
-        Fullstack Developer with 4+ years of experience. Started coding at age 14; known for clean architecture and attention to detail.
-      </p>
-      <p>
-        Expertise in MERN stack, Next.js, NestJS, React Native, Electron, and 3D technologies; building scalable web, mobile, desktop, and immersive 3D applications.
-      </p>
-      <p>
-        Now at 18 years old, what some view as a limitation, I see as my greatest advantage—starting early gave me the freedom to learn, experiment and build a strong foundation.
-      </p>
-      <p>
-        Creator of ShopFlow: modern SaaS shop management system. Passionate about exploring new technologies and turning ideas into reality through polished, production-ready projects.
-      </p>
+      <section>
+  <p>
+    As a Software Engineer, I focus on building digital solutions that balance technical precision with a strong understanding of user needs. I currently oversee data management and IT infrastructure at 
+    <strong>PT Energi Pelabuhan Indonesia (State-Owned Enterprise)</strong>, ensuring mission-critical systems run efficiently and reliably.
+  </p>
+
+  <p>
+    Beyond my full-time role, I actively work in remote environments and have delivered 17 projects across web platforms (PWA, Next.js, Livewire), mobile applications (Flutter), and technical tools including data scraping, penetration testing, and load testing. My core stack includes Laravel, React, and Next.js, with an emphasis on scalable and maintainable architecture.
+  </p>
+
+  <h3>Professional Highlights</h3>
+  <ul>
+    <li><strong>SATUASA Student Award</strong> – Best Innovation & 3rd Place IT Product</li>
+    <li><strong>TOEIC Score: 895</strong> – Professional Proficiency level for international collaboration</li>
+    <li>
+      Bachelor’s candidate at <strong>Universitas Terbuka</strong>, where distance learning has strengthened my time management, discipline, and ability to balance full-time work with remote projects.
+    </li>
+  </ul>
+
+  <p>
+    Although my primary focus is software development, winning a national short film competition (FLS2N) shaped my visual perspective, which contributes to designing intuitive and user-centered interfaces.
+  </p>
+
+  <p>
+    I’m experienced in asynchronous collaboration and independent project ownership. If you’re seeking a disciplined and communicative developer who delivers impact remotely, I’d welcome the opportunity to connect.
+  </p>
+</section>
+
     </div>
 
     <div class="bg-zinc-900/30 p-4 rounded-xl border border-zinc-800 overflow-x-auto">

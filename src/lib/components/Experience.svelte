@@ -1,25 +1,32 @@
 <script>
   const experiences = [
     {
-      company: 'Forrof.io',
-      role: 'Senior Fullstack Developer',
-      period: '2023 - Present',
+      company: 'Energi Pelabuhan Indonesia Ltd.',
+      role: 'Data Management and IT Infrastructure',
+      period: '2024 - Present',
       description: 'Develop scalable SaaS applications using modern web technologies. Architect and develop full-stack solutions with the MERN stack and Next.js. Build cross-platform applications with React Native and Electron.',
-      logo: 'F'
+      logo: '/pt_energi_pelabuhan_indonesia_logo.jpg'
     },
     {
-      company: 'Upwork (Freelance)',
-      role: 'Fullstack Developer',
-      period: '2021 - 2023',
+      company: 'Gravix (Freelance)',
+      role: 'Fullstack and Devops Engineer',
+      period: '2024 - 2025',
       description: 'Collaborated with various clients to deliver production-ready web solutions. Focused on solving complex frontend challenges and building robust backend systems.',
-      logo: 'U'
+      logo: '/idgravix_logo.jpg'
     },
     {
-      company: 'TechCorp Inc.',
-      role: 'Junior Web Developer',
-      period: '2020 - 2021',
+      company: 'SEMUDAH',
+      role: 'Head Technician',
+      period: '2023 - 2024',
       description: 'Assisted in the development of client websites using WordPress and custom PHP. Learned the fundamentals of web development and agile methodologies.',
-      logo: 'T'
+      logo: '/semudah.jpg'
+    },
+    {
+      company: 'Korpolairud Baharkam Polri',
+      role: 'IT Staff Intern',
+      period: 'Jan 2023 - Apr 2023',
+      description: 'Assisted in the development of client websites using WordPress and custom PHP. Learned the fundamentals of web development and agile methodologies.',
+      logo: '/korps_mariniers_logo.jpg'
     }
   ];
 </script>
@@ -34,8 +41,8 @@
           <div class="absolute left-[27px] top-14 bottom-0 w-px bg-zinc-800 -mb-6 last:hidden"></div>
           
           <div class="relative shrink-0">
-            <div class="w-14 h-14 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 font-bold group-hover:border-zinc-700 group-hover:text-white transition-colors">
-              {exp.logo}
+            <div class="w-14 h-14 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 font-bold group-hover:border-zinc-700 group-hover:text-white transition-colors overflow-hidden">
+              <img src={exp.logo} alt={exp.company} class="w-full h-full object-cover" />
             </div>
           </div>
 
