@@ -1,9 +1,12 @@
 <script>
   import { onMount } from 'svelte';
+  import { fade } from 'svelte/transition';
 
   let contributionWeeks = [];
   let loading = true;
   let totalContributions = 0;
+  let hoveredDay = null;
+  let tooltipPosition = { x: 0, y: 0 };
   
   function getColor(level) {
     switch(level) {
@@ -14,6 +17,24 @@
       case 4: return 'bg-[#39d353]';
       default: return 'bg-[#161b22]';
     }
+  }
+
+  function formatDate(dateString) {
+    const [year, month, day] = dateString.split('-');
+    return `${day}.${month}.${year}`;
+  }
+
+  function handleMouseEnter(event, day) {
+    const rect = event.target.getBoundingClientRect();
+    tooltipPosition = {
+      x: rect.left + rect.width / 2,
+      y: rect.top - 8
+    };
+    hoveredDay = day;
+  }
+
+  function handleMouseLeave() {
+    hoveredDay = null;
   }
 
   onMount(async () => {
@@ -123,11 +144,17 @@
               {#each contributionWeeks as week}
                 <div class="flex flex-col gap-[3px]">
                   {#each week as day}
-                    <div 
-                        class="w-[10px] h-[10px] rounded-[2px] {getColor(day.level)}"
-                        title="{day.count} contributions on {day.date}"
-                    ></div>
-                  {/each}
+            <div 
+                class="w-[10px] h-[10px] rounded-[2px] {getColor(day.level)}"
+                role="gridcell"
+                tabindex="0"
+                aria-label="{day.count} contributions on {day.date}"
+                on:mouseenter={(e) => handleMouseEnter(e, day)}
+                on:mouseleave={handleMouseLeave}
+                on:focus={(e) => handleMouseEnter(e, day)}
+                on:blur={handleMouseLeave}
+            ></div>
+          {/each}
                 </div>
               {/each}
             </div>
@@ -145,4 +172,19 @@
       </div>
     </div>
   </div>
+
+  {#if hoveredDay}
+    <div 
+      class="fixed z-50 bg-zinc-700 text-[10px] text-white px-2 py-1 rounded shadow-xl pointer-events-none transform -translate-x-1/2 -translate-y-full"
+      style="top: {tooltipPosition.y}px; left: {tooltipPosition.x}px;"
+      transition:fade={{ duration: 100 }}
+    >
+      <div class="whitespace-nowrap font-medium text-zinc-200">
+        <span class="text-white font-bold">{hoveredDay.count} contributions</span> on {formatDate(hoveredDay.date)}
+      </div>
+      <div 
+        class="absolute left-1/2 bottom-0 w-2 h-2 bg-zinc-700 transform -translate-x-1/2 translate-y-1/2 rotate-45"
+      ></div>
+    </div>
+  {/if}
 </section>

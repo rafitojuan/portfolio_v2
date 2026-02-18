@@ -14,8 +14,8 @@
     },
     {
       quote: "Cleaned up our messy codebase. Dashboard is now much more maintainable.",
-      author: "Lead Smart Team",
-      role: "Affiliate Marketing Dashboard"
+      author: "Iqbar Ramadhityo",
+      role: "Superman"
     },
     {
       quote: "Delivers clean, scalable components. Great collaboration on production deployments.",
@@ -35,10 +35,10 @@
   let startX2 = 0;
   let animationFrameId: number;
   
-  const SPEED = 0.5; 
+  const SPEED = 0.5;
   const ITEM_WIDTH = 450;
-  const GAP = 24; 
-  const SINGLE_SET_WIDTH = (ITEM_WIDTH + GAP) * testimonials.length; 
+  const GAP = 24;
+  const SINGLE_SET_WIDTH = (ITEM_WIDTH + GAP) * testimonials.length;
 
   function animate() {
     if (!isDragging1) {

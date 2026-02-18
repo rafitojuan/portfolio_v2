@@ -4,7 +4,7 @@
       company: 'Energi Pelabuhan Indonesia Ltd.',
       role: 'Data Management and IT Infrastructure',
       period: '2024 - Present',
-      description: 'Develop scalable SaaS applications using modern web technologies. Architect and develop full-stack solutions with the MERN stack and Next.js. Build cross-platform applications with React Native and Electron.',
+      description: 'Architect and ship scalable web apps, PWAs, mobile clients, and cloud-native APIs using cutting-edge tech. Own full-stack development, DevOps automation, and cloud infrastructure while providing hands-on hardware, network, and data-management support.',
       logo: '/pt_energi_pelabuhan_indonesia_logo.jpg'
     },
     {
@@ -18,14 +18,14 @@
       company: 'SEMUDAH',
       role: 'Head Technician',
       period: '2023 - 2024',
-      description: 'Assisted in the development of client websites using WordPress and custom PHP. Learned the fundamentals of web development and agile methodologies.',
+      description: 'Head of Technician at SEMUDAH, a leading fitness platform. Responsible for leading a team of technicians in maintaining and improving the platform\'s hardware and software infrastructure. Ensured smooth operation of the platform and provided technical support to clients.',
       logo: '/semudah.jpg'
     },
     {
       company: 'Korpolairud Baharkam Polri',
       role: 'IT Staff Intern',
       period: 'Jan 2023 - Apr 2023',
-      description: 'Assisted in the development of client websites using WordPress and custom PHP. Learned the fundamentals of web development and agile methodologies.',
+      description: 'Assisted in the development of internal apps and assisting in hardware maintenance, network configuration, and software deployment.',
       logo: '/korps_mariniers_logo.jpg'
     }
   ];
