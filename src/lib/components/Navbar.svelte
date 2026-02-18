@@ -17,7 +17,7 @@
 <header class="sticky top-0 z-50 w-full overflow-x-hidden bg-zinc-950/80 backdrop-blur-md border-b border-zinc-800 transition-shadow duration-300">
   <div class="mx-auto flex h-14 items-center justify-between gap-2 px-4 sm:px-6 md:max-w-3xl border-x border-zinc-900/50">
     <a href="#home" class="shrink-0 transition-opacity hover:opacity-80" aria-label="Home">
-      <img src="/Logo-White.png" alt="Home" class="h-12 w-auto" />
+      <img src="/Logo-White.png" alt="Home" class="h-9 w-auto" />
     </a>
 
     <div class="flex-1"></div>

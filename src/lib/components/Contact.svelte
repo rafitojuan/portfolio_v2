@@ -4,7 +4,7 @@
     <p class="text-zinc-400 mb-8 max-w-2xl mx-auto">
       I'm always open to discussing product design work or partnership opportunities.
     </p>
-    <a href="mailto:your.email@example.com" class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-zinc-950 bg-zinc-50 hover:bg-zinc-200 transition-colors">
+    <a href="mailto:rafitosch@gmail.com" class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-zinc-950 bg-zinc-50 hover:bg-zinc-200 transition-colors">
       Say Hello
     </a>
   </div>
