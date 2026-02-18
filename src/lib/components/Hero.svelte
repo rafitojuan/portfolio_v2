@@ -19,6 +19,26 @@
   let typingTimeout;
   let titleIndex = 0;
   let isDeleting = false;
+  let isSlowed = false;
+  let isPlaying = false;
+
+  function playPronunciation() {
+    if (isPlaying) return;
+    
+    const audioPath = isSlowed ? '/rafitojuan%20(slowed).aac' : '/rafitojuan.aac';
+    const audio = new Audio(audioPath);
+    
+    isPlaying = true;
+    audio.play().catch(e => {
+      console.error("Audio play failed", e);
+      isPlaying = false;
+    });
+    
+    audio.onended = () => {
+      isPlaying = false;
+      isSlowed = !isSlowed;
+    };
+  }
 
   function typeWriter() {
     const currentTitle = titles[titleIndex];
@@ -99,7 +119,12 @@
               <svg class="w-6 h-6 text-blue-500 fill-current" viewBox="0 0 24 24">
                 <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .495.083.965.238 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z"/>
               </svg>
-              <button class="text-zinc-500 hover:text-zinc-300 transition-colors" aria-label="Pronounce name">
+              <button 
+                on:click={playPronunciation} 
+                class="transition-colors {isPlaying ? 'text-green-500 animate-pulse' : 'text-zinc-500 hover:text-zinc-300'}" 
+                aria-label="Pronounce name"
+                disabled={isPlaying}
+              >
                 <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
                 </svg>
