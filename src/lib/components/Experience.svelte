@@ -11,21 +11,21 @@
       company: 'Gravix (Freelance)',
       role: 'Fullstack and Devops Engineer',
       period: '2024 - 2025',
-      description: 'Collaborated with various clients to deliver production-ready web solutions. Focused on solving complex frontend challenges and building robust backend systems.',
+      description: 'Collaborated with various clients to deliver production-ready web and pwa solutions. Focused on solving complex frontend challenges and building robust backend systems.',
       logo: '/idgravix_logo.jpg'
     },
     {
       company: 'SEMUDAH',
       role: 'Head Technician',
       period: '2023 - 2024',
-      description: 'Head of Technician at SEMUDAH, a leading fitness platform. Responsible for leading a team of technicians in maintaining and improving the platform\'s hardware and software infrastructure. Ensured smooth operation of the platform and provided technical support to clients.',
+      description: 'Led the technical team at SEMUDAH, overseeing hardware, software, and network operations across vocational workshops. Architected internal tools, streamlined deployment pipelines, and delivered UI/UX & web-dev services to external clients—turning maintenance chaos into a scalable, self-healing ecosystem.',
       logo: '/semudah.jpg'
     },
     {
       company: 'Korpolairud Baharkam Polri',
       role: 'IT Staff Intern',
       period: 'Jan 2023 - Apr 2023',
-      description: 'Assisted in the development of internal apps and assisting in hardware maintenance, network configuration, and software deployment.',
+      description: 'Contributed to the development and enhancement of internal applications, automated deployment workflows, and streamlined IT operations. Provided hands-on support for hardware diagnostics, network optimization, and software provisioning—transforming legacy processes into efficient, scalable solutions.',
       logo: '/korps_mariniers_logo.jpg'
     }
   ];
