@@ -234,7 +234,7 @@
             {project.title}
           </h3>
           
-          <p class="text-sm text-zinc-400 mb-4 line-clamp-2 leading-relaxed">
+          <p class="text-sm text-zinc-400 mb-4 leading-relaxed">
             {project.description}
           </p>
           
@@ -275,21 +275,16 @@
               {project.title}
             </h3>
             
-            <p class="text-sm text-zinc-400 mb-4 line-clamp-3 leading-relaxed grow">
+            <p class="text-sm text-zinc-400 mb-4 leading-relaxed grow">
               {project.description}
             </p>
             
             <div class="flex flex-wrap gap-2 mt-auto">
-              {#each project.tags.slice(0, 3) as tag}
+              {#each project.tags as tag}
                 <span class="px-2 py-1 text-xs font-medium text-zinc-500 bg-zinc-900 border border-zinc-800 rounded">
                   {tag}
                 </span>
               {/each}
-              {#if project.tags.length > 3}
-                <span class="px-2 py-1 text-xs font-medium text-zinc-500 bg-zinc-900 border border-zinc-800 rounded">
-                  +{project.tags.length - 3}
-                </span>
-              {/if}
             </div>
           </a>
         {/each}

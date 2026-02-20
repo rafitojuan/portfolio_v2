@@ -1,27 +1,60 @@
 <script lang="ts">
   import { onMount } from 'svelte';
 
-  const testimonials = [
+  interface Testimonial {
+    quote: string;
+    author: string;
+    role: string;
+    image?: string;
+  }
+
+  const testimonials: Testimonial[] = [
     {
       quote: "Attention to detail and quality work are truly commendable",
-      author: "Faraz Mahmood",
-      role: "Founder @forrof.io"
+      author: "Randi Apriansyah",
+      role: "CEO of Gravix"
     },
     {
       quote: "Redesigned our UI from boring to modern. Even created dark mode from scratch!",
-      author: "Fitreps Team",
-      role: "Fitness Platform"
+      author: "Mr. Rob",
+      role: "Founder of Webapp Studio"
+    },
+    {
+      quote: "Delivers clean, scalable components. Great collaboration on production deployments.",
+      author: "Ari Maulana",
+      role: "Project Manager for QarirGenerator"
+    },
+    {
+      quote: "Delivers clean, scalable components. Great collaboration on production deployments.",
+      author: "Ariz Karlim",
+      role: "Senior Asst Officer at EPI",
+      image: "https://ecopowerport.co.id/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-21-at-11.41.02-1080x675.jpeg"
+    },
+    {
+      quote: "jangan kirim stiker orang hitam telanjang ya cik 😹",
+      author: "Aliya Angel",
+      role: "Graphic designer and Artist"
+    },
+    {
+      quote: "i just create the rest api for you, go fetch with your clean code.",
+      author: "Putra Setyonugroho",
+      role: "Backend and Fullstack Developer also my best buddies"
     },
     {
       quote: "Cleaned up our messy codebase. Dashboard is now much more maintainable.",
       author: "Iqbar Ramadhityo",
-      role: "Superman"
+      role: "Accounting Staff at EPI"
     },
     {
       quote: "Delivers clean, scalable components. Great collaboration on production deployments.",
-      author: "LoopIQ Team",
-      role: "Healthcare Management"
-    }
+      author: "Iqbal Ramadhan",
+      role: "Operation and Technical Staff at EPI"
+    },
+    {
+      quote: "Delivers clean, scalable components. Great collaboration on production deployments.",
+      author: "Abdillah Haidar M.",
+      role: "Data Management and IT Infrastructure Staff at EPI"
+    },
   ];
 
   const row1Items = [...testimonials, ...testimonials, ...testimonials, ...testimonials];
@@ -182,8 +215,12 @@
                   <div class="flex items-center gap-4">
                     <div class="relative">
                       <div class="w-12 h-12 rounded-full bg-linear-to-br from-zinc-800 to-black p-px shadow-lg ring-1 ring-white/10 group-hover:ring-blue-500/30 transition-all duration-300">
-                        <div class="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 font-bold text-lg group-hover:text-white transition-colors">
-                          {testimonial.author.charAt(0)}
+                        <div class="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 font-bold text-lg group-hover:text-white transition-colors overflow-hidden">
+                          {#if testimonial.image}
+                            <img src={testimonial.image} alt={testimonial.author} class="w-full h-full object-cover" />
+                          {:else}
+                            {testimonial.author.charAt(0)}
+                          {/if}
                         </div>
                       </div>
                       <div class="absolute -bottom-1 -right-1 bg-zinc-950 rounded-full p-0.5">
@@ -222,8 +259,12 @@
                   <div class="flex items-center gap-4">
                     <div class="relative">
                       <div class="w-12 h-12 rounded-full bg-linear-to-br from-zinc-800 to-black p-px shadow-lg ring-1 ring-white/10 group-hover:ring-blue-500/30 transition-all duration-300">
-                        <div class="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 font-bold text-lg group-hover:text-white transition-colors">
-                          {testimonial.author.charAt(0)}
+                        <div class="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 font-bold text-lg group-hover:text-white transition-colors overflow-hidden">
+                          {#if testimonial.image}
+                            <img src={testimonial.image} alt={testimonial.author} class="w-full h-full object-cover" />
+                          {:else}
+                            {testimonial.author.charAt(0)}
+                          {/if}
                         </div>
                       </div>
                       <div class="absolute -bottom-1 -right-1 bg-zinc-950 rounded-full p-0.5">
@@ -279,8 +320,12 @@
                   <div class="flex items-center gap-4">
                     <div class="relative">
                       <div class="w-12 h-12 rounded-full bg-linear-to-br from-zinc-800 to-black p-px shadow-lg ring-1 ring-white/10 group-hover:ring-purple-500/30 transition-all duration-300">
-                        <div class="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 font-bold text-lg group-hover:text-white transition-colors">
-                          {testimonial.author.charAt(0)}
+                        <div class="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 font-bold text-lg group-hover:text-white transition-colors overflow-hidden">
+                          {#if testimonial.image}
+                            <img src={testimonial.image} alt={testimonial.author} class="w-full h-full object-cover" />
+                          {:else}
+                            {testimonial.author.charAt(0)}
+                          {/if}
                         </div>
                       </div>
                       <div class="absolute -bottom-1 -right-1 bg-zinc-950 rounded-full p-0.5">
@@ -319,8 +364,12 @@
                   <div class="flex items-center gap-4">
                     <div class="relative">
                       <div class="w-12 h-12 rounded-full bg-linear-to-br from-zinc-800 to-black p-px shadow-lg ring-1 ring-white/10 group-hover:ring-purple-500/30 transition-all duration-300">
-                        <div class="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 font-bold text-lg group-hover:text-white transition-colors">
-                          {testimonial.author.charAt(0)}
+                        <div class="w-full h-full rounded-full bg-zinc-900 flex items-center justify-center text-zinc-400 font-bold text-lg group-hover:text-white transition-colors overflow-hidden">
+                          {#if testimonial.image}
+                            <img src={testimonial.image} alt={testimonial.author} class="w-full h-full object-cover" />
+                          {:else}
+                            {testimonial.author.charAt(0)}
+                          {/if}
                         </div>
                       </div>
                       <div class="absolute -bottom-1 -right-1 bg-zinc-950 rounded-full p-0.5">
