@@ -10,22 +10,25 @@
 
   const testimonials: Testimonial[] = [
     {
-      quote: "Attention to detail and quality work are truly commendable",
+      quote: "Cocok untuk pengerjaan MVP yang cepat, responsive terhadap issue dan bug",
       author: "Randi Apriansyah",
-      role: "CEO of Gravix"
+      role: "CEO of Gravix",
+      image: "https://media.licdn.com/dms/image/v2/D5603AQHYnJMoTxmGMg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1696472732033?e=1773273600&v=beta&t=Vb_HTrRqGA7h8mFcJl-xl8iCYIlRIPPh4bYWmajP430"
     },
     {
-      quote: "Redesigned our UI from boring to modern. Even created dark mode from scratch!",
+      quote: "Bagus dalam pekerjaan kompleks, diskusi yang mantap dan selalu memberikan solusi yang terbaik",
       author: "Mr. Rob",
-      role: "Founder of Webapp Studio"
+      role: "Founder of Webapp Studio",
+      image: "https://bo.mpsonline.cloud/images/iconWebMaster.png"
     },
     {
-      quote: "Delivers clean, scalable components. Great collaboration on production deployments.",
+      quote: "Kualitas kode yang bagus dan selalu best practice.",
       author: "Ari Maulana",
-      role: "Project Manager for QarirGenerator"
+      role: "Project Manager for QarirGenerator",
+      image: "https://media.licdn.com/dms/image/v2/D5603AQGRdU8IfAg2AA/profile-displayphoto-scale_200_200/B56Zh_s3gbHMAY-/0/1754489127337?e=1773273600&v=beta&t=_BIdE8nPYR-Qye0mozYPAJfn8MD-hJ7cAf_ylXYqOvU"
     },
     {
-      quote: "Delivers clean, scalable components. Great collaboration on production deployments.",
+      quote: "Developer yang all around dan fast learner dan mudah beradaptasi.",
       author: "Ariz Karlim",
       role: "Senior Asst Officer at EPI",
       image: "https://ecopowerport.co.id/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-21-at-11.41.02-1080x675.jpeg"
@@ -38,22 +41,20 @@
     {
       quote: "i just create the rest api for you, go fetch with your clean code.",
       author: "Putra Setyonugroho",
-      role: "Backend and Fullstack Developer also my best buddies"
+      role: "Backend and Fullstack Developer also my best buddies",
+      image: "https://media.licdn.com/dms/image/v2/D4E03AQGWPRvqrFWJ9Q/profile-displayphoto-scale_200_200/B4EZh47KHtHgAY-/0/1754375432537?e=1773273600&v=beta&t=zxjOBFuInzVhg7XZAKR9Wbdrzog2fpW1eXPjw-NoKhA"
     },
     {
-      quote: "Cleaned up our messy codebase. Dashboard is now much more maintainable.",
+      quote: "Sangat Inovatif menciptakan sebuah sistem presensi berbasis website dan cepat tanggap soal bug dan mau menerima masukan.",
       author: "Iqbar Ramadhityo",
-      role: "Accounting Staff at EPI"
+      role: "Accounting Staff at EPI",
+      image : "/iqbar.jpg"
     },
     {
       quote: "Delivers clean, scalable components. Great collaboration on production deployments.",
-      author: "Iqbal Ramadhan",
-      role: "Operation and Technical Staff at EPI"
-    },
-    {
-      quote: "Delivers clean, scalable components. Great collaboration on production deployments.",
-      author: "Abdillah Haidar M.",
-      role: "Data Management and IT Infrastructure Staff at EPI"
+      author: "Iqbal Baihaqi",
+      role: "Operation and Technical Staff at EPI",
+      image: "/iqbal.jpg"
     },
   ];
 
