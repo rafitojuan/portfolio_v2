@@ -8,6 +8,8 @@
   import About from './lib/components/About.svelte';
   import Experience from './lib/components/Experience.svelte';
   import Projects from './lib/components/Projects.svelte';
+  import HonorsAwards from './lib/components/HonorsAwards.svelte';
+  import Certifications from './lib/components/Certifications.svelte';
   import TechStack from './lib/components/TechStack.svelte';
   import Testimonials from './lib/components/Testimonials.svelte';
   import Contact from './lib/components/Contact.svelte';
@@ -60,9 +62,11 @@
   <Navbar />
   <Hero />
   <About />
+  <TechStack />
   <Experience />
   <Projects />
-  <TechStack />
+  <HonorsAwards />
+  <Certifications />
   <Testimonials />
   <Contact />
   <Footer />

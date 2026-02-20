@@ -10,48 +10,48 @@
 
   const testimonials: Testimonial[] = [
     {
-      quote: "Cocok untuk pengerjaan MVP yang cepat, responsive terhadap issue dan bug",
+      quote: "Perfect for rapid MVP development; highly responsive to issues and quick to resolve bugs.",
       author: "Randi Apriansyah",
       role: "CEO of Gravix",
       image: "https://media.licdn.com/dms/image/v2/D5603AQHYnJMoTxmGMg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1696472732033?e=1773273600&v=beta&t=Vb_HTrRqGA7h8mFcJl-xl8iCYIlRIPPh4bYWmajP430"
     },
     {
-      quote: "Bagus dalam pekerjaan kompleks, diskusi yang mantap dan selalu memberikan solusi yang terbaik",
+      quote: "Exceptional at handling complex projects. Great communication and always provides the best technical solutions.",
       author: "Mr. Rob",
       role: "Founder of Webapp Studio",
       image: "https://bo.mpsonline.cloud/images/iconWebMaster.png"
     },
     {
-      quote: "Kualitas kode yang bagus dan selalu best practice.",
+      quote: "Delivers high-quality code that consistently adheres to industry best practices.",
       author: "Ari Maulana",
       role: "Project Manager for QarirGenerator",
       image: "https://media.licdn.com/dms/image/v2/D5603AQGRdU8IfAg2AA/profile-displayphoto-scale_200_200/B56Zh_s3gbHMAY-/0/1754489127337?e=1773273600&v=beta&t=_BIdE8nPYR-Qye0mozYPAJfn8MD-hJ7cAf_ylXYqOvU"
     },
     {
-      quote: "Developer yang all around dan fast learner dan mudah beradaptasi.",
+      quote: "A versatile all-around developer who learns quickly and adapts seamlessly to new environments.",
       author: "Ariz Karlim",
       role: "Senior Asst Officer at EPI",
       image: "https://ecopowerport.co.id/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-21-at-11.41.02-1080x675.jpeg"
     },
     {
-      quote: "jangan kirim stiker orang hitam telanjang ya cik 😹",
+      quote: "Always brings a unique perspective and creative energy to our collaborations.",
       author: "Aliya Angel",
       role: "Graphic designer and Artist"
     },
     {
-      quote: "i just create the rest api for you, go fetch with your clean code.",
+      quote: "I provide the backend, and he seamlessly integrates it with clean, efficient frontend code.",
       author: "Putra Setyonugroho",
       role: "Backend and Fullstack Developer also my best buddies",
       image: "https://media.licdn.com/dms/image/v2/D4E03AQGWPRvqrFWJ9Q/profile-displayphoto-scale_200_200/B4EZh47KHtHgAY-/0/1754375432537?e=1773273600&v=beta&t=zxjOBFuInzVhg7XZAKR9Wbdrzog2fpW1eXPjw-NoKhA"
     },
     {
-      quote: "Sangat Inovatif menciptakan sebuah sistem presensi berbasis website dan cepat tanggap soal bug dan mau menerima masukan.",
+      quote: "Highly innovative in developing our web-based attendance system. Quick to resolve bugs and very open to feedback.",
       author: "Iqbar Ramadhityo",
       role: "Accounting Staff at EPI",
       image : "/iqbar.jpg"
     },
     {
-      quote: "Delivers clean, scalable components. Great collaboration on production deployments.",
+      quote: "Consistently delivers clean, scalable components. Excellent collaboration during production deployments.",
       author: "Iqbal Baihaqi",
       role: "Operation and Technical Staff at EPI",
       image: "/iqbal.jpg"
@@ -184,8 +184,6 @@
 
     <div class="flex flex-col gap-12 w-full">
       <div class="relative w-full mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-        <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
         <div 
           role="region"
           aria-label="Testimonials row 1"
@@ -289,8 +287,6 @@
       </div>
 
       <div class="relative w-full mask-[linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-        <!-- svelte-ignore a11y-no-noninteractive-element-interactions -->
-        <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
         <div 
           role="region"
           aria-label="Testimonials row 2"

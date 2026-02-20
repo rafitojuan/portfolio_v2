@@ -204,7 +204,10 @@
   <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full relative">
     <div bind:this={sentinel} class="absolute -top-14 h-1 w-full pointer-events-none opacity-0"></div>
     <div class={`flex items-center justify-between mb-8 sticky top-14 z-10 py-4 border-b border-zinc-800/50 transition-colors duration-300 ${isStuck ? 'bg-black/90 backdrop-blur-sm' : ''}`}>
-      <h2 class="text-xl font-bold text-white">Projects</h2>
+      <div class="flex items-center gap-3">
+        <h2 class="text-xl font-bold text-white">Projects</h2>
+        <span class="text-zinc-500 text-sm font-mono">({projects.length + additionalProjects.length})</span>
+      </div>
       <button on:click={toggleProjects} class="text-sm text-zinc-500 hover:text-white transition-colors">
         {showAllProjects ? 'See less ↑' : 'View all projects →'}
       </button>
