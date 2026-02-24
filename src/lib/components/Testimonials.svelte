@@ -34,9 +34,10 @@
       image: "https://ecopowerport.co.id/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-21-at-11.41.02-1080x675.jpeg"
     },
     {
-      quote: "Always brings a unique perspective and creative energy to our collaborations.",
+      quote: "Love his personality and his works.",
       author: "Aliya Angel",
-      role: "Graphic designer and Artist"
+      role: "Graphic designer and Artist",
+      image: "/aliya.jpeg"
     },
     {
       quote: "I provide the backend, and he seamlessly integrates it with clean, efficient frontend code.",
@@ -51,7 +52,7 @@
       image : "/iqbar.jpg"
     },
     {
-      quote: "Consistently delivers clean, scalable components. Excellent collaboration during production deployments.",
+      quote: "Combines strong technical expertise with limitless creativity. His innovative solutions consistently exceed expectations.",
       author: "Iqbal Baihaqi",
       role: "Operation and Technical Staff at EPI",
       image: "/iqbal.jpg"
