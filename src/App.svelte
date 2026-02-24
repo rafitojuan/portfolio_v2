@@ -7,6 +7,7 @@
   import Hero from './lib/components/Hero.svelte';
   import About from './lib/components/About.svelte';
   import Experience from './lib/components/Experience.svelte';
+  import Education from './lib/components/Education.svelte';
   import Projects from './lib/components/Projects.svelte';
   import HonorsAwards from './lib/components/HonorsAwards.svelte';
   import Certifications from './lib/components/Certifications.svelte';
@@ -64,6 +65,7 @@
   <About />
   <TechStack />
   <Experience />
+  <Education />
   <Projects />
   <HonorsAwards />
   <Certifications />
