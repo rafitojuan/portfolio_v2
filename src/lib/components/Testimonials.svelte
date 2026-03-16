@@ -13,7 +13,7 @@
       quote: "Perfect for rapid MVP development; highly responsive to issues and quick to resolve bugs.",
       author: "Randi Apriansyah",
       role: "CEO of Gravix",
-      image: "https://media.licdn.com/dms/image/v2/D5603AQHYnJMoTxmGMg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1696472732033?e=1773273600&v=beta&t=Vb_HTrRqGA7h8mFcJl-xl8iCYIlRIPPh4bYWmajP430"
+      image: "https://media.licdn.com/dms/image/v2/D5603AQHYnJMoTxmGMg/profile-displayphoto-shrink_200_200/profile-displayphoto-shrink_200_200/0/1696472732033?e=1775088000&v=beta&t=-1NGAeTH-5Bjaf6qbz12j5yQpjqR3zVAnfJDOdacilo"
     },
     {
       quote: "Exceptional at handling complex projects. Great communication and always provides the best technical solutions.",
@@ -25,13 +25,13 @@
       quote: "Delivers high-quality code that consistently adheres to industry best practices.",
       author: "Ari Maulana",
       role: "Project Manager for QarirGenerator",
-      image: "https://media.licdn.com/dms/image/v2/D5603AQGRdU8IfAg2AA/profile-displayphoto-scale_200_200/B56Zh_s3gbHMAY-/0/1754489127337?e=1773273600&v=beta&t=_BIdE8nPYR-Qye0mozYPAJfn8MD-hJ7cAf_ylXYqOvU"
+      image: "https://media.licdn.com/dms/image/v2/D5603AQGRdU8IfAg2AA/profile-displayphoto-scale_200_200/B56Zh_s3gbHMAY-/0/1754489127337?e=1775088000&v=beta&t=PpeB-HEwR9jhmF0uyVGkuF0Eiv2fcNOSpOnwZYu_6e4"
     },
     {
       quote: "A versatile all-around developer who learns quickly and adapts seamlessly to new environments.",
       author: "Ariz Karlim",
       role: "Senior Asst Officer at EPI",
-      image: "https://ecopowerport.co.id/wp-content/uploads/2025/05/WhatsApp-Image-2025-05-21-at-11.41.02-1080x675.jpeg"
+      image: "https://i0.wp.com/maritimindonesia.id/wp-content/uploads/2025/05/IMG-20250521-WA0037-scaled.jpg?fit=800%2C600&ssl=1"
     },
     {
       quote: "Love his personality and his works.",
@@ -43,7 +43,7 @@
       quote: "I provide the backend, and he seamlessly integrates it with clean, efficient frontend code.",
       author: "Putra Setyonugroho",
       role: "Backend and Fullstack Developer also my best buddies",
-      image: "https://media.licdn.com/dms/image/v2/D4E03AQGWPRvqrFWJ9Q/profile-displayphoto-scale_200_200/B4EZh47KHtHgAY-/0/1754375432537?e=1773273600&v=beta&t=zxjOBFuInzVhg7XZAKR9Wbdrzog2fpW1eXPjw-NoKhA"
+      image: "https://media.licdn.com/dms/image/v2/D4E03AQGWPRvqrFWJ9Q/profile-displayphoto-scale_200_200/B4EZh47KHtHgAY-/0/1754375432537?e=1775088000&v=beta&t=i2-NbUUt22mrlLdHszV5Iz_LQ4aiQ47LGw42j6drZy4"
     },
     {
       quote: "Highly innovative in developing our web-based attendance system. Quick to resolve bugs and very open to feedback.",

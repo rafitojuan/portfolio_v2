@@ -33,7 +33,7 @@
         <p>Built by a human.</p>
       </div>
       <p>
-        Inspired by <a href="https://github.com/abdulrehmanwaseem" target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-white transition-colors">Abdul Rehman</a>, check him out.
+        Inspired by <a href="https://github.com/" target="_blank" rel="noopener noreferrer" class="text-zinc-500 hover:text-white transition-colors">GitHub</a>.
       </p>
     </div>
   </div>

@@ -3,45 +3,59 @@
 
   let awards = [
     {
-      title: 'HydThon AI Hackathon 2026 (Trophy)',
-      position: 'Winner',
-      date: '02.2026',
-      scope: 'Institutional',
-      attachment: '#',
+      title: 'Distinguished Graduate',
+      position: '1st Position',
+      date: '05.2024',
+      scope: 'College',
+      attachment: 'https://drive.google.com/file/d/1zLCybuD4pkyuo4E5o0P0u5J_jnpQFOCW/view?usp=sharing',
       description: [
-        'Won 1st place at HydThon AI Hackathon 2026 in Hyderabad',
-        'Organized by INTRAPRENEUR in collaboration with Net2Apps, aligned with the HISHA Vision',
-        'Recognized for active participation, innovation, teamwork, and contribution towards building Hyderabad\'s AI ecosystem'
+        'Graduated as the top student in Software Engineering with a remarkable 926 score',
+        'Maintained first-place ranking throughout the entire course of study',
+        'Recognized as one of the most outstanding graduates in Software Engineer history',
       ],
       isOpen: true
     },
     {
-      title: 'SMIT Coding Night (Hackathon)',
-      position: 'Top 5 Position',
-      date: '11.2025',
+      title: 'Internship Honor',
+      position: 'A+',
+      date: '04.2023',
       scope: 'Institutional',
-      attachment: '#',
+      attachment: 'https://drive.google.com/file/d/1UhPsfWe5GxUdEKftbQPI9Z-cLhnEGWjU/view?usp=sharing',
       description: [
-        'Achieved Top 5 ranking among 50+ participating teams',
-        'Developed a real-time collaboration tool using WebSocket technology',
-        'Demonstrated rapid prototyping and full-stack development skills under time pressure'
+        'Completed a 4-month intensive internship program',
+        'Engineered an automated face scanning attendance system with streamlined data management',
+        'Managed physical servers, IT inventory, and network infrastructure',
+        'Delivered technical support to end-users and resolved issues promptly',
+        'Designed illustrations and contributed to UI/UX design'
       ],
-      isOpen: false
+      isOpen: true
     },
     {
-      title: 'FG Public School Cantt (Exhibition)',
-      position: '2nd Position',
-      date: '09.2023',
-      scope: 'College',
-      attachment: '#',
+      title: 'Exellence IT Product Creation',
+      position: '1st Position',
+      date: '10.2022',
+      scope: 'Institutional',
+      attachment: 'https://drive.google.com/file/d/16_nZ_WzzrrMIXb4wZjzjuty5O0q3la-J/view?usp=sharing',
       description: [
-        'Participated in provincial coding project competition',
-        'Developed 3D web-based airplane game',
-        'Achieved 2nd position at FG Public School Cantt Exhibition for project showcase',
-        'Demonstrated my game development skills using web technologies'
+        'Developed an innovative IT product—a platform connecting users with IT Support technicians with Uber kinda tyoe ordering',
+        'Secured first place at the SATUASA STUDENT AWARD project showcase',
+        'Presented the project to the public with confidence'
       ],
-      isOpen: false
-    }
+      isOpen: true
+    },
+    {
+      title: 'Senior Non Brass Competition',
+      position: '3rd Position',
+      date: '10.2022',
+      scope: 'Institutional',
+      attachment: 'https://drive.google.com/file/d/1jw6gb_dJ-WxsbTV9lmJoW_jRRgvalOej/view?usp=sharing',
+      description: [
+        'Participated in a drumband competition',
+        'Expressed passion for art and music',
+        'Demonstrated ability to thrive under pressure and work collaboratively as a team'
+      ],
+      isOpen: true
+    },
   ];
 
   function toggle(index) {

@@ -20,7 +20,7 @@
       description: 'An AI-powered career acceleration platform offering personalized roadmaps, CV reviews, and global job matching strategies for a Singaporean client.',
       tags: ['ReactJS', 'Laravel', 'RestAPI', 'OpenAI','Github Actions'],
       link: 'https://qarirhack.gravix.my.id/',
-      icon: 'https://media.licdn.com/dms/image/v2/D4D0BAQFH7s4M9mGesw/company-logo_200_200/company-logo_200_200/0/1682788922562/qarirlabscom_logo?e=1773273600&v=beta&t=pFs97UTmZ9BALamn-umSovbDGyyIMvlDJ6rjL35LOvQ'
+      icon: 'https://qarirhack.gravix.my.id/assets/favicon-Ch12LfCe.svg'
     },
     {
       title: 'RPHClick',

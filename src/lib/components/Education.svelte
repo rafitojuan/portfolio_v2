@@ -3,11 +3,11 @@
 
   let educations = [
     {
-      institution: 'Universitas Terbuka',
+      institution: 'Open University',
       period: '2026 - Present',
       degree: "Bachelor's Degree in System Information",
       description: [
-        'Currently pursuing a Bachelor\'s degree in System Information, focusing on software engineering and data management.',
+        'Currently pursuing a Bachelor\'s degree in System Information.',
         'Active in remote work and balancing full-time employment with academic responsibilities.',
         'Developing strong time management and self-discipline skills through distance learning.'
       ],
@@ -15,17 +15,17 @@
       isOpen: true
     },
     {
-      institution: 'Jakarta 12th Vocational High School',
+      institution: 'Jakarta 12 Vocational High School',
       period: '2021 - 2024',
       degree: 'Vocational High School - Software Engineering Concentration',
       description: [
-        'Specialized in Software Engineering, with a focus on web development, mobile applications and harddware maintenance.',
+        'Specialized in Software Engineering, with a focus on web development, mobile applications and hardware maintenance.',
         'Winner of SATUASA Stundent Award, for the best idea and project realisation.',
         'Winner of FLS2N (National Short Film Competition), demonstrating creative and visual storytelling skills.',
-        'Active participant in tech communities and student organizations.'
+        'Active participant in webdev communities, japanese club, drumband and student organizations.'
       ],
       tags: ['Laravel', 'Flutter', 'PHP','Javascript','Java','MySQL','IT Business'],
-      isOpen: false
+      isOpen: true
     }
   ];
 

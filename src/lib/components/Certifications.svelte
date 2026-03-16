@@ -1,12 +1,47 @@
 <script>
   const certifications = [
     {
-      name: 'Example Certification',
-      issuer: 'Certification Authority',
+      name: 'Website Technician Competency BNSP',
+      issuer: 'Badan Nasional Sertifikasi Kompetensi (BNSP)',
       date: '2024',
-      link: '#'
+      link: 'https://drive.google.com/file/d/1YQMXi9GeD5GTYLWoWq3fmdUxGmxu_wum/view?usp=sharing'
     },
-    // Add more certifications here
+    {
+      name: 'TOEIC Listening and Reading',
+      issuer: 'ETS',
+      date: '2023',
+      link: 'https://drive.google.com/file/d/12EhwKdZM7uTWnZ_kIsoh2fvNsPSqwC25/view?usp=sharing'
+    },
+    {
+      name: 'Database Administrator',
+      issuer: 'Certification Authority',
+      date: '2026',
+      link: 'https://drive.google.com/file/d/1fLn8qbE4Ln0bY9QRk4hXqtsP-UXtbW35/view?usp=drive_link'
+    },
+    {
+      name: 'Database Developer',
+      issuer: 'Certification Authority',
+      date: '2026',
+      link: 'https://drive.google.com/file/d/1XQK7HkSGloWQ8-Dq5HCvpElyZqX5n10J/view?usp=drive_link'
+    },
+    {
+      name: 'Database Practitioner',
+      issuer: 'Certification Authority',
+      date: '2026',
+      link: 'https://drive.google.com/file/d/1JybtxPgPoEItGhwwhogsh31tZ0p_mcHh/view?usp=drive_link'
+    },
+    {
+      name: 'AI Career Bootcamp',
+      issuer: 'Indonesia AI',
+      date: '2023',
+      link: 'https://drive.google.com/file/d/1mXd_0Df1MCoYiq-A36ZcmAKtUBFFaTeu/view?usp=sharing'
+    },
+    {
+      name: 'Film Screenwriting Certification',
+      issuer: 'Jakarta Islamic Centre',
+      date: '2022',
+      link: 'https://drive.google.com/file/d/1ySAcrQjbNvHpHEnU8AQiGNjQqxTeH_qy/view?usp=sharing'
+    },
   ];
 </script>
 
