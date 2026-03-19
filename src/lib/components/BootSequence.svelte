@@ -68,13 +68,13 @@
       </div>
     {:else}
       <div class="flex flex-col items-center gap-8" in:fly={{ y: 20, duration: 500 }}>
-        <pre class="font-mono text-4xl text-white leading-none whitespace-pre glitch" data-text={faces[faceFrame]}>{faces[faceFrame]}</pre>
+        <pre class="font-mono text-4xl text-white leading-none whitespace-pre" data-text={faces[faceFrame]}>{faces[faceFrame]}</pre>
         <div class="flex flex-col items-center gap-2">
-          <h1 class="text-2xl font-bold text-white tracking-widest uppercase glitch" data-text="Beta portfolio now online">
-            Beta portfolio now online
+          <h1 class="text-2xl font-bold text-white tracking-widest uppercase" data-text="Portfolio now online">
+            Portfolio now online
           </h1>
           <div class="text-zinc-500 text-xs animate-pulse">
-            Pressing any key to continue... (auto)
+            Pressing any key to continue...
           </div>
         </div>
       </div>
@@ -83,35 +83,6 @@
 {/if}
 
 <style>
-  .glitch {
-    position: relative;
-    color: white;
-  }
-  
-  .glitch::before,
-  .glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  
-  .glitch::before {
-    left: 2px;
-    text-shadow: -1px 0 #ff00c1;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
-  }
-  
-  .glitch::after {
-    left: -2px;
-    text-shadow: -1px 0 #00fff9;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim2 5s infinite linear alternate-reverse;
-  }
-  
   @keyframes glitch-anim {
     0% { clip: rect(42px, 9999px, 44px, 0); transform: skew(0.5deg); }
     5% { clip: rect(12px, 9999px, 5px, 0); transform: skew(0.5deg); }

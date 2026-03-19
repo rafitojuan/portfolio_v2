@@ -37,7 +37,7 @@
       scope: 'Institutional',
       attachment: 'https://drive.google.com/file/d/16_nZ_WzzrrMIXb4wZjzjuty5O0q3la-J/view?usp=sharing',
       description: [
-        'Developed an innovative IT product—a platform connecting users with IT Support technicians with Uber kinda tyoe ordering',
+        'Developed an innovative IT product—a platform connecting users with IT Support technicians with Uber kinda type ordering',
         'Secured first place at the SATUASA STUDENT AWARD project showcase',
         'Presented the project to the public with confidence'
       ],
