@@ -68,7 +68,7 @@
   }
 </script>
 
-<section id="honors" class="py-12 border-b border-zinc-900/50">
+<section id="honors" class="py-12 border-b border-zinc-900/50 scroll-mt-14">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full">
     <div class="flex items-center gap-3 mb-8">
       <h2 class="text-xl font-bold text-white">Honors & Awards</h2>

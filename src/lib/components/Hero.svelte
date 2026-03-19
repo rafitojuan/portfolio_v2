@@ -84,7 +84,7 @@
   });
 </script>
 
-<section id="home" class="pt-8 pb-8 border-b border-zinc-900/50">
+<section id="home" class="pt-8 pb-8 border-b border-zinc-900/50 scroll-mt-14">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full">
     
     <div class="relative overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-950/50">

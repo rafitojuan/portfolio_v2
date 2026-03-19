@@ -127,8 +127,8 @@
       title: 'Portfolio Website V2',
       description: 'The current iteration of my professional portfolio, built with Svelte and Tailwind CSS to demonstrate modern frontend capabilities.',
       tags: ['Svelte', 'Tailwind', 'Lenis' , 'Vercel'],
-      link: 'https://rafitojuan.my.id/portfolio/',
-      icon: '/Logo-Purple.png'
+      link: 'https://portfolio.rafitojuan.my.id',
+      icon: '/Logo-White.png'
     },
     {
       title: 'Wordpress Loadtesting',
@@ -200,7 +200,7 @@
   });
 </script>
 
-<section id="projects" class="py-12 border-b border-zinc-900/50">
+<section id="projects" class="py-12 border-b border-zinc-900/50 scroll-mt-14">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full relative">
     <div bind:this={sentinel} class="absolute -top-14 h-1 w-full pointer-events-none opacity-0"></div>
     <div class={`flex items-center justify-between mb-8 sticky top-14 z-10 py-4 border-b border-zinc-800/50 transition-colors duration-300 ${isStuck ? 'bg-black/90 backdrop-blur-sm' : ''}`}>
