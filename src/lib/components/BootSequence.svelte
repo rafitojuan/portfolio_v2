@@ -70,9 +70,9 @@
       <div class="flex flex-col items-center gap-8" in:fly={{ y: 20, duration: 500 }}>
         <pre class="font-mono text-4xl text-white leading-none whitespace-pre" data-text={faces[faceFrame]}>{faces[faceFrame]}</pre>
         <div class="flex flex-col items-center gap-2">
-          <h1 class="text-2xl font-bold text-white tracking-widest uppercase" data-text="Portfolio now online">
+          <p class="text-2xl font-bold text-white tracking-widest uppercase" data-text="Portfolio now online">
             Portfolio now online
-          </h1>
+          </p>
           <div class="text-zinc-500 text-xs animate-pulse">
             Pressing any key to continue...
           </div>

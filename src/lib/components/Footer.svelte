@@ -39,8 +39,8 @@
   </div>
 
   <div class="w-full flex justify-center items-end leading-none select-none pointer-events-none">
-    <h1 class="text-[15vw] font-bold text-zinc-900 tracking-tighter whitespace-nowrap -mb-[3vw]">
+    <p class="text-[15vw] font-bold text-zinc-900 tracking-tighter whitespace-nowrap -mb-[3vw]" aria-hidden="true">
       rafitojuan
-    </h1>
+    </p>
   </div>
 </footer>

@@ -100,7 +100,7 @@
             <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 border-zinc-900 overflow-hidden bg-zinc-800">
               <img 
                 src="https://github.com/rafitojuan.png" 
-                alt="Profile" 
+                alt="Portrait of Rafito Juan" 
                 class="w-full h-full object-cover"
               />
             </div>
@@ -202,7 +202,7 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
               </svg>
             </div>
-            <a href="https://rafitojuan.my.id" target="_blank" class="hover:text-white transition-colors">rafitojuan.my.id</a>
+            <a href="https://rafitojuan.my.id" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">rafitojuan.my.id</a>
           </div>
 
         </div>
