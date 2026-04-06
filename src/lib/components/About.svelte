@@ -114,13 +114,13 @@
         </div>
         
         {#if !loading}
-        <div class="flex gap-[3px] mb-2 text-[10px] text-zinc-500 h-4">
+        <div class="flex gap-0.75 mb-2 text-2.5 text-zinc-500 h-4">
              {#each contributionWeeks as week, i}
                 {@const date = new Date(week[0].date)}
                 {@const month = date.toLocaleString('default', { month: 'short' })}
                 {@const prevDate = i > 0 ? new Date(contributionWeeks[i-1][0].date) : null}
                 {@const prevMonth = prevDate ? prevDate.toLocaleString('default', { month: 'short' }) : null}
-                <div class="flex-1 w-[10px] relative overflow-visible">
+                <div class="flex-1 w-2.5 relative overflow-visible">
                      {#if i === 0 || month !== prevMonth}
                          <span class="absolute top-0 left-0">{month}</span>
                      {/if}
@@ -130,22 +130,22 @@
         {/if}
 
         {#if loading}
-            <div class="flex gap-[3px] h-[84px] animate-pulse">
+            <div class="flex gap-0.75 h-21 animate-pulse">
                 {#each Array(52) as _}
-                    <div class="flex flex-col gap-[3px]">
+                    <div class="flex flex-col gap-0.75">
                         {#each Array(7) as _}
-                            <div class="w-[10px] h-[10px] rounded-[2px] bg-zinc-800"></div>
+                            <div class="w-2.5 h-2.5 rounded-xs bg-zinc-800"></div>
                         {/each}
                     </div>
                 {/each}
             </div>
         {:else}
-            <div class="flex gap-[3px]">
+            <div class="flex gap-0.75">
               {#each contributionWeeks as week}
-                <div class="flex flex-col gap-[3px]">
+                <div class="flex flex-col gap-0.75">
                   {#each week as day}
             <div 
-                class="w-[10px] h-[10px] rounded-[2px] {getColor(day.level)}"
+                class="w-2.5 h-2.5 rounded-xs {getColor(day.level)}"
                 role="gridcell"
                 tabindex="0"
                 aria-label="{day.count} contributions on {day.date}"
@@ -160,13 +160,13 @@
             </div>
         {/if}
 
-        <div class="flex justify-end items-center gap-2 mt-4 text-[10px] text-zinc-500">
+        <div class="flex justify-end items-center gap-2 mt-4 text-2.5 text-zinc-500">
           <span>Less</span>
-          <div class="w-[10px] h-[10px] rounded-[2px] bg-[#161b22]"></div>
-          <div class="w-[10px] h-[10px] rounded-[2px] bg-[#0e4429]"></div>
-          <div class="w-[10px] h-[10px] rounded-[2px] bg-[#006d32]"></div>
-          <div class="w-[10px] h-[10px] rounded-[2px] bg-[#26a641]"></div>
-          <div class="w-[10px] h-[10px] rounded-[2px] bg-[#39d353]"></div>
+          <div class="w-2.5 h-2.5 rounded-xs bg-[#161b22]"></div>
+          <div class="w-2.5 h-2.5 rounded-xs bg-[#0e4429]"></div>
+          <div class="w-2.5 h-2.5 rounded-xs bg-[#006d32]"></div>
+          <div class="w-2.5 h-2.5 rounded-xs bg-[#26a641]"></div>
+          <div class="w-2.5 h-2.5 rounded-xs bg-[#39d353]"></div>
           <span>More</span>
         </div>
       </div>
@@ -175,7 +175,7 @@
 
   {#if hoveredDay}
     <div 
-      class="fixed z-50 bg-zinc-700 text-[10px] text-white px-2 py-1 rounded shadow-xl pointer-events-none transform -translate-x-1/2 -translate-y-full"
+      class="fixed z-50 bg-zinc-700 text-2.5 text-white px-2 py-1 rounded shadow-xl pointer-events-none transform -translate-x-1/2 -translate-y-full"
       style="top: {tooltipPosition.y}px; left: {tooltipPosition.x}px;"
       transition:fade={{ duration: 100 }}
     >

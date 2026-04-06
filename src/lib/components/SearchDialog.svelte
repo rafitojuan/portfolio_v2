@@ -205,7 +205,7 @@
           RJ
         </div>
         
-        <div class="flex items-center gap-4 text-[10px] font-medium text-zinc-500">
+        <div class="flex items-center gap-4 text-2.5 font-medium text-zinc-500">
           <button 
             class="flex items-center gap-1 hover:text-zinc-300 transition-colors cursor-pointer"
             on:click={() => filteredItems[selectedIndex] && handleSelect(filteredItems[selectedIndex])}

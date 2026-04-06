@@ -37,7 +37,7 @@
           <path d="M10.278 11.514a5.824 5.824 0 1 1 1.235-1.235l3.209 3.208A.875.875 0 0 1 14.111 15a.875.875 0 0 1-.624-.278l-3.209-3.208Zm.623-4.69a4.077 4.077 0 1 1-8.154 0 4.077 4.077 0 0 1 8.154 0Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
         </svg>
         <span class="hidden sm:inline font-sans text-xs font-medium">Search</span>
-        <kbd class="hidden sm:inline-flex items-center h-5 px-1.5 rounded bg-zinc-800 text-[10px] font-sans text-zinc-500 border border-zinc-700">Ctrl K</kbd>
+        <kbd class="hidden sm:inline-flex items-center h-5 px-1.5 rounded bg-zinc-800 text-2.5 font-sans text-zinc-500 border border-zinc-700">Ctrl K</kbd>
       </button>
 
       <a href="https://github.com/rafitojuan" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-zinc-400 hover:bg-zinc-800 hover:text-zinc-50 transition-colors" aria-label="GitHub Profile">
