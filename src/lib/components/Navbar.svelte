@@ -26,6 +26,7 @@
       <a href="#about" class="font-mono text-sm font-medium text-zinc-400 hover:text-zinc-50 transition-colors">About</a>
       <a href="#experience" class="font-mono text-sm font-medium text-zinc-400 hover:text-zinc-50 transition-colors">Experience</a>
       <a href="#projects" class="font-mono text-sm font-medium text-zinc-400 hover:text-zinc-50 transition-colors">Projects</a>
+      <a href="#games" class="font-mono text-sm font-medium text-zinc-400 hover:text-zinc-50 transition-colors">Games</a>
     </nav>
 
     <div class="flex items-center gap-2 ml-4">
@@ -67,6 +68,7 @@
         <a href="#about" class="font-mono text-sm font-medium text-zinc-400 hover:text-zinc-50 transition-colors" on:click={() => isOpen = false}>About</a>
         <a href="#experience" class="font-mono text-sm font-medium text-zinc-400 hover:text-zinc-50 transition-colors" on:click={() => isOpen = false}>Experience</a>
         <a href="#projects" class="font-mono text-sm font-medium text-zinc-400 hover:text-zinc-50 transition-colors" on:click={() => isOpen = false}>Projects</a>
+        <a href="#games" class="font-mono text-sm font-medium text-zinc-400 hover:text-zinc-50 transition-colors" on:click={() => isOpen = false}>Games</a>
         <a href="#contact" class="font-mono text-sm font-medium text-zinc-400 hover:text-zinc-50 transition-colors" on:click={() => isOpen = false}>Contact</a>
       </nav>
     </div>

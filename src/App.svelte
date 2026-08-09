@@ -16,8 +16,10 @@
   import Contact from './lib/components/Contact.svelte';
   import Footer from './lib/components/Footer.svelte';
   import SearchDialog from './lib/components/SearchDialog.svelte';
+  import GamesPage from './lib/components/GamesPage.svelte';
 
   let isBooting = true;
+  let currentRoute = 'home';
 
   $: if ($lenisStore) {
     if (isBooting) {
@@ -30,6 +32,17 @@
   }
 
   onMount(() => {
+    const handleHashChange = () => {
+      if (window.location.hash.startsWith('#games')) {
+        currentRoute = 'games';
+        window.scrollTo(0, 0);
+      } else {
+        currentRoute = 'home';
+      }
+    };
+    
+    window.addEventListener('hashchange', handleHashChange);
+    handleHashChange();
     const lenis = new Lenis({
       duration: 1.2,
       easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -50,6 +63,7 @@
     requestAnimationFrame(raf);
 
     return () => {
+      window.removeEventListener('hashchange', handleHashChange);
       lenis.destroy();
       lenisStore.set(null);
     };
@@ -57,19 +71,27 @@
 </script>
 
 <main class="antialiased text-zinc-50 min-h-screen selection:bg-white selection:text-black">
-  <BootSequence on:complete={() => isBooting = false} />
+  {#if isBooting && currentRoute === 'home'}
+    <BootSequence on:complete={() => isBooting = false} />
+  {/if}
   
   <Navbar />
-  <Hero />
-  <About />
-  <TechStack />
-  <Experience />
-  <Education />
-  <Projects />
-  <HonorsAwards />
-  <Certifications />
-  <Testimonials />
-  <Contact />
+  
+  {#if currentRoute === 'home'}
+    <Hero />
+    <About />
+    <TechStack />
+    <Experience />
+    <Education />
+    <Projects />
+    <HonorsAwards />
+    <Certifications />
+    <Testimonials />
+    <Contact />
+  {:else if currentRoute === 'games'}
+    <GamesPage />
+  {/if}
+  
   <Footer />
   <SearchDialog />
 </main>
