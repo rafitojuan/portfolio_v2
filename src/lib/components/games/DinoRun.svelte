@@ -1,11 +1,11 @@
-<script>
+<script lang="ts">
   import { onMount, createEventDispatcher, onDestroy } from 'svelte';
   
   const dispatch = createEventDispatcher();
   
-  let canvas;
-  let ctx;
-  let animationId;
+  let canvas: HTMLCanvasElement;
+  let ctx: CanvasRenderingContext2D;
+  let animationId: number;
   
   // Game constants
   const GRAVITY = 0.6;
@@ -13,7 +13,7 @@
   let GAME_SPEED = 5;
   let OBSTACLE_SPAWN_RATE = 1500; // ms
   
-  let audioCtx = null;
+  let audioCtx: AudioContext | null = null;
   let gameStarted = false;
   let isGameOver = false;
   let score = 0;
@@ -38,17 +38,17 @@
     height: 40,
     vy: 0,
     isJumping: false,
-    activePowerUp: null,
+    activePowerUp: null as string | null,
     powerUpTimer: 0
   };
   
-  let obstacles = [];
-  let powerups = [];
+  let obstacles: any[] = [];
+  let powerups: any[] = [];
   
   function playJumpSound() {
     try {
       if (!audioCtx) {
-        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
       }
       if (audioCtx.state === 'suspended') {
         audioCtx.resume();
@@ -98,7 +98,7 @@
 
   function playStartSound() {
     try {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (!audioCtx) audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
       if (audioCtx.state === 'suspended') audioCtx.resume();
       
       const oscillator = audioCtx.createOscillator();
@@ -121,7 +121,7 @@
 
   function playGameOverSound() {
     try {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (!audioCtx) audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
       if (audioCtx.state === 'suspended') audioCtx.resume();
       
       const oscillator = audioCtx.createOscillator();
@@ -144,7 +144,7 @@
 
   function playScoreSound() {
     try {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (!audioCtx) audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
       if (audioCtx.state === 'suspended') audioCtx.resume();
       
       const oscillator = audioCtx.createOscillator();
@@ -168,7 +168,7 @@
 
   function playPowerUpSound() {
     try {
-      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (!audioCtx) audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
       if (audioCtx.state === 'suspended') audioCtx.resume();
       
       const oscillator = audioCtx.createOscillator();
@@ -207,7 +207,7 @@
     }
   }
   
-  function handleInput(e) {
+  function handleInput(e: KeyboardEvent) {
     if (e.code === 'Space' || e.code === 'ArrowUp') {
       e.preventDefault();
       jump();
@@ -255,6 +255,15 @@
 
     // Hacker aesthetic dino (simple rectangle with a "head")
     ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
+    
+    // Curly black hair
+    ctx.fillStyle = '#000000';
+    ctx.beginPath();
+    ctx.arc(dino.x + 4, dino.y, 4, 0, Math.PI * 2);
+    ctx.arc(dino.x + 10, dino.y - 2, 5, 0, Math.PI * 2);
+    ctx.arc(dino.x + 16, dino.y, 4, 0, Math.PI * 2);
+    ctx.fill();
+
     // Eye
     ctx.fillStyle = '#09090b'; // bg color for eye
     ctx.fillRect(dino.x + 12, dino.y + 6, 4, 4);
@@ -301,7 +310,7 @@
     }
   }
   
-  function checkCollision(obs) {
+  function checkCollision(obs: any) {
     return (
       dino.x < obs.x + obs.width &&
       dino.x + dino.width > obs.x &&
@@ -310,7 +319,7 @@
     );
   }
   
-  function update(dt) {
+  function update(dt: number) {
     if (!gameStarted || isGameOver) return;
     
     // Play BGM
@@ -464,7 +473,7 @@
   
   function draw() {
     // Clear canvas
-    ctx.fillStyle = '#09090b'; // zinc-950
+    ctx.fillStyle = '#18181b'; // zinc-900
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     
     // Draw ground line
@@ -509,7 +518,7 @@
     }
   }
   
-  function gameLoop(time) {
+  function gameLoop(time: number) {
     const dt = time - lastTime;
     lastTime = time;
     
@@ -530,7 +539,7 @@
   }
   
   onMount(() => {
-    ctx = canvas.getContext('2d');
+    ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
     // Set internal resolution
     canvas.width = 600;
     canvas.height = 200;
@@ -567,7 +576,7 @@
     <!-- Use aspect-video or fixed aspect ratio for consistency -->
     <canvas 
       bind:this={canvas} 
-      class="w-full h-full bg-zinc-950 block"
+      class="w-full h-full bg-zinc-900 block"
       style="aspect-ratio: 3/1;"
     ></canvas>
   </div>

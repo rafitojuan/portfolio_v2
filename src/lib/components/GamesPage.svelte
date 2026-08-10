@@ -1,7 +1,7 @@
-<script>
+<script lang="ts">
   import DinoRun from './games/DinoRun.svelte';
 
-  let activeGame = null;
+  let activeGame: string | null = null;
 </script>
 
 {#if activeGame === null}
