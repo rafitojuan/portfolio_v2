@@ -320,15 +320,15 @@
   });
 </script>
 
-<div class="w-full flex flex-col items-center justify-center pt-24 px-4 gap-6 min-h-[80vh]">
-  <div class="w-full max-w-3xl flex justify-between items-center text-zinc-400 font-mono">
+<div class="w-full flex flex-col items-center justify-center pt-16 sm:pt-24 px-2 sm:px-4 gap-3 sm:gap-6 min-h-[80vh]">
+  <div class="w-full max-w-3xl flex justify-between items-center text-zinc-400 font-mono text-xs sm:text-base">
     <button on:click={() => dispatch('back')} class="hover:text-cyan-400 transition-colors flex items-center gap-2">
       <span class="text-cyan-500">&lt;</span> TERMINATE
     </button>
     <div class="text-sm">WARRIROR.exe</div>
   </div>
 
-  <div class="w-full max-w-3xl bg-[#0a0a0c] border border-zinc-800 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.05)] h-[400px] flex flex-col relative font-mono">
+  <div class="w-full max-w-3xl bg-[#0a0a0c] border border-zinc-800 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.05)] h-[300px] sm:h-[400px] flex flex-col relative font-mono">
     
     <!-- Top Bar -->
     <div class="w-full h-8 bg-zinc-900 border-b border-zinc-800 flex items-center px-4 justify-between">
@@ -343,10 +343,10 @@
     </div>
 
     <!-- Game Area -->
-    <div class="flex-1 p-6 flex flex-col relative">
+    <div class="flex-1 p-3 sm:p-6 flex flex-col relative">
       
       <!-- Stats -->
-      <div class="flex justify-between text-zinc-400 mb-8">
+      <div class="flex justify-between text-zinc-400 mb-4 sm:mb-8 text-sm sm:text-base">
         <div>SCORE: <span class="text-cyan-400 font-bold">{score}</span></div>
         <div>WPM: <span class="text-emerald-400 font-bold">{wpm}</span></div>
       </div>
@@ -354,22 +354,22 @@
       <!-- Main Typing Area -->
       <div class="flex-1 flex flex-col items-center justify-center">
         {#if !gameStarted && !isGameOver}
-          <div class="text-cyan-400 text-2xl font-bold mb-4 animate-pulse">SYSTEM READY</div>
-          <div class="text-zinc-500">Start typing to initiate bypass...</div>
+          <div class="text-cyan-400 text-lg sm:text-2xl font-bold mb-2 sm:mb-4 animate-pulse">SYSTEM READY</div>
+          <div class="text-zinc-500 text-xs sm:text-base">Start typing to initiate bypass...</div>
         {:else if isGameOver}
-          <div class="text-rose-500 text-3xl font-bold mb-4">ACCESS DENIED</div>
-          <div class="text-zinc-500 mb-2">TIMEOUT REACHED</div>
+          <div class="text-rose-500 text-xl sm:text-3xl font-bold mb-2 sm:mb-4">ACCESS DENIED</div>
+          <div class="text-zinc-500 mb-2 text-sm sm:text-base">TIMEOUT REACHED</div>
           
-          <div class="mt-4 p-4 border border-zinc-800 bg-zinc-900/50 rounded-lg text-center min-w-[300px] shadow-[0_0_15px_rgba(34,211,238,0.05)]">
+          <div class="mt-4 p-3 sm:p-4 border border-zinc-800 bg-zinc-900/50 rounded-lg text-center min-w-[200px] sm:min-w-[300px] shadow-[0_0_15px_rgba(34,211,238,0.05)]">
             <div class="text-xs text-zinc-500 mb-1">FINAL RATING</div>
             <div class="text-xl font-black text-cyan-400 uppercase tracking-widest">{getRating(wpm)}</div>
           </div>
 
-          <div class="text-zinc-400 mt-6 font-bold text-lg">Final Score: <span class="text-cyan-400">{score}</span> | WPM: <span class="text-emerald-400">{wpm}</span></div>
-          <div class="text-zinc-600 mt-8 text-sm animate-pulse">Press any key to retry</div>
+          <div class="text-zinc-400 mt-4 sm:mt-6 font-bold text-sm sm:text-lg">Final Score: <span class="text-cyan-400">{score}</span> | WPM: <span class="text-emerald-400">{wpm}</span></div>
+          <div class="text-zinc-600 mt-4 sm:mt-8 text-xs sm:text-sm animate-pulse">Press any key to retry</div>
         {:else}
           <!-- Timeout Bar -->
-          <div class="w-full max-w-md h-3 bg-zinc-800 rounded-full mb-8 overflow-hidden relative border border-zinc-700">
+          <div class="w-full max-w-xs sm:max-w-md h-2 sm:h-3 bg-zinc-800 rounded-full mb-4 sm:mb-8 overflow-hidden relative border border-zinc-700">
             <div 
               class="h-full rounded-full {timeLeft > 30 ? 'bg-cyan-400' : 'bg-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.5)]'}"
               style="width: {Math.max(0, timeLeft)}%"
@@ -377,7 +377,7 @@
           </div>
           
           <!-- Word -->
-          <div class="text-3xl tracking-widest flex items-center justify-center break-all text-center">
+          <div class="text-xl sm:text-3xl tracking-widest flex items-center justify-center break-all text-center">
             <span class="text-emerald-400">
               {currentTyped}
             </span>

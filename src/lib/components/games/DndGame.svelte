@@ -108,6 +108,7 @@
   
   let cheatBuffer: string[] = [];
   let isDungeonMaster = false;
+  let showMobileSheet = false;
 
   async function scrollToBottom() {
     await tick();
@@ -354,11 +355,11 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
 <svelte:window on:keydown={handleGlobalKeydown} />
 
 <div
-  class="w-full flex flex-col items-center justify-center pt-24 px-4 gap-6 min-h-[80vh]"
+  class="w-full flex flex-col items-center justify-center pt-16 sm:pt-24 px-2 sm:px-4 gap-3 sm:gap-6 min-h-[80vh]"
 >
   <!-- Header -->
   <div
-    class="w-full max-w-4xl flex justify-between items-center text-zinc-400 font-mono"
+    class="w-full max-w-4xl flex justify-between items-center text-zinc-400 font-mono text-xs sm:text-base"
   >
     <button
       on:click={() => dispatch("back")}
@@ -375,7 +376,7 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
   </div>
 
   <div
-    class="w-full max-w-4xl bg-[#0a0a0c] border border-zinc-800 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.05)] h-[600px] flex flex-col relative font-mono"
+    class="w-full max-w-4xl bg-[#0a0a0c] border border-zinc-800 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.05)] h-[calc(100dvh-140px)] sm:h-[600px] flex flex-col relative font-mono"
   >
     <!-- Top Bar -->
     <div
@@ -395,9 +396,9 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
     <div class="flex-1 flex overflow-hidden">
       {#if gameState === "CHARACTER_CREATION"}
         <div
-          class="flex-1 flex flex-col items-center justify-center p-8 overflow-y-auto"
+          class="flex-1 flex flex-col items-center justify-start sm:justify-center p-4 sm:p-8 overflow-y-auto"
         >
-          <h2 class="text-2xl font-black text-cyan-400 mb-8 tracking-widest">
+          <h2 class="text-lg sm:text-2xl font-black text-cyan-400 mb-4 sm:mb-8 tracking-widest">
             CHARACTER CREATION
           </h2>
 
@@ -485,7 +486,7 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
 
             <button
               on:click={startGame}
-              class="mt-4 w-full bg-cyan-500/10 border border-cyan-500 text-cyan-400 hover:bg-cyan-500/20 font-bold py-3 rounded transition-all"
+              class="mt-4 w-full bg-cyan-500/10 border border-cyan-500 text-cyan-400 hover:bg-cyan-500/20 font-bold py-2 sm:py-3 rounded transition-all text-sm sm:text-base"
             >
               BEGIN ADVENTURE
             </button>
@@ -504,9 +505,17 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
           >
         </div>
       {:else if gameState === "ADVENTURE"}
+        <!-- Mobile Character Toggle -->
+        <button
+          on:click={() => showMobileSheet = !showMobileSheet}
+          class="md:hidden absolute top-10 left-2 z-20 text-[10px] bg-zinc-900 border border-zinc-700 text-zinc-400 px-2 py-1 rounded hover:text-cyan-400 transition-colors"
+        >
+          {showMobileSheet ? '✕ CLOSE' : '⚔ STATS'}
+        </button>
+
         <!-- Left Sidebar: Character Sheet -->
         <div
-          class="w-64 bg-zinc-900/50 border-r border-zinc-800 p-4 flex flex-col shrink-0 overflow-y-auto hidden md:flex overscroll-none"
+          class="{showMobileSheet ? 'flex absolute inset-0 z-10 w-full' : 'hidden'} md:flex md:relative md:w-64 bg-zinc-900/95 md:bg-zinc-900/50 border-r border-zinc-800 p-4 flex-col shrink-0 overflow-y-auto overscroll-none"
         >
           <h3 class="text-cyan-400 font-bold uppercase truncate">{charName}</h3>
           <div class="text-xs text-zinc-500 mb-6">{charRace} {charClass}</div>
@@ -565,15 +574,15 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
         </div>
 
         <!-- Main Content Area -->
-        <div class="flex-1 flex flex-col relative overflow-hidden bg-[#050505]">
+        <div class="flex-1 flex flex-col relative overflow-hidden bg-[#050505] min-w-0">
           <!-- Narrative Log -->
           <div
             bind:this={logContainer}
-            class="flex-1 overflow-y-auto p-6 scroll-smooth overscroll-none"
+            class="flex-1 overflow-y-auto p-3 sm:p-6 scroll-smooth overscroll-none"
           >
             {#each narrativeLog as log}
               <div
-                class="text-zinc-300 leading-relaxed mb-4 whitespace-pre-wrap font-serif text-lg"
+                class="text-zinc-300 leading-relaxed mb-4 whitespace-pre-wrap font-serif text-sm sm:text-lg"
               >
                 {@html log}
               </div>
@@ -602,14 +611,14 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
           </div>
 
           <!-- Bottom Action Area -->
-          <div class="shrink-0 border-t border-zinc-800 bg-zinc-900/80 p-4">
+          <div class="shrink-0 border-t border-zinc-800 bg-zinc-900/80 p-2 sm:p-4">
             <!-- Dynamic Buttons -->
             {#if currentChoices.length > 0}
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 mb-2 sm:mb-4">
                 {#each currentChoices as choice}
                   <button
                     on:click={() => submitAction(choice)}
-                    class="text-left text-sm p-3 bg-zinc-800 hover:bg-cyan-900/30 border border-zinc-700 hover:border-cyan-500/50 text-zinc-300 hover:text-cyan-100 rounded transition-colors"
+                    class="text-left text-xs sm:text-sm p-2 sm:p-3 bg-zinc-800 hover:bg-cyan-900/30 border border-zinc-700 hover:border-cyan-500/50 text-zinc-300 hover:text-cyan-100 rounded transition-colors active:bg-cyan-900/50"
                   >
                     {choice}
                   </button>
@@ -624,7 +633,7 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
                 bind:value={freeInput}
                 on:keydown={handleInputKeydown}
                 type="text"
-                placeholder="Or type any action you want to do..."
+                placeholder="Type action..."
                 disabled={isWaitingForAI || isAnimating}
                 class="flex-1 bg-transparent border-b border-zinc-700 hover:border-zinc-500 focus:border-cyan-500 text-zinc-200 py-2 outline-none transition-colors disabled:opacity-50"
               />

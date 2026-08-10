@@ -26,6 +26,7 @@
   const POWERUP_SPAWN_RATE = 5000;
   
   let cheatBuffer = "";
+  let touchStartY = 0;
 
   // BGM variables
   let bgmTimer = 0;
@@ -701,6 +702,30 @@
     window.addEventListener("keyup", handleKeyUp);
   });
 
+  function handleTouchStart(e: TouchEvent) {
+    touchStartY = e.touches[0].clientY;
+  }
+
+  function handleTouchEnd(e: TouchEvent) {
+    const touchEndY = e.changedTouches[0].clientY;
+    const diffY = touchEndY - touchStartY;
+
+    if (diffY > 40) {
+      // Swipe down → crouch or fast fall
+      if (gameStarted && !isGameOver) {
+        if (!dino.isJumping) {
+          dino.isCrouching = true;
+          setTimeout(() => { dino.isCrouching = false; }, 500);
+        } else {
+          dino.vy += 5;
+        }
+      }
+    } else {
+      // Tap / swipe up → jump
+      jump();
+    }
+  }
+
   onDestroy(() => {
     window.removeEventListener("keydown", handleInput);
     window.removeEventListener("keyup", handleKeyUp);
@@ -709,10 +734,10 @@
 </script>
 
 <div
-  class="w-full flex flex-col items-center justify-center pt-24 px-4 gap-6 min-h-[80vh]"
+  class="w-full flex flex-col items-center justify-center pt-16 sm:pt-24 px-2 sm:px-4 gap-3 sm:gap-6 min-h-[80vh]"
 >
   <div
-    class="w-full max-w-3xl flex justify-between items-center text-zinc-400 font-mono"
+    class="w-full max-w-3xl flex justify-between items-center text-zinc-400 font-mono text-xs sm:text-base"
   >
     <button
       on:click={() => dispatch("back")}
@@ -724,12 +749,15 @@
   </div>
 
   <div
-    class="w-full max-w-3xl border border-zinc-800 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.05)] cursor-pointer focus:outline-none focus:border-cyan-500/50 transition-colors"
+    class="w-full max-w-3xl border border-zinc-800 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.05)] cursor-pointer focus:outline-none focus:border-cyan-500/50 transition-colors select-none touch-none"
     on:click={jump}
+    on:touchstart={handleTouchStart}
+    on:touchend={handleTouchEnd}
+    on:contextmenu|preventDefault
     on:keydown={(e) => e.key === "Enter" && jump()}
     role="button"
     tabindex="0"
-    aria-label="Game Area. Press Space or Click to Jump"
+    aria-label="Game Area. Press Space or Tap to Jump, Swipe Down to Crouch"
   >
     <!-- Use aspect-video or fixed aspect ratio for consistency -->
     <canvas
@@ -740,11 +768,11 @@
   </div>
 
   <div
-    class="text-zinc-500 font-mono text-sm max-w-3xl w-full text-center mt-2 flex flex-col gap-1"
+    class="text-zinc-500 font-mono text-xs sm:text-sm max-w-3xl w-full text-center mt-2 flex flex-col gap-1"
   >
     <div>
-      <span class="hidden sm:inline text-zinc-400">Press SPACE to jump. </span>
-      <span class="sm:hidden text-zinc-400">Tap the game area to jump. </span>
+      <span class="hidden sm:inline text-zinc-400">Press SPACE to jump. ↓ to crouch. </span>
+      <span class="sm:hidden text-zinc-400">Tap to jump. Swipe down to crouch. </span>
       Avoid the obstacles.
     </div>
   </div>
