@@ -1,5 +1,6 @@
 <script lang="ts">
   import DinoRun from './games/DinoRun.svelte';
+  import TerminalTyper from './games/TerminalTyper.svelte';
 
   let activeGame: string | null = null;
 </script>
@@ -33,20 +34,19 @@
         </div>
       </button>
 
-      <!-- Terminal Typer (Disabled) -->
-      <button disabled class="group relative flex flex-col p-6 gap-4 bg-zinc-900/30 border border-zinc-800/50 rounded-xl transition-all text-left opacity-50 cursor-not-allowed">
-        <div class="h-12 w-12 rounded-lg bg-zinc-800/50 flex items-center justify-center border border-zinc-700/50">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-zinc-600"><rect width="20" height="16" x="2" y="4" rx="2" ry="2"/><path d="M6 8h.001"/><path d="M10 8h.001"/><path d="M14 8h.001"/><path d="M18 8h.001"/><path d="M8 12h.001"/><path d="M12 12h.001"/><path d="M16 12h.001"/><path d="M7 16h10"/></svg>
+      <!-- Terminal Warriror -->
+      <button on:click={() => activeGame = 'typer'} class="group relative flex flex-col p-6 gap-4 bg-zinc-900/50 border border-zinc-800 rounded-xl hover:border-cyan-500/50 hover:bg-zinc-800/50 transition-all text-left">
+        <div class="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-xl"></div>
+        <div class="h-12 w-12 rounded-lg bg-zinc-800 flex items-center justify-center border border-zinc-700 group-hover:border-cyan-500/30">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-zinc-400 group-hover:text-cyan-400"><rect width="20" height="16" x="2" y="4" rx="2" ry="2"/><path d="M6 8h.001"/><path d="M10 8h.001"/><path d="M14 8h.001"/><path d="M18 8h.001"/><path d="M8 12h.001"/><path d="M12 12h.001"/><path d="M16 12h.001"/><path d="M7 16h10"/></svg>
         </div>
         <div>
-          <h3 class="text-xl font-bold text-zinc-500 font-mono flex items-center gap-2">
-            Terminal Typer
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-zinc-600"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-          </h3>
-          <p class="text-sm text-zinc-600 mt-2 font-mono">Type the commands before the timeout. Calculates your Words Per Minute.</p>
+          <h3 class="text-xl font-bold text-zinc-200 group-hover:text-zinc-50 font-mono">Terminal Warriror</h3>
+          <p class="text-sm text-zinc-500 mt-2 font-mono group-hover:text-zinc-400">Type the commands before the timeout. Calculates your Words Per Minute.</p>
         </div>
-        <div class="mt-auto pt-4 flex items-center gap-2 text-xs font-mono text-zinc-600">
-          <span>> COMING SOON</span>
+        <div class="mt-auto pt-4 flex items-center gap-2 text-xs font-mono text-cyan-500/70 opacity-0 group-hover:opacity-100 transition-opacity">
+          <span>> EXECUTE</span>
+          <span class="animate-pulse">_</span>
         </div>
       </button>
 
@@ -71,4 +71,6 @@
 </section>
 {:else if activeGame === 'dino'}
   <DinoRun on:back={() => activeGame = null} />
+{:else if activeGame === 'typer'}
+  <TerminalTyper on:back={() => activeGame = null} />
 {/if}
