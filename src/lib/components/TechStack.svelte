@@ -125,6 +125,8 @@
     <div class="flex flex-wrap gap-3">
       {#each stack as tech}
         <a href={tech.url} target="_blank" rel="noopener noreferrer" 
+           aria-label={tech.name}
+           title={tech.name}
            class="group relative flex items-center justify-center w-14 h-14 bg-zinc-900/50 border border-zinc-800 rounded-xl hover:bg-zinc-800 hover:border-zinc-700 transition-all hover:scale-110">
           <span class="w-8 h-8 flex items-center justify-center transition-all duration-300">
             {@html tech.icon}

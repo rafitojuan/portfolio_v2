@@ -1,5 +1,5 @@
 <script>
-  import { onMount, createEventDispatcher } from 'svelte';
+  import { onMount, onDestroy, createEventDispatcher } from 'svelte';
   import { fade } from 'svelte/transition';
 
   const dispatch = createEventDispatcher();
@@ -8,6 +8,8 @@
   let finalMessageShown = false;
   let progress = 0;
   let showAscii = false;
+  let isSkipped = false;
+  let timeouts = [];
   
   let targetData = `
     ██████╗  █████╗ ███████╗██╗████████╗██████╗ 
@@ -29,29 +31,43 @@
     { text: "SYSTEM COMPROMISED. FULL ACCESS GRANTED.", delay: 200, color: "text-fuchsia-500" }
   ];
 
+  function skip() {
+    if (isSkipped) return;
+    isSkipped = true;
+    visible = false;
+    dispatch('complete');
+  }
+
+  function handleKeydown(e) {
+    if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
+      e.preventDefault();
+      skip();
+    }
+  }
+
   onMount(async () => {
-    // Fetch target IP info for hacker aesthetic
-    fetch('https://ipapi.co/json/')
-      .then(res => res.json())
-      .then(data => {
-        if (data.ip) {
-          targetData = `
+    window.addEventListener('keydown', handleKeydown);
+
+    // Fetch target IP info for hacker aesthetic with fast timeout
+    try {
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 1200);
+      fetch('https://ipapi.co/json/', { signal: controller.signal })
+        .then(res => res.json())
+        .then(data => {
+          clearTimeout(timeoutId);
+          if (data.ip) {
+            targetData = `
     >>> TARGET ACQUIRED <<<
     IP  : ${data.ip}
     LOC : ${data.city || 'UNKNOWN'}, ${data.country_name || 'UNKNOWN'}
     ISP : ${data.org || 'UNKNOWN'}
     ASN : ${data.asn || 'UNKNOWN'}
-          `;
-        }
-      })
-      .catch(err => {
-        // Fallback if adblocker or error blocks the request
-        fetch('https://api.ipify.org?format=json')
-          .then(res => res.json())
-          .then(data => {
-            if (data.ip) targetData = `\n    >>> TARGET ACQUIRED <<<\n    IP  : ${data.ip}\n          `;
-          }).catch(() => {});
-      });
+            `;
+          }
+        })
+        .catch(() => {});
+    } catch (_) {}
 
     // Generate random hex lines for noise
     for (let i = 0; i < 15; i++) {
@@ -60,7 +76,9 @@
     }
 
     for (const log of bootLogs) {
+      if (isSkipped) return;
       await new Promise(r => setTimeout(r, log.delay));
+      if (isSkipped) return;
       lines = [...lines, log];
       
       const container = document.getElementById('boot-sequence');
@@ -68,29 +86,47 @@
     }
 
     // Progress bar animation
-    while (progress < 100) {
+    while (progress < 100 && !isSkipped) {
       await new Promise(r => setTimeout(r, 20));
       progress += Math.floor(Math.random() * 15) + 5;
       if (progress > 100) progress = 100;
     }
 
-    await new Promise(r => setTimeout(r, 300));
+    if (isSkipped) return;
+    await new Promise(r => setTimeout(r, 200));
+    if (isSkipped) return;
     finalMessageShown = true;
     showAscii = true;
 
-    await new Promise(r => setTimeout(r, 2500));
+    await new Promise(r => setTimeout(r, 1500));
+    if (isSkipped) return;
     visible = false;
     setTimeout(() => {
-      dispatch('complete');
-    }, 500); 
+      if (!isSkipped) dispatch('complete');
+    }, 300); 
+  });
+
+  onDestroy(() => {
+    window.removeEventListener('keydown', handleKeydown);
   });
 </script>
 
 {#if visible}
   <div 
-    class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center p-4 font-mono text-sm sm:text-base select-none cursor-wait overflow-hidden"
-    out:fade={{ duration: 400 }}
+    class="fixed inset-0 z-[100] bg-black flex flex-col items-center justify-center p-4 font-mono text-sm sm:text-base select-none overflow-hidden"
+    out:fade={{ duration: 300 }}
+    role="region"
+    aria-label="System Boot Sequence"
   >
+    <button
+      type="button"
+      on:click={skip}
+      class="fixed top-4 right-4 z-30 px-3 py-1.5 rounded-lg border border-zinc-800 bg-zinc-900/80 text-zinc-400 hover:text-zinc-100 hover:border-zinc-700 text-xs font-mono transition-colors focus:outline-none focus:ring-1 focus:ring-cyan-500 cursor-pointer"
+      aria-label="Skip boot sequence animation"
+    >
+      Skip [Esc]
+    </button>
+
     <!-- CRT overlay lines -->
     <div class="pointer-events-none fixed inset-0 z-10 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%]"></div>
     
@@ -202,5 +238,13 @@
     90% { clip: rect(24px, 9999px, 12px, 0); transform: skew(0.5deg); }
     95% { clip: rect(65px, 9999px, 86px, 0); transform: skew(0.5deg); }
     100% { clip: rect(12px, 9999px, 5px, 0); transform: skew(0.5deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glitch::before,
+    .glitch::after {
+      animation: none !important;
+      display: none !important;
+    }
   }
 </style>

@@ -141,6 +141,7 @@
                 />
               </svg>
               <button
+                type="button"
                 on:click={playPronunciation}
                 class="transition-colors {isPlaying
                   ? 'text-green-500 animate-pulse'

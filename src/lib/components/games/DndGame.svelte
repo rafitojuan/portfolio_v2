@@ -404,21 +404,23 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
 
           <div class="w-full max-w-md flex flex-col gap-6">
             <div class="flex flex-col gap-2">
-              <label class="text-zinc-500 text-sm">CHARACTER NAME</label>
+              <label for="char-name" class="text-zinc-400 text-sm font-medium">CHARACTER NAME</label>
               <input
+                id="char-name"
                 type="text"
                 bind:value={charName}
                 placeholder="Enter name..."
-                class="bg-zinc-900 border border-zinc-700 rounded px-4 py-2 text-zinc-200 focus:outline-none focus:border-cyan-500"
+                class="bg-zinc-900 border border-zinc-700 rounded px-4 py-2 text-zinc-100 focus:outline-none focus:border-cyan-500"
               />
             </div>
 
             <div class="grid grid-cols-2 gap-4">
               <div class="flex flex-col gap-2">
-                <label class="text-zinc-500 text-sm">RACE</label>
+                <label for="char-race" class="text-zinc-400 text-sm font-medium">RACE</label>
                 <select
+                  id="char-race"
                   bind:value={charRace}
-                  class="bg-zinc-900 border border-zinc-700 rounded px-4 py-2 text-zinc-200 focus:outline-none focus:border-cyan-500"
+                  class="bg-zinc-900 border border-zinc-700 rounded px-4 py-2 text-zinc-100 focus:outline-none focus:border-cyan-500"
                 >
                   {#each races as r}
                     <option value={r}>{r}</option>
@@ -426,10 +428,11 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
                 </select>
               </div>
               <div class="flex flex-col gap-2">
-                <label class="text-zinc-500 text-sm">CLASS</label>
+                <label for="char-class" class="text-zinc-400 text-sm font-medium">CLASS</label>
                 <select
+                  id="char-class"
                   bind:value={charClass}
-                  class="bg-zinc-900 border border-zinc-700 rounded px-4 py-2 text-zinc-200 focus:outline-none focus:border-cyan-500"
+                  class="bg-zinc-900 border border-zinc-700 rounded px-4 py-2 text-zinc-100 focus:outline-none focus:border-cyan-500"
                 >
                   {#each classes as c}
                     <option value={c}>{c}</option>
@@ -442,10 +445,11 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
               class="flex flex-col gap-2 mt-4 p-4 border border-zinc-800 bg-zinc-900/30 rounded-lg"
             >
               <div class="flex justify-between items-center mb-2">
-                <label class="text-zinc-500 text-sm">ATTRIBUTES</label>
+                <span class="text-zinc-400 text-sm font-medium">ATTRIBUTES</span>
                 <button
+                  type="button"
                   on:click={rollStats}
-                  class="text-xs text-cyan-500 hover:text-cyan-400 border border-cyan-900 hover:border-cyan-500 rounded px-2 py-1 transition-colors"
+                  class="text-xs text-cyan-400 hover:text-cyan-300 border border-cyan-900 hover:border-cyan-500 rounded px-2 py-1 transition-colors cursor-pointer"
                 >
                   REROLL (3d6)
                 </button>
@@ -590,19 +594,19 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
 
             {#if isWaitingForAI}
               <div
-                class="flex items-center gap-2 text-zinc-500 mt-4 bg-zinc-900/50 self-start p-3 rounded-2xl rounded-tl-sm w-fit border border-zinc-800"
+                class="flex items-center gap-2 text-zinc-400 mt-4 bg-zinc-900/50 self-start p-3 rounded-2xl rounded-tl-sm w-fit border border-zinc-800"
               >
                 <div class="flex gap-1.5">
                   <div
-                    class="w-2 h-2 bg-zinc-500 rounded-full animate-bounce"
+                    class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"
                     style="animation-delay: 0ms"
                   ></div>
                   <div
-                    class="w-2 h-2 bg-zinc-500 rounded-full animate-bounce"
+                    class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"
                     style="animation-delay: 150ms"
                   ></div>
                   <div
-                    class="w-2 h-2 bg-zinc-500 rounded-full animate-bounce"
+                    class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"
                     style="animation-delay: 300ms"
                   ></div>
                 </div>
@@ -617,8 +621,9 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 mb-2 sm:mb-4">
                 {#each currentChoices as choice}
                   <button
+                    type="button"
                     on:click={() => submitAction(choice)}
-                    class="text-left text-xs sm:text-sm p-2 sm:p-3 bg-zinc-800 hover:bg-cyan-900/30 border border-zinc-700 hover:border-cyan-500/50 text-zinc-300 hover:text-cyan-100 rounded transition-colors active:bg-cyan-900/50"
+                    class="text-left text-xs sm:text-sm p-2 sm:p-3 bg-zinc-800 hover:bg-zinc-700/80 border border-zinc-700 hover:border-cyan-500/50 text-zinc-100 hover:text-white rounded transition-colors active:bg-zinc-700 cursor-pointer"
                   >
                     {choice}
                   </button>

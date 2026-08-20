@@ -204,13 +204,16 @@
     <div class="p-6 space-y-6">
       <!-- Platform Choice -->
       <div>
-        <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400 mb-3 text-left">
+        <div class="block text-xs font-medium uppercase tracking-wider text-zinc-400 mb-3 text-left">
           1. Choose Platform
-        </label>
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" role="radiogroup" aria-label="Choose Contact Platform">
           {#each options as option}
             <button
               type="button"
+              role="radio"
+              aria-checked={activeTab === option.id}
+              aria-label={`Select ${option.name} platform`}
               on:click={() => selectTab(option.id)}
               class="flex flex-row sm:flex-col items-center justify-start sm:justify-center gap-3 sm:gap-0 p-3 sm:p-4 rounded-xl border transition-all text-left sm:text-center relative overflow-hidden cursor-pointer {activeTab === option.id ? 'bg-zinc-900/95 border-zinc-500 shadow-md ring-1 ring-zinc-500/50' : 'bg-zinc-900/40 border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/60 text-zinc-400'}"
             >
@@ -235,7 +238,7 @@
       <!-- Message Template -->
       <div>
         <div class="flex items-center justify-between mb-2">
-          <label class="block text-xs font-medium uppercase tracking-wider text-zinc-400 text-left">
+          <label for="contact-message-template" class="block text-xs font-medium uppercase tracking-wider text-zinc-400 text-left cursor-pointer">
             2. Message Template ({activeOption.name})
           </label>
           <button
@@ -247,6 +250,7 @@
           </button>
         </div>
         <textarea
+          id="contact-message-template"
           bind:value={templates[activeTab]}
           rows="5"
           data-lenis-prevent="true"

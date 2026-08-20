@@ -6,7 +6,17 @@ services:
     volumes:
       - ./:/app
       - /app/node_modules
-    ports:
-      - "80:5173"
+    expose:
+      - "5173"
+    environment:
+      - VIRTUAL_HOST=porto.local
+      - VIRTUAL_PORT=5173
     command: sh -c "npm install && npm run dev -- --host"
     restart: unless-stopped
+    networks:
+      - default
+      - proxy-net
+
+networks:
+  proxy-net:
+    external: true

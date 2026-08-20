@@ -4,9 +4,10 @@
   let educations = [
     {
       institution: 'Open University',
-      period: '2026 - Present',
+      period: '2025 - Present',
       degree: "Bachelor's Degree in System Information",
       description: [
+        'Currently 3.65 SGPA',
         'Currently pursuing a Bachelor\'s degree in System Information.',
         'Active in remote work and balancing full-time employment with academic responsibilities.',
         'Developing strong time management and self-discipline skills through distance learning.'
@@ -43,8 +44,11 @@
       {#each educations as edu, i}
         <div class="group relative border border-zinc-800/50 bg-zinc-900/20 rounded-2xl overflow-hidden hover:border-zinc-700/50 transition-all duration-300">
           <button 
-            class="w-full flex items-start justify-between p-6 text-left cursor-pointer"
+            type="button"
+            class="w-full flex items-start justify-between p-6 text-left cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400"
             on:click={() => toggle(i)}
+            aria-expanded={edu.isOpen}
+            aria-controls={"edu-content-" + i}
           >
             <div class="flex gap-4">
               <div class="mt-1 p-2 rounded-lg bg-zinc-900 border border-zinc-800 text-zinc-400 group-hover:text-zinc-200 transition-colors h-fit">
@@ -62,7 +66,7 @@
               </div>
             </div>
 
-            <div class={`p-2 rounded-lg text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300 transition-all duration-300 ${edu.isOpen ? 'rotate-180' : ''}`}>
+            <div class={`p-2 rounded-lg text-zinc-500 hover:bg-zinc-800 hover:text-zinc-300 transition-all duration-300 ${edu.isOpen ? 'rotate-180' : ''}`} aria-hidden="true">
               <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="m6 9 6 6 6-6"/>
               </svg>
@@ -70,7 +74,7 @@
           </button>
 
           {#if edu.isOpen}
-            <div transition:slide={{ duration: 300, axis: 'y' }} class="px-6 pb-6 pl-[5.5rem]">
+            <div id={"edu-content-" + i} transition:slide={{ duration: 300, axis: 'y' }} class="px-6 pb-6 pl-[5.5rem]">
               <div class="text-zinc-300 text-sm mb-4 font-medium border-l-2 border-zinc-700 pl-3">
                 {edu.degree}
               </div>
