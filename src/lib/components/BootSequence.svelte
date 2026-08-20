@@ -5,20 +5,8 @@
   const dispatch = createEventDispatcher();
   let lines = [];
   let visible = true;
-  let finalMessageShown = false;
   let progress = 0;
-  let showAscii = false;
   let isSkipped = false;
-  let timeouts = [];
-  
-  let targetData = `
-    ██████╗  █████╗ ███████╗██╗████████╗██████╗ 
-    ██╔══██╗██╔══██╗██╔════╝██║╚══██╔══╝██╔══██╗
-    ██████╔╝███████║█████╗  ██║   ██║   ██║  ██║
-    ██╔══██╗██╔══██║██╔══╝  ██║   ██║   ██║  ██║
-    ██║  ██║██║  ██║██║     ██║   ██║   ██████╔╝
-    ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝   ╚═╝   ╚═════╝ 
-  `;
 
   const bootLogs = [
     { text: "INITIATING ctOS OVERRIDE...", delay: 100, color: "text-zinc-400" },
@@ -28,10 +16,10 @@
     { text: "REROUTING TRACE... [SUCCESS]", delay: 80, color: "text-cyan-400" },
     { text: "DECRYPTING USER PROFILE: rafitojuan...", delay: 120, color: "text-zinc-400" },
     { text: "LOADING ASSETS...", delay: 80, color: "text-zinc-400" },
-    { text: "SYSTEM COMPROMISED. FULL ACCESS GRANTED.", delay: 200, color: "text-fuchsia-500" }
+    { text: "SYSTEM COMPROMISED. INITIALIZING INTERFACE...", delay: 150, color: "text-cyan-400" }
   ];
 
-  function skip() {
+  function finish() {
     if (isSkipped) return;
     isSkipped = true;
     visible = false;
@@ -41,33 +29,12 @@
   function handleKeydown(e) {
     if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
       e.preventDefault();
-      skip();
+      finish();
     }
   }
 
   onMount(async () => {
     window.addEventListener('keydown', handleKeydown);
-
-    // Fetch target IP info for hacker aesthetic with fast timeout
-    try {
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 1200);
-      fetch('https://ipapi.co/json/', { signal: controller.signal })
-        .then(res => res.json())
-        .then(data => {
-          clearTimeout(timeoutId);
-          if (data.ip) {
-            targetData = `
-    >>> TARGET ACQUIRED <<<
-    IP  : ${data.ip}
-    LOC : ${data.city || 'UNKNOWN'}, ${data.country_name || 'UNKNOWN'}
-    ISP : ${data.org || 'UNKNOWN'}
-    ASN : ${data.asn || 'UNKNOWN'}
-            `;
-          }
-        })
-        .catch(() => {});
-    } catch (_) {}
 
     // Generate random hex lines for noise
     for (let i = 0; i < 15; i++) {
@@ -93,17 +60,9 @@
     }
 
     if (isSkipped) return;
-    await new Promise(r => setTimeout(r, 200));
+    await new Promise(r => setTimeout(r, 150));
     if (isSkipped) return;
-    finalMessageShown = true;
-    showAscii = true;
-
-    await new Promise(r => setTimeout(r, 1500));
-    if (isSkipped) return;
-    visible = false;
-    setTimeout(() => {
-      if (!isSkipped) dispatch('complete');
-    }, 300); 
+    finish();
   });
 
   onDestroy(() => {
@@ -120,7 +79,7 @@
   >
     <button
       type="button"
-      on:click={skip}
+      on:click={finish}
       class="fixed top-4 right-4 z-30 px-3 py-1.5 rounded-lg border border-zinc-800 bg-zinc-900/80 text-zinc-400 hover:text-zinc-100 hover:border-zinc-700 text-xs font-mono transition-colors focus:outline-none focus:ring-1 focus:ring-cyan-500 cursor-pointer"
       aria-label="Skip boot sequence animation"
     >
@@ -130,121 +89,20 @@
     <!-- CRT overlay lines -->
     <div class="pointer-events-none fixed inset-0 z-10 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%]"></div>
     
-    {#if !finalMessageShown}
-      <div id="boot-sequence" class="w-full max-w-3xl h-[70vh] overflow-hidden flex flex-col justify-end gap-1 pb-8">
-        {#each lines as line}
-          <div class="flex items-start gap-3 opacity-90">
-            <span class="text-zinc-600 shrink-0">[{new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', fractionalSecondDigits: 2 })}]</span>
-            <span class={line.color}>{line.text}</span>
-          </div>
-        {/each}
-        <div class="flex items-center gap-2 mt-4 text-cyan-400">
-          <span>ROOTKIT_EXEC:</span>
-          <div class="flex-1 border border-cyan-900 h-4 relative bg-zinc-950">
-            <div class="absolute inset-y-0 left-0 bg-cyan-500 transition-all duration-75" style="width: {progress}%"></div>
-          </div>
-          <span class="w-12 text-right">{progress}%</span>
+    <div id="boot-sequence" class="w-full max-w-3xl h-[70vh] overflow-hidden flex flex-col justify-end gap-1 pb-8">
+      {#each lines as line}
+        <div class="flex items-start gap-3 opacity-90">
+          <span class="text-zinc-600 shrink-0">[{new Date().toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit', fractionalSecondDigits: 2 })}]</span>
+          <span class={line.color}>{line.text}</span>
         </div>
-      </div>
-    {:else}
-      <div class="flex flex-col items-center gap-6 z-20 w-full max-w-3xl">
-        <pre class="font-mono text-xs sm:text-sm md:text-base text-cyan-400 leading-relaxed whitespace-pre glitch animate-pulse" data-text={targetData}>{targetData}</pre>
-        
-        <div class="flex flex-col items-center gap-3 w-full">
-          <h1 class="text-3xl md:text-5xl font-black text-white tracking-[0.2em] uppercase glitch" data-text="ACCESS GRANTED">
-            ACCESS GRANTED
-          </h1>
-          <div class="text-fuchsia-500 text-sm tracking-widest uppercase animate-pulse flex gap-4">
-            <span>[ CONNECTING TO NETWORK ]</span>
-          </div>
+      {/each}
+      <div class="flex items-center gap-2 mt-4 text-cyan-400">
+        <span>ROOTKIT_EXEC:</span>
+        <div class="flex-1 border border-cyan-900 h-4 relative bg-zinc-950">
+          <div class="absolute inset-y-0 left-0 bg-cyan-500 transition-all duration-75" style="width: {progress}%"></div>
         </div>
+        <span class="w-12 text-right">{progress}%</span>
       </div>
-    {/if}
+    </div>
   </div>
 {/if}
-
-<style>
-  .glitch {
-    position: relative;
-    display: inline-block;
-  }
-  
-  .glitch::before, .glitch::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: black;
-  }
-  
-  .glitch::before {
-    left: 2px;
-    text-shadow: -2px 0 #ff00c1;
-    clip: rect(44px, 450px, 56px, 0);
-    animation: glitch-anim 5s infinite linear alternate-reverse;
-  }
-  
-  .glitch::after {
-    left: -2px;
-    text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
-    animation: glitch-anim2 1s infinite linear alternate-reverse;
-  }
-
-  @keyframes glitch-anim {
-    0% { clip: rect(22px, 9999px, 83px, 0); transform: skew(0.5deg); }
-    5% { clip: rect(62px, 9999px, 5px, 0); transform: skew(0.5deg); }
-    10% { clip: rect(35px, 9999px, 36px, 0); transform: skew(0.5deg); }
-    15% { clip: rect(24px, 9999px, 82px, 0); transform: skew(0.5deg); }
-    20% { clip: rect(98px, 9999px, 26px, 0); transform: skew(0.5deg); }
-    25% { clip: rect(12px, 9999px, 85px, 0); transform: skew(0.5deg); }
-    30% { clip: rect(65px, 9999px, 36px, 0); transform: skew(0.5deg); }
-    35% { clip: rect(24px, 9999px, 12px, 0); transform: skew(0.5deg); }
-    40% { clip: rect(98px, 9999px, 76px, 0); transform: skew(0.5deg); }
-    45% { clip: rect(42px, 9999px, 14px, 0); transform: skew(0.5deg); }
-    50% { clip: rect(12px, 9999px, 35px, 0); transform: skew(0.5deg); }
-    55% { clip: rect(65px, 9999px, 86px, 0); transform: skew(0.5deg); }
-    60% { clip: rect(24px, 9999px, 12px, 0); transform: skew(0.5deg); }
-    65% { clip: rect(98px, 9999px, 86px, 0); transform: skew(0.5deg); }
-    70% { clip: rect(12px, 9999px, 5px, 0); transform: skew(0.5deg); }
-    75% { clip: rect(65px, 9999px, 86px, 0); transform: skew(0.5deg); }
-    80% { clip: rect(24px, 9999px, 12px, 0); transform: skew(0.5deg); }
-    85% { clip: rect(98px, 9999px, 86px, 0); transform: skew(0.5deg); }
-    90% { clip: rect(42px, 9999px, 44px, 0); transform: skew(0.5deg); }
-    95% { clip: rect(12px, 9999px, 5px, 0); transform: skew(0.5deg); }
-    100% { clip: rect(65px, 9999px, 86px, 0); transform: skew(0.5deg); }
-  }
-  
-  @keyframes glitch-anim2 {
-    0% { clip: rect(65px, 9999px, 86px, 0); transform: skew(0.5deg); }
-    5% { clip: rect(12px, 9999px, 5px, 0); transform: skew(0.5deg); }
-    10% { clip: rect(42px, 9999px, 44px, 0); transform: skew(0.5deg); }
-    15% { clip: rect(98px, 9999px, 86px, 0); transform: skew(0.5deg); }
-    20% { clip: rect(24px, 9999px, 12px, 0); transform: skew(0.5deg); }
-    25% { clip: rect(65px, 9999px, 86px, 0); transform: skew(0.5deg); }
-    30% { clip: rect(12px, 9999px, 5px, 0); transform: skew(0.5deg); }
-    35% { clip: rect(98px, 9999px, 86px, 0); transform: skew(0.5deg); }
-    40% { clip: rect(24px, 9999px, 12px, 0); transform: skew(0.5deg); }
-    45% { clip: rect(65px, 9999px, 86px, 0); transform: skew(0.5deg); }
-    50% { clip: rect(12px, 9999px, 5px, 0); transform: skew(0.5deg); }
-    55% { clip: rect(42px, 9999px, 44px, 0); transform: skew(0.5deg); }
-    60% { clip: rect(98px, 9999px, 86px, 0); transform: skew(0.5deg); }
-    65% { clip: rect(24px, 9999px, 12px, 0); transform: skew(0.5deg); }
-    70% { clip: rect(65px, 9999px, 86px, 0); transform: skew(0.5deg); }
-    75% { clip: rect(12px, 9999px, 5px, 0); transform: skew(0.5deg); }
-    80% { clip: rect(42px, 9999px, 44px, 0); transform: skew(0.5deg); }
-    85% { clip: rect(98px, 9999px, 86px, 0); transform: skew(0.5deg); }
-    90% { clip: rect(24px, 9999px, 12px, 0); transform: skew(0.5deg); }
-    95% { clip: rect(65px, 9999px, 86px, 0); transform: skew(0.5deg); }
-    100% { clip: rect(12px, 9999px, 5px, 0); transform: skew(0.5deg); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .glitch::before,
-    .glitch::after {
-      animation: none !important;
-      display: none !important;
-    }
-  }
-</style>

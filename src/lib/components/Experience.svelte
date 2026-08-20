@@ -31,17 +31,17 @@
   ];
 </script>
 
-<section id="experience" class="py-12 border-b border-zinc-900/50 scroll-mt-14">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full">
-    <h2 class="text-xl font-bold text-white mb-8">Experience</h2>
+<section id="experience" class="py-12 border-b border-zinc-200 dark:border-zinc-900/50 scroll-mt-14">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-200 dark:border-zinc-900/50 h-full">
+    <h2 class="text-xl font-bold text-zinc-950 dark:text-white mb-8">Experience</h2>
     
     <div class="space-y-12">
       {#each experiences as exp}
         <div class="group relative flex gap-6">
-          <div class="absolute left-[27px] top-14 bottom-0 w-px bg-zinc-800 -mb-6 last:hidden"></div>
+          <div class="absolute left-[27px] top-14 bottom-0 w-px bg-zinc-200 dark:bg-zinc-800 -mb-6 last:hidden"></div>
           
           <div class="relative shrink-0">
-            <div class="w-14 h-14 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 font-bold group-hover:border-zinc-700 group-hover:text-white transition-colors overflow-hidden">
+            <div class="w-14 h-14 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 font-bold group-hover:border-zinc-400 dark:group-hover:border-zinc-700 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors overflow-hidden shadow-xs dark:shadow-none">
               <img src={exp.logo} alt={exp.company} class="w-full h-full object-cover" />
             </div>
           </div>
@@ -49,15 +49,15 @@
           <div class="flex-1 pt-1">
             <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
               <div>
-                <h3 class="font-semibold text-white group-hover:text-zinc-200 transition-colors">
+                <h3 class="font-semibold text-zinc-900 dark:text-white group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors">
                   {exp.company}
                 </h3>
-                <div class="text-sm text-zinc-500">{exp.role}</div>
+                <div class="text-sm text-zinc-600 dark:text-zinc-400">{exp.role}</div>
               </div>
               <span class="text-xs font-mono text-zinc-500 pt-1">{exp.period}</span>
             </div>
             
-            <p class="text-sm text-zinc-400 leading-relaxed">
+            <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
               {exp.description}
             </p>
           </div>

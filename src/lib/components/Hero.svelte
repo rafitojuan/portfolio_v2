@@ -86,25 +86,25 @@
   });
 </script>
 
-<section id="home" class="pt-8 pb-8 border-b border-zinc-900/50 scroll-mt-14">
+<section id="home" class="pt-8 pb-8 border-b border-zinc-200 dark:border-zinc-900/50 scroll-mt-14">
   <div
-    class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full"
+    class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-200 dark:border-zinc-900/50 h-full"
   >
     <div
-      class="relative overflow-hidden rounded-3xl border border-zinc-800 bg-zinc-950/50"
+      class="relative overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950/50 shadow-sm dark:shadow-none transition-colors duration-200"
     >
       <div
-        class="absolute inset-0 opacity-20 pointer-events-none"
-        style="background-image: repeating-linear-gradient(45deg, #3f3f46 0, #3f3f46 1px, transparent 0, transparent 10px);"
+        class="absolute inset-0 opacity-10 dark:opacity-20 pointer-events-none"
+        style="background-image: repeating-linear-gradient(45deg, #71717a 0, #71717a 1px, transparent 0, transparent 10px);"
       ></div>
 
       <div class="relative z-10 p-6 sm:p-8">
         <div
-          class="flex flex-col sm:flex-row items-center sm:items-end gap-6 mb-8 border-b border-zinc-800/50 pb-8"
+          class="flex flex-col sm:flex-row items-center sm:items-end gap-6 mb-8 border-b border-zinc-200 dark:border-zinc-800/50 pb-8"
         >
           <div class="relative shrink-0">
             <div
-              class="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 border-zinc-900 overflow-hidden bg-zinc-800"
+              class="w-32 h-32 sm:w-40 sm:h-40 rounded-full border-4 border-zinc-100 dark:border-zinc-900 overflow-hidden bg-zinc-100 dark:bg-zinc-800"
             >
               <img
                 src="https://github.com/rafitojuan.png"
@@ -113,7 +113,7 @@
               />
             </div>
             <div
-              class="absolute top-0 left-0 w-10 h-7 rounded overflow-hidden shadow-lg border border-zinc-700"
+              class="absolute top-0 left-0 w-10 h-7 rounded overflow-hidden shadow-md border border-zinc-200 dark:border-zinc-700"
             >
               <img
                 src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg"
@@ -128,7 +128,7 @@
               class="flex items-center justify-center sm:justify-start gap-2 mb-1"
             >
               <h1
-                class="text-3xl sm:text-4xl font-bold text-white tracking-tight"
+                class="text-3xl sm:text-4xl font-bold text-zinc-950 dark:text-white tracking-tight"
               >
                 Rafito Juan
               </h1>
@@ -144,8 +144,8 @@
                 type="button"
                 on:click={playPronunciation}
                 class="transition-colors {isPlaying
-                  ? 'text-green-500 animate-pulse'
-                  : 'text-zinc-500 hover:text-zinc-300'}"
+                  ? 'text-green-600 dark:text-green-500 animate-pulse'
+                  : 'text-zinc-400 hover:text-zinc-700 dark:text-zinc-500 dark:hover:text-zinc-300'}"
                 aria-label="Pronounce name"
                 disabled={isPlaying}
               >
@@ -165,19 +165,19 @@
               </button>
             </div>
             <div class="h-8 relative overflow-hidden flex items-center">
-              <p class="text-xl text-zinc-400 font-medium">
-                {displayedText}<span class="animate-pulse ml-0.5">|</span>
+              <p class="text-xl text-zinc-600 dark:text-zinc-400 font-medium">
+                {displayedText}<span class="animate-pulse ml-0.5 text-zinc-400 dark:text-zinc-600">|</span>
               </p>
             </div>
           </div>
         </div>
 
         <div
-          class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-sm font-mono text-zinc-400"
+          class="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-8 text-sm font-mono text-zinc-600 dark:text-zinc-400"
         >
           <div class="flex items-start gap-3 md:col-span-2">
             <div
-              class="mt-0.5 p-2 rounded-lg bg-zinc-900 border border-zinc-800 shrink-0"
+              class="mt-0.5 p-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shrink-0"
             >
               <svg
                 class="w-5 h-5 text-zinc-500"
@@ -193,12 +193,12 @@
                 />
               </svg>
             </div>
-            <p>Software Engineer and Fullstack Developer</p>
+            <p class="text-zinc-700 dark:text-zinc-300">Software Engineer and Fullstack Developer</p>
           </div>
 
           <div class="flex items-center gap-3">
             <div
-              class="p-2 rounded-lg bg-zinc-900 border border-zinc-800 shrink-0"
+              class="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shrink-0"
             >
               <svg
                 class="w-5 h-5 text-zinc-500"
@@ -219,7 +219,7 @@
 
           <div class="flex items-center gap-3">
             <div
-              class="p-2 rounded-lg bg-zinc-900 border border-zinc-800 shrink-0"
+              class="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shrink-0"
             >
               <svg
                 class="w-5 h-5 text-zinc-500"
@@ -240,7 +240,7 @@
 
           <div class="flex items-center gap-3">
             <div
-              class="p-2 rounded-lg bg-zinc-900 border border-zinc-800 shrink-0"
+              class="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shrink-0"
             >
               <svg
                 class="w-5 h-5 text-zinc-500"
@@ -266,7 +266,7 @@
 
           <div class="flex items-center gap-3">
             <div
-              class="p-2 rounded-lg bg-zinc-900 border border-zinc-800 shrink-0"
+              class="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shrink-0"
             >
               <svg
                 class="w-5 h-5 text-zinc-500"
@@ -282,12 +282,12 @@
                 />
               </svg>
             </div>
-            <p class="text-white">{time} (GMT+7)</p>
+            <p class="text-zinc-950 dark:text-white font-semibold">{time} (GMT+7)</p>
           </div>
 
           <div class="flex items-center gap-3">
             <div
-              class="p-2 rounded-lg bg-zinc-900 border border-zinc-800 shrink-0"
+              class="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shrink-0"
             >
               <svg
                 class="w-5 h-5 text-zinc-500"
@@ -305,13 +305,13 @@
             </div>
             <a
               href="mailto:rafitosch@gmail.com"
-              class="hover:text-white transition-colors">rafitosch@gmail.com</a
+              class="hover:text-zinc-950 dark:hover:text-white transition-colors">rafitosch@gmail.com</a
             >
           </div>
 
           <div class="flex items-center gap-3">
             <div
-              class="p-2 rounded-lg bg-zinc-900 border border-zinc-800 shrink-0"
+              class="p-2 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shrink-0"
             >
               <svg
                 class="w-5 h-5 text-zinc-500"
@@ -331,7 +331,7 @@
               href="https://rafitojuan.my.id"
               target="_blank"
               rel="noopener noreferrer"
-              class="hover:text-white transition-colors">rafitojuan.my.id</a
+              class="hover:text-zinc-950 dark:hover:text-white transition-colors">rafitojuan.my.id</a
             >
           </div>
         </div>

@@ -45,26 +45,26 @@
   ];
 </script>
 
-<section id="certifications" class="py-12 border-b border-zinc-900/50 scroll-mt-14">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full">
+<section id="certifications" class="py-12 border-b border-zinc-200 dark:border-zinc-900/50 scroll-mt-14">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-200 dark:border-zinc-900/50 h-full">
     <div class="flex items-center gap-3 mb-8">
-      <h2 class="text-xl font-bold text-white">Certifications</h2>
+      <h2 class="text-xl font-bold text-zinc-950 dark:text-white">Certifications</h2>
       <span class="text-zinc-500 text-sm font-mono">({certifications.length})</span>
     </div>
     
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       {#each certifications as cert}
         <a href={cert.link} target="_blank" rel="noopener noreferrer" 
-           class="group p-4 border border-zinc-800 bg-zinc-900/30 hover:bg-zinc-900/50 hover:border-zinc-700 transition-all rounded-sm flex flex-col justify-between h-full">
+           class="group p-4 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/30 hover:bg-zinc-50 dark:hover:bg-zinc-900/50 hover:border-zinc-300 dark:hover:border-zinc-700 shadow-xs dark:shadow-none transition-all rounded-xl flex flex-col justify-between h-full">
           <div>
-            <h3 class="font-semibold text-white group-hover:text-zinc-200 transition-colors">
+            <h3 class="font-semibold text-zinc-900 dark:text-white group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors">
               {cert.name}
             </h3>
-            <div class="text-sm text-zinc-500 mt-1">{cert.issuer}</div>
+            <div class="text-sm text-zinc-600 dark:text-zinc-500 mt-1">{cert.issuer}</div>
           </div>
-          <div class="mt-4 pt-4 border-t border-zinc-800 flex justify-between items-center text-xs font-mono text-zinc-600">
+          <div class="mt-4 pt-4 border-t border-zinc-200 dark:border-zinc-800 flex justify-between items-center text-xs font-mono text-zinc-500 dark:text-zinc-400">
             <span>{cert.date}</span>
-            <span class="group-hover:text-zinc-400 transition-colors">View Credential &rarr;</span>
+            <span class="group-hover:text-zinc-950 dark:group-hover:text-zinc-100 transition-colors">View Credential &rarr;</span>
           </div>
         </a>
       {/each}

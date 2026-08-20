@@ -2,6 +2,7 @@
   import { onMount } from 'svelte';
   import Lenis from 'lenis';
   import { lenis as lenisStore } from './lib/stores/lenis.js';
+  import { theme } from './lib/stores/theme.js';
   import BootSequence from './lib/components/BootSequence.svelte';
   import Navbar from './lib/components/Navbar.svelte';
   import Hero from './lib/components/Hero.svelte';
@@ -32,6 +33,8 @@
   }
 
   onMount(() => {
+    theme.init();
+
     const handleHashChange = () => {
       if (window.location.hash.startsWith('#games')) {
         currentRoute = 'games';
@@ -70,7 +73,7 @@
   });
 </script>
 
-<main class="antialiased text-zinc-50 min-h-screen selection:bg-white selection:text-black">
+<main class="antialiased text-zinc-900 dark:text-zinc-50 bg-zinc-50 dark:bg-zinc-950 min-h-screen selection:bg-zinc-900 selection:text-white dark:selection:bg-white dark:selection:text-black transition-colors duration-200">
   {#if isBooting && currentRoute === 'home'}
     <BootSequence on:complete={() => isBooting = false} />
   {/if}

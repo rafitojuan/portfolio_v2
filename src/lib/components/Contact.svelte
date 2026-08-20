@@ -148,16 +148,16 @@
 
 <svelte:window on:keydown={handleKeydown} />
 
-<section id="contact" class="py-16 md:py-24 border-t border-zinc-900/50 scroll-mt-14">
-  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center border-x border-zinc-900/50 h-full">
-    <h2 class="text-3xl font-bold text-zinc-50 mb-6">Let's work together</h2>
-    <p class="text-zinc-400 mb-8 max-w-2xl mx-auto">
+<section id="contact" class="py-16 md:py-24 border-t border-zinc-200 dark:border-zinc-900/50 scroll-mt-14">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center border-x border-zinc-200 dark:border-zinc-900/50 h-full">
+    <h2 class="text-3xl font-bold text-zinc-950 dark:text-zinc-50 mb-6">Let's work together</h2>
+    <p class="text-zinc-600 dark:text-zinc-400 mb-8 max-w-2xl mx-auto">
       I'm always open to discussing product design work or partnership opportunities.
     </p>
     <button
       type="button"
       on:click={openModal}
-      class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-md text-zinc-950 bg-zinc-50 hover:bg-zinc-200 transition-colors cursor-pointer"
+      class="inline-flex items-center px-8 py-4 border border-transparent text-lg font-medium rounded-xl text-white dark:text-zinc-950 bg-zinc-900 dark:bg-zinc-50 hover:bg-zinc-800 dark:hover:bg-zinc-200 shadow-md transition-all cursor-pointer hover:scale-[1.02]"
     >
       Say Hello
     </button>
@@ -167,7 +167,7 @@
 {#if isModalOpen}
   <!-- Backdrop -->
   <div
-    class="fixed inset-0 z-60 bg-black/80 backdrop-blur-sm"
+    class="fixed inset-0 z-60 bg-black/60 dark:bg-black/80 backdrop-blur-sm"
     transition:fade={{ duration: 150 }}
     on:click={closeModal}
     role="presentation"
@@ -179,19 +179,19 @@
     aria-modal="true"
     data-lenis-prevent="true"
     on:wheel|stopPropagation
-    class="fixed top-1/2 left-1/2 z-60 w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 rounded-2xl shadow-2xl ring-1 ring-zinc-800 duration-200 sm:max-w-xl bg-zinc-950 overflow-y-auto max-h-[90vh] overscroll-contain"
+    class="fixed top-1/2 left-1/2 z-60 w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 rounded-2xl shadow-2xl ring-1 ring-zinc-200 dark:ring-zinc-800 duration-200 sm:max-w-xl bg-white dark:bg-zinc-950 overflow-y-auto max-h-[90vh] overscroll-contain"
     transition:scale={{ duration: 150, start: 0.95 }}
   >
     <!-- Modal Header -->
-    <div class="flex items-center justify-between px-6 py-5 border-b border-zinc-800/80 bg-zinc-900/30">
+    <div class="flex items-center justify-between px-6 py-5 border-b border-zinc-200 dark:border-zinc-800/80 bg-zinc-50 dark:bg-zinc-900/30">
       <div class="text-left">
-        <h3 class="text-lg font-semibold text-zinc-100">Get in Touch</h3>
-        <p class="text-xs text-zinc-400 mt-0.5">Select your preferred platform and customize the message template.</p>
+        <h3 class="text-lg font-semibold text-zinc-900 dark:text-zinc-100">Get in Touch</h3>
+        <p class="text-xs text-zinc-500 dark:text-zinc-400 mt-0.5">Select your preferred platform and customize the message template.</p>
       </div>
       <button
         type="button"
         on:click={closeModal}
-        class="p-2 rounded-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/60 transition-colors cursor-pointer"
+        class="p-2 rounded-lg text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800/60 transition-colors cursor-pointer"
         aria-label="Close dialog"
       >
         <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
@@ -204,7 +204,7 @@
     <div class="p-6 space-y-6">
       <!-- Platform Choice -->
       <div>
-        <div class="block text-xs font-medium uppercase tracking-wider text-zinc-400 mb-3 text-left">
+        <div class="block text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400 mb-3 text-left">
           1. Choose Platform
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-3" role="radiogroup" aria-label="Choose Contact Platform">
@@ -215,19 +215,19 @@
               aria-checked={activeTab === option.id}
               aria-label={`Select ${option.name} platform`}
               on:click={() => selectTab(option.id)}
-              class="flex flex-row sm:flex-col items-center justify-start sm:justify-center gap-3 sm:gap-0 p-3 sm:p-4 rounded-xl border transition-all text-left sm:text-center relative overflow-hidden cursor-pointer {activeTab === option.id ? 'bg-zinc-900/95 border-zinc-500 shadow-md ring-1 ring-zinc-500/50' : 'bg-zinc-900/40 border-zinc-800/80 hover:border-zinc-700 hover:bg-zinc-900/60 text-zinc-400'}"
+              class="flex flex-row sm:flex-col items-center justify-start sm:justify-center gap-3 sm:gap-0 p-3 sm:p-4 rounded-xl border transition-all text-left sm:text-center relative overflow-hidden cursor-pointer {activeTab === option.id ? 'bg-zinc-100 dark:bg-zinc-900/95 border-zinc-400 dark:border-zinc-500 shadow-sm ring-1 ring-zinc-400/50 dark:ring-zinc-500/50' : 'bg-zinc-50 dark:bg-zinc-900/40 border-zinc-200 dark:border-zinc-800/80 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-100 dark:hover:bg-zinc-900/60 text-zinc-600 dark:text-zinc-400'}"
             >
-              <div class="sm:mb-2 transition-colors shrink-0 {activeTab === option.id ? option.iconColor : 'text-zinc-400'}">
+              <div class="sm:mb-2 transition-colors shrink-0 {activeTab === option.id ? option.iconColor : 'text-zinc-500 dark:text-zinc-400'}">
                 {@html option.icon}
               </div>
               <div class="flex-1 sm:flex-none min-w-0">
-                <span class="block text-sm font-medium {activeTab === option.id ? 'text-zinc-100' : 'text-zinc-300'}">{option.name}</span>
+                <span class="block text-sm font-medium {activeTab === option.id ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-700 dark:text-zinc-300'}">{option.name}</span>
                 <span class="block text-[11px] text-zinc-500 truncate mt-0.5">{option.handle}</span>
               </div>
               {#if activeTab === option.id}
                 <div class="absolute top-2.5 right-2.5 flex h-2 w-2">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-zinc-400 opacity-75"></span>
-                  <span class="relative inline-flex rounded-full h-2 w-2 bg-zinc-300"></span>
+                  <span class="relative inline-flex rounded-full h-2 w-2 bg-zinc-600 dark:bg-zinc-300"></span>
                 </div>
               {/if}
             </button>
@@ -238,13 +238,13 @@
       <!-- Message Template -->
       <div>
         <div class="flex items-center justify-between mb-2">
-          <label for="contact-message-template" class="block text-xs font-medium uppercase tracking-wider text-zinc-400 text-left cursor-pointer">
+          <label for="contact-message-template" class="block text-xs font-medium uppercase tracking-wider text-zinc-500 dark:text-zinc-400 text-left cursor-pointer">
             2. Message Template ({activeOption.name})
           </label>
           <button
             type="button"
             on:click={() => resetTemplate(activeTab)}
-            class="text-xs text-zinc-400 hover:text-zinc-200 underline underline-offset-2 cursor-pointer transition-colors"
+            class="text-xs text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-200 underline underline-offset-2 cursor-pointer transition-colors"
           >
             Reset Template
           </button>
@@ -255,25 +255,25 @@
           rows="5"
           data-lenis-prevent="true"
           on:wheel|stopPropagation
-          class="w-full rounded-xl bg-zinc-900/60 border border-zinc-800 p-3.5 text-sm text-zinc-100 placeholder:text-zinc-500 focus:outline-none focus:border-zinc-500 focus:ring-1 focus:ring-zinc-500/50 transition-all font-sans resize-y leading-relaxed overscroll-contain max-h-60 min-h-[8rem]"
+          class="w-full rounded-xl bg-zinc-50 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800 p-3.5 text-sm text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-500 focus:ring-1 focus:ring-zinc-400/50 dark:focus:ring-zinc-500/50 transition-all font-sans resize-y leading-relaxed overscroll-contain max-h-60 min-h-[8rem]"
           placeholder="Type your message here..."
         ></textarea>
       </div>
 
       <!-- Footer Buttons -->
-      <div class="flex flex-col sm:flex-row gap-3 pt-2 border-t border-zinc-800/80">
+      <div class="flex flex-col sm:flex-row gap-3 pt-2 border-t border-zinc-200 dark:border-zinc-800/80">
         <button
           type="button"
           on:click={handleCopyOnly}
-          class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-zinc-800 bg-zinc-900/60 text-sm font-medium text-zinc-300 hover:bg-zinc-800 hover:text-zinc-100 transition-colors cursor-pointer order-2 sm:order-1"
+          class="flex-1 inline-flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900/60 text-sm font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-zinc-100 transition-colors cursor-pointer order-2 sm:order-1"
         >
           {#if copied}
-            <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg class="w-4 h-4 text-emerald-600 dark:text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
             </svg>
-            <span class="text-emerald-400 font-semibold">Copied to Clipboard!</span>
+            <span class="text-emerald-600 dark:text-emerald-400 font-semibold">Copied to Clipboard!</span>
           {:else}
-            <svg class="w-4 h-4 text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <svg class="w-4 h-4 text-zinc-500 dark:text-zinc-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
             </svg>
             <span>Copy Template Only</span>
@@ -283,7 +283,7 @@
         <button
           type="button"
           on:click={handlePrimaryAction}
-          class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-zinc-100 hover:bg-white text-zinc-950 text-sm font-semibold shadow-lg hover:shadow-zinc-100/10 transition-all cursor-pointer order-1 sm:order-2"
+          class="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-zinc-900 dark:bg-zinc-100 hover:bg-zinc-800 dark:hover:bg-white text-white dark:text-zinc-950 text-sm font-semibold shadow-md transition-all cursor-pointer order-1 sm:order-2"
         >
           <div class="shrink-0">
             {@html activeOption.icon}

@@ -200,26 +200,26 @@
   });
 </script>
 
-<section id="projects" class="py-12 border-b border-zinc-900/50 scroll-mt-14">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full relative">
+<section id="projects" class="py-12 border-b border-zinc-200 dark:border-zinc-900/50 scroll-mt-14">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-200 dark:border-zinc-900/50 h-full relative">
     <div bind:this={sentinel} class="absolute -top-14 h-1 w-full pointer-events-none opacity-0"></div>
-    <div class={`flex items-center justify-between mb-8 sticky top-14 z-10 py-4 border-b border-zinc-800/50 transition-colors duration-300 ${isStuck ? 'bg-black/90 backdrop-blur-sm' : ''}`}>
+    <div class={`flex items-center justify-between mb-8 sticky top-14 z-10 py-4 border-b border-zinc-200 dark:border-zinc-800/50 transition-colors duration-300 ${isStuck ? 'bg-white/90 dark:bg-black/90 backdrop-blur-sm' : ''}`}>
       <div class="flex items-center gap-3">
-        <h2 class="text-xl font-bold text-white">Projects</h2>
+        <h2 class="text-xl font-bold text-zinc-950 dark:text-white">Projects</h2>
         <span class="text-zinc-500 text-sm font-mono">({projects.length + additionalProjects.length})</span>
       </div>
-      <button on:click={toggleProjects} class="text-sm text-zinc-500 hover:text-white transition-colors">
+      <button type="button" on:click={toggleProjects} class="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer">
         {showAllProjects ? 'See less ↑' : 'View all projects →'}
       </button>
     </div>
     
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       {#each projects as project}
-        <a href={project.link} target="_blank" rel="noopener noreferrer" class="group block p-4 bg-zinc-900/30 border border-zinc-800 rounded-xl hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300">
+        <a href={project.link} target="_blank" rel="noopener noreferrer" class="group block p-4 bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:border-zinc-300 dark:hover:border-zinc-700 shadow-xs dark:shadow-none transition-all duration-300">
           <div class="flex justify-between items-start mb-4">
-            <div class="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center text-xl group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+            <div class="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-xl group-hover:scale-110 transition-transform duration-300 overflow-hidden">
               {#if project.icon.startsWith('http') || project.icon.startsWith('/')}
-                <img src={project.icon} alt={project.title} class="w-full h-full object-contain p-1" />
+                <img src={project.icon} alt={project.title} class="w-full h-full object-contain p-1 {project.icon.includes('Logo-White') ? 'dark:invert-0 invert' : ''}" />
               {:else if project.icon.startsWith('<svg')}
                 <div class="w-full h-full p-1 flex items-center justify-center">
                   {@html project.icon}
@@ -228,22 +228,22 @@
                 {project.icon}
               {/if}
             </div>
-            <svg class="w-4 h-4 text-zinc-600 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <svg class="w-4 h-4 text-zinc-400 dark:text-zinc-600 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
             </svg>
           </div>
           
-          <h3 class="font-bold text-white mb-2 group-hover:text-zinc-200 transition-colors">
+          <h3 class="font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors">
             {project.title}
           </h3>
           
-          <p class="text-sm text-zinc-400 mb-4 leading-relaxed">
+          <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-4 leading-relaxed">
             {project.description}
           </p>
           
           <div class="flex flex-wrap gap-2">
             {#each project.tags as tag}
-              <span class="px-2 py-1 text-xs font-medium text-zinc-500 bg-zinc-900 border border-zinc-800 rounded">
+              <span class="px-2 py-1 text-xs font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded">
                 {tag}
               </span>
             {/each}
@@ -254,13 +254,13 @@
       {#if showAllProjects}
         {#each additionalProjects as project, i (i)}
           <a href={project.link} target="_blank" rel="noopener noreferrer"
-             class="group block p-4 bg-zinc-900/30 border border-zinc-800 rounded-xl hover:bg-zinc-800/50 hover:border-zinc-700 transition-all duration-300 h-full flex-col"
+             class="group block p-4 bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:border-zinc-300 dark:hover:border-zinc-700 shadow-xs dark:shadow-none transition-all duration-300 h-full flex flex-col"
              in:fly={{ y: 20, delay: (i % 12) * 50, duration: 300 }}>
             
             <div class="flex justify-between items-start mb-4">
-              <div class="w-10 h-10 rounded-lg bg-zinc-800 flex items-center justify-center text-xl group-hover:scale-110 transition-transform duration-300 overflow-hidden">
+              <div class="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-xl group-hover:scale-110 transition-transform duration-300 overflow-hidden">
                 {#if project.icon.startsWith('http') || project.icon.startsWith('/')}
-                <img src={project.icon} alt={project.title} class="w-full h-full object-contain p-1" />
+                <img src={project.icon} alt={project.title} class="w-full h-full object-contain p-1 {project.icon.includes('Logo-White') ? 'dark:invert-0 invert' : ''}" />
               {:else if project.icon.startsWith('<svg')}
                 <div class="w-full h-full p-1 flex items-center justify-center">
                   {@html project.icon}
@@ -269,22 +269,22 @@
                 {project.icon}
               {/if}
               </div>
-              <svg class="w-4 h-4 text-zinc-600 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg class="w-4 h-4 text-zinc-400 dark:text-zinc-600 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
             </div>
             
-            <h3 class="font-bold text-white mb-2 group-hover:text-zinc-200 transition-colors line-clamp-1">
+            <h3 class="font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors line-clamp-1">
               {project.title}
             </h3>
             
-            <p class="text-sm text-zinc-400 mb-4 leading-relaxed grow">
+            <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-4 leading-relaxed grow">
               {project.description}
             </p>
             
             <div class="flex flex-wrap gap-2 mt-auto">
               {#each project.tags as tag}
-                <span class="px-2 py-1 text-xs font-medium text-zinc-500 bg-zinc-900 border border-zinc-800 rounded">
+                <span class="px-2 py-1 text-xs font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded">
                   {tag}
                 </span>
               {/each}

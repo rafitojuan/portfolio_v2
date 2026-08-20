@@ -68,36 +68,36 @@
   }
 </script>
 
-<section id="honors" class="py-12 border-b border-zinc-900/50 scroll-mt-14">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full">
+<section id="honors" class="py-12 border-b border-zinc-200 dark:border-zinc-900/50 scroll-mt-14">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-200 dark:border-zinc-900/50 h-full">
     <div class="flex items-center gap-3 mb-8">
-      <h2 class="text-xl font-bold text-white">Honors & Awards</h2>
+      <h2 class="text-xl font-bold text-zinc-950 dark:text-white">Honors & Awards</h2>
       <span class="text-zinc-500 text-sm font-mono">({awards.length})</span>
     </div>
     
-    <div class="border border-zinc-800 rounded-lg overflow-hidden bg-zinc-900/20">
-      <div class="divide-y divide-zinc-800">
+    <div class="border border-zinc-200 dark:border-zinc-800 rounded-lg overflow-hidden bg-white dark:bg-zinc-900/20 shadow-xs dark:shadow-none">
+      <div class="divide-y divide-zinc-200 dark:divide-zinc-800">
         {#each awards as award, i}
-          <div class="group border-b border-zinc-800 last:border-b-0">
-            <div class="flex items-center justify-between p-4 hover:bg-zinc-900/40 transition-colors">
+          <div class="group border-b border-zinc-200 dark:border-zinc-800 last:border-b-0">
+            <div class="flex items-center justify-between p-4 hover:bg-zinc-50 dark:hover:bg-zinc-900/40 transition-colors">
               <button 
                 type="button"
-                class="flex-1 flex gap-4 items-start text-left cursor-pointer focus:outline-none focus-visible:ring-1 focus-visible:ring-zinc-400 rounded-md"
+                class="flex-1 flex gap-4 items-start text-left cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400 dark:focus-visible:ring-zinc-600 rounded-md"
                 on:click={() => toggle(i)}
                 aria-expanded={award.isOpen}
                 aria-controls={"award-desc-" + i}
               >
-                <div class="mt-1 w-10 h-10 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-500 shrink-0 group-hover:border-zinc-700 group-hover:text-zinc-300 transition-colors">
+                <div class="mt-1 w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-500 shrink-0 group-hover:border-zinc-300 dark:group-hover:border-zinc-700 group-hover:text-zinc-950 dark:group-hover:text-zinc-300 transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-medal"><path d="M7.21 15 2.66 7.14a2 2 0 0 1 .13-2.2L4.4 2.8A2 2 0 0 1 6 2h12a2 2 0 0 1 1.6.8l1.6 2.14a2 2 0 0 1 .14 2.2L16.79 15"/><path d="M11 12 5.12 2.2"/><path d="m13 12 5.88-9.8"/><path d="M8 7h8"/><circle cx="12" cy="17" r="5"/><path d="M12 18v-2h-.5"/></svg>
                 </div>
 
                 <div class="flex-1 min-w-0 pt-0.5">
-                  <h3 class="font-bold text-white truncate pr-2 group-hover:text-zinc-200 transition-colors text-base">{award.title}</h3>
+                  <h3 class="font-bold text-zinc-900 dark:text-white truncate pr-2 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors text-base">{award.title}</h3>
                   <div class="flex flex-wrap items-center gap-x-3 text-sm text-zinc-500 mt-1 font-mono text-xs sm:text-sm">
-                    <span class="text-zinc-400">{award.position}</span>
-                    <span class="w-px h-3 bg-zinc-800"></span>
+                    <span class="text-zinc-700 dark:text-zinc-400 font-medium">{award.position}</span>
+                    <span class="w-px h-3 bg-zinc-300 dark:bg-zinc-800"></span>
                     <span>{award.date}</span>
-                    <span class="w-px h-3 bg-zinc-800"></span>
+                    <span class="w-px h-3 bg-zinc-300 dark:bg-zinc-800"></span>
                     <span>{award.scope}</span>
                   </div>
                 </div>
@@ -109,7 +109,7 @@
                     href={award.attachment} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    class="p-2 text-zinc-500 hover:text-white transition-colors rounded-md hover:bg-zinc-800"
+                    class="p-2 text-zinc-400 dark:text-zinc-500 hover:text-zinc-950 dark:hover:text-white transition-colors rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800"
                     aria-label={`View certificate attachment for ${award.title}`}
                     title="View Attachment"
                   >
@@ -119,7 +119,7 @@
                 <button 
                   type="button"
                   on:click={() => toggle(i)}
-                  class="p-2 text-zinc-500 hover:text-white transition-colors rounded-md hover:bg-zinc-800"
+                  class="p-2 text-zinc-400 dark:text-zinc-500 hover:text-zinc-950 dark:hover:text-white transition-colors rounded-md hover:bg-zinc-100 dark:hover:bg-zinc-800"
                   aria-label={award.isOpen ? `Collapse details for ${award.title}` : `Expand details for ${award.title}`}
                   aria-expanded={award.isOpen}
                 >
@@ -143,11 +143,11 @@
 
             {#if award.isOpen}
               <div id={"award-desc-" + i} transition:slide={{ duration: 300 }} class="overflow-hidden">
-                <div class="px-4 pb-6 pl-[4.5rem] pr-6 text-sm text-zinc-400 border-t border-zinc-800/50 bg-zinc-900/10 pt-4">
+                <div class="px-4 pb-6 pl-[4.5rem] pr-6 text-sm text-zinc-600 dark:text-zinc-400 border-t border-zinc-200 dark:border-zinc-800/50 bg-zinc-50/50 dark:bg-zinc-900/10 pt-4">
                   <ul class="space-y-3">
                     {#each award.description as desc}
                       <li class="flex items-start gap-3 leading-relaxed">
-                        <span class="mt-2 w-1.5 h-1.5 rounded-full bg-zinc-700 shrink-0"></span>
+                        <span class="mt-2 w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-700 shrink-0"></span>
                         <span>{desc}</span>
                       </li>
                     {/each}

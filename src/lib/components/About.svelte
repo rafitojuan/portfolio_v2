@@ -10,12 +10,12 @@
   
   function getColor(level) {
     switch(level) {
-      case 0: return 'bg-[#161b22]';
-      case 1: return 'bg-[#0e4429]';
-      case 2: return 'bg-[#006d32]';
-      case 3: return 'bg-[#26a641]';
-      case 4: return 'bg-[#39d353]';
-      default: return 'bg-[#161b22]';
+      case 0: return 'bg-[#ebedf0] dark:bg-[#161b22]';
+      case 1: return 'bg-[#9be9a8] dark:bg-[#0e4429]';
+      case 2: return 'bg-[#40c463] dark:bg-[#006d32]';
+      case 3: return 'bg-[#30a14e] dark:bg-[#26a641]';
+      case 4: return 'bg-[#216e39] dark:bg-[#39d353]';
+      default: return 'bg-[#ebedf0] dark:bg-[#161b22]';
     }
   }
 
@@ -65,56 +65,51 @@
       loading = false;
     }
   });
-
-
 </script>
 
-<section id="about" class="pb-12 border-b border-zinc-900/50 scroll-mt-14">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full">
-    <h2 class="text-xl font-bold text-white mb-6">About</h2>
+<section id="about" class="pb-12 border-b border-zinc-200 dark:border-zinc-900/50 scroll-mt-14">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-200 dark:border-zinc-900/50 h-full">
+    <h2 class="text-xl font-bold text-zinc-950 dark:text-white mb-6">About</h2>
     
-    <div class="prose prose-invert prose-zinc max-w-none text-zinc-400 mb-8">
-      <section>
-  <p>
-    As a Software Engineer, I focus on building digital solutions that balance technical precision with a strong understanding of user needs. I currently oversee data management and IT infrastructure at 
-    <strong>PT Energi Pelabuhan Indonesia (State-Owned Enterprise)</strong>, ensuring mission-critical systems run efficiently and reliably.
-  </p>
+    <div class="prose max-w-none text-zinc-600 dark:text-zinc-400 mb-8 space-y-4 text-sm sm:text-base leading-relaxed">
+      <p>
+        As a Software Engineer, I focus on building digital solutions that balance technical precision with a strong understanding of user needs. I currently oversee data management and IT infrastructure at 
+        <strong class="text-zinc-900 dark:text-zinc-100">PT Energi Pelabuhan Indonesia (State-Owned Enterprise)</strong>, ensuring mission-critical systems run efficiently and reliably.
+      </p>
 
-  <p>
-    Beyond my full-time role, I actively work in remote environments and have delivered 17 projects across web platforms (PWA, Next.js, Livewire), mobile applications (Flutter), and technical tools including data scraping, penetration testing, and load testing. My core stack includes Laravel, React, and Next.js, with an emphasis on scalable and maintainable architecture.
-  </p>
+      <p>
+        Beyond my full-time role, I actively work in remote environments and have delivered 17 projects across web platforms (PWA, Next.js, Livewire), mobile applications (Flutter), and technical tools including data scraping, penetration testing, and load testing. My core stack includes Laravel, React, and Next.js, with an emphasis on scalable and maintainable architecture.
+      </p>
 
-  <h3>Professional Highlights</h3>
-  <ul>
-    <li><strong>SATUASA Student Award</strong> – Best Innovation & 3rd Place IT Product</li>
-    <li><strong>TOEIC Score: 895</strong> – Professional Proficiency level for international collaboration</li>
-    <li>
-      Bachelor’s candidate at <strong>Universitas Terbuka</strong>, where distance learning has strengthened my time management, discipline, and ability to balance full-time work with remote projects.
-    </li>
-  </ul>
+      <h3 class="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 pt-2">Professional Highlights</h3>
+      <ul class="list-disc list-inside space-y-1.5 pl-1">
+        <li><strong class="text-zinc-900 dark:text-zinc-200">SATUASA Student Award</strong> – Best Innovation & 3rd Place IT Product</li>
+        <li><strong class="text-zinc-900 dark:text-zinc-200">TOEIC Score: 895</strong> – Professional Proficiency level for international collaboration</li>
+        <li>
+          Bachelor’s candidate at <strong class="text-zinc-900 dark:text-zinc-200">Universitas Terbuka</strong>, where distance learning has strengthened my time management, discipline, and ability to balance full-time work with remote projects.
+        </li>
+      </ul>
 
-  <p>
-    Although my primary focus is software development, winning a national short film competition (FLS2N) shaped my visual perspective, which contributes to designing intuitive and user-centered interfaces.
-  </p>
+      <p>
+        Although my primary focus is software development, winning a national short film competition (FLS2N) shaped my visual perspective, which contributes to designing intuitive and user-centered interfaces.
+      </p>
 
-  <p>
-    I’m experienced in asynchronous collaboration and independent project ownership. If you’re seeking a disciplined and communicative developer who delivers impact remotely, I’d welcome the opportunity to connect.
-  </p>
-</section>
-
+      <p>
+        I’m experienced in asynchronous collaboration and independent project ownership. If you’re seeking a disciplined and communicative developer who delivers impact remotely, I’d welcome the opportunity to connect.
+      </p>
     </div>
 
-    <div class="bg-zinc-900/30 p-4 rounded-xl border border-zinc-800 overflow-x-auto">
+    <div class="bg-white dark:bg-zinc-900/30 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-x-auto shadow-xs dark:shadow-none">
       <div class="min-w-max">
         <div class="flex justify-between items-end mb-2">
-           <div class="flex flex-col mb-2">
-              <span class="text-xs text-zinc-500">Contributions in the last year</span>
-              <span class="text-white font-bold text-sm">{loading ? '...' : totalContributions} total</span>
-           </div>
+            <div class="flex flex-col mb-2">
+              <span class="text-xs text-zinc-600 dark:text-zinc-400">Contributions in the last year</span>
+              <span class="text-zinc-900 dark:text-white font-bold text-sm">{loading ? '...' : totalContributions} total</span>
+            </div>
         </div>
         
         {#if !loading}
-        <div class="flex gap-[3px] mb-2 text-[10px] text-zinc-500 h-4">
+        <div class="flex gap-[3px] mb-2 text-[10px] text-zinc-600 dark:text-zinc-400 h-4">
              {#each contributionWeeks as week, i}
                 {@const date = new Date(week[0].date)}
                 {@const month = date.toLocaleString('default', { month: 'short' })}
@@ -134,7 +129,7 @@
                 {#each Array(52) as _}
                     <div class="flex flex-col gap-[3px]">
                         {#each Array(7) as _}
-                            <div class="w-2.5 h-2.5 rounded-[2px] bg-zinc-800"></div>
+                            <div class="w-2.5 h-2.5 rounded-[2px] bg-zinc-200 dark:bg-zinc-800"></div>
                         {/each}
                     </div>
                 {/each}
@@ -157,13 +152,13 @@
             </div>
         {/if}
 
-        <div class="flex justify-end items-center gap-2 mt-4 text-[10px] text-zinc-500">
+        <div class="flex justify-end items-center gap-2 mt-4 text-[10px] text-zinc-600 dark:text-zinc-400">
           <span>Less</span>
-          <div class="w-2.5 h-2.5 rounded-[2px] bg-[#161b22]" aria-hidden="true"></div>
-          <div class="w-2.5 h-2.5 rounded-[2px] bg-[#0e4429]" aria-hidden="true"></div>
-          <div class="w-2.5 h-2.5 rounded-[2px] bg-[#006d32]" aria-hidden="true"></div>
-          <div class="w-2.5 h-2.5 rounded-[2px] bg-[#26a641]" aria-hidden="true"></div>
-          <div class="w-2.5 h-2.5 rounded-[2px] bg-[#39d353]" aria-hidden="true"></div>
+          <div class="w-2.5 h-2.5 rounded-[2px] bg-[#ebedf0] dark:bg-[#161b22]" aria-hidden="true"></div>
+          <div class="w-2.5 h-2.5 rounded-[2px] bg-[#9be9a8] dark:bg-[#0e4429]" aria-hidden="true"></div>
+          <div class="w-2.5 h-2.5 rounded-[2px] bg-[#40c463] dark:bg-[#006d32]" aria-hidden="true"></div>
+          <div class="w-2.5 h-2.5 rounded-[2px] bg-[#30a14e] dark:bg-[#26a641]" aria-hidden="true"></div>
+          <div class="w-2.5 h-2.5 rounded-[2px] bg-[#216e39] dark:bg-[#39d353]" aria-hidden="true"></div>
           <span>More</span>
         </div>
       </div>
@@ -172,7 +167,7 @@
 
   {#if hoveredDay}
     <div 
-      class="fixed z-50 bg-zinc-700 text-[10px] text-white px-2 py-1 rounded shadow-xl pointer-events-none transform -translate-x-1/2 -translate-y-full"
+      class="fixed z-50 bg-zinc-900 dark:bg-zinc-700 text-[10px] text-white px-2 py-1 rounded shadow-xl pointer-events-none transform -translate-x-1/2 -translate-y-full"
       style="top: {tooltipPosition.y}px; left: {tooltipPosition.x}px;"
       transition:fade={{ duration: 100 }}
     >
@@ -180,7 +175,7 @@
         <span class="text-white font-bold">{hoveredDay.count} contributions</span> on {formatDate(hoveredDay.date)}
       </div>
       <div 
-        class="absolute left-1/2 bottom-0 w-2 h-2 bg-zinc-700 transform -translate-x-1/2 translate-y-1/2 rotate-45"
+        class="absolute left-1/2 bottom-0 w-2 h-2 bg-zinc-900 dark:bg-zinc-700 transform -translate-x-1/2 translate-y-1/2 rotate-45"
       ></div>
     </div>
   {/if}

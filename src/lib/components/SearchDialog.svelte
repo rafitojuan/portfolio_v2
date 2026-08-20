@@ -126,21 +126,21 @@
     role="dialog" 
     id="search-dialog"
     aria-modal="true"
-    class="fixed top-1/2 left-1/2 z-60 w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 rounded-2xl shadow-2xl ring-1 ring-zinc-800 duration-200 sm:max-w-lg bg-zinc-950 p-0 max-sm:top-16 max-sm:translate-y-0"
+    class="fixed top-1/2 left-1/2 z-60 w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 rounded-2xl shadow-2xl ring-1 ring-zinc-200 dark:ring-zinc-800 duration-200 sm:max-w-lg bg-white dark:bg-zinc-950 p-0 max-sm:top-16 max-sm:translate-y-0"
     tabindex="-1" 
     bind:this={dialogElement}
     transition:scale={{ duration: 150, start: 0.95 }}
   >
     <div class="flex flex-col h-full max-h-[80vh]">
       
-      <div class="flex items-center gap-2 h-12 px-4 border-b border-zinc-800 shrink-0">
-        <svg class="size-4 shrink-0 opacity-50 text-zinc-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
+      <div class="flex items-center gap-2 h-12 px-4 border-b border-zinc-200 dark:border-zinc-800 shrink-0">
+        <svg class="size-4 shrink-0 opacity-50 text-zinc-500 dark:text-zinc-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 16 16">
           <path d="M10.278 11.514a5.824 5.824 0 1 1 1.235-1.235l3.209 3.208A.875.875 0 0 1 14.111 15a.875.875 0 0 1-.624-.278l-3.209-3.208Zm.623-4.69a4.077 4.077 0 1 1-8.154 0 4.077 4.077 0 0 1 8.154 0Z" fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"></path>
         </svg>
         <input 
           bind:this={inputElement}
           bind:value={query}
-          class="flex-1 h-10 bg-transparent py-3 font-mono text-sm outline-none placeholder:text-zinc-500 text-zinc-100 border-none" 
+          class="flex-1 h-10 bg-transparent py-3 font-mono text-sm outline-none placeholder:text-zinc-400 dark:placeholder:text-zinc-500 text-zinc-900 dark:text-zinc-100 border-none" 
           placeholder="Type a command or search..." 
           autocomplete="off" 
           autocorrect="off" 
@@ -152,8 +152,9 @@
         >
         {#if query}
           <button 
+            type="button"
             on:click={() => { query = ''; inputElement.focus(); }}
-            class="p-1 rounded-sm hover:bg-zinc-800 text-zinc-500 hover:text-zinc-300 transition-colors"
+            class="p-1 rounded-sm hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
             aria-label="Clear search"
           >
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-4">
@@ -182,12 +183,13 @@
                         {#each groupItems as item}
                             {@const index = filteredItems.indexOf(item)}
                             <button
+                                type="button"
                                 id={'search-item-' + index}
-                                class="w-full flex items-center gap-2 rounded-xl px-2 py-2 text-sm text-left transition-colors {index === selectedIndex ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:bg-zinc-800 hover:text-white'}"
+                                class="w-full flex items-center gap-2 rounded-xl px-2 py-2 text-sm text-left transition-colors {index === selectedIndex ? 'bg-zinc-100 dark:bg-zinc-800 text-zinc-950 dark:text-white font-medium' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white'}"
                                 on:click={() => handleSelect(item)}
                                 on:mouseenter={() => selectedIndex = index}
                             >
-                                <span class="w-4 h-4 shrink-0 {index === selectedIndex ? 'text-zinc-300' : 'text-zinc-500'}">
+                                <span class="w-4 h-4 shrink-0 {index === selectedIndex ? 'text-zinc-700 dark:text-zinc-300' : 'text-zinc-400 dark:text-zinc-500'}">
                                     {@html item.icon}
                                 </span>
                                 {item.label}
@@ -200,18 +202,19 @@
 
       </div>
 
-      <div class="border-t border-zinc-800 bg-zinc-900/50 px-4 py-2 flex items-center justify-between shrink-0">
+      <div class="border-t border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 px-4 py-2 flex items-center justify-between shrink-0">
         <div class="text-zinc-500 font-bold text-xs tracking-wider">
           RJ
         </div>
         
         <div class="flex items-center gap-4 text-2.5 font-medium text-zinc-500">
           <button 
-            class="flex items-center gap-1 hover:text-zinc-300 transition-colors cursor-pointer"
+            type="button"
+            class="flex items-center gap-1 hover:text-zinc-700 dark:hover:text-zinc-300 transition-colors cursor-pointer"
             on:click={() => filteredItems[selectedIndex] && handleSelect(filteredItems[selectedIndex])}
           >
             <span>{selectedAction}</span>
-            <kbd class="inline-flex items-center justify-center h-4 w-4 rounded bg-zinc-800 border border-zinc-700 text-zinc-400 font-sans">
+            <kbd class="inline-flex items-center justify-center h-4 w-4 rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 font-sans">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="size-2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M9 9l-5.364 5.364a1 1 0 000 1.414l5.364 5.364M19.636 4.636l5.364 5.364a1 1 0 010 1.414l-5.364 5.364" />
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 15h12a4 4 0 004-4v-6" />
@@ -220,7 +223,7 @@
           </button>
           <div class="flex items-center gap-1">
             <span>Exit</span>
-            <kbd class="inline-flex items-center justify-center h-4 px-1 rounded bg-zinc-800 border border-zinc-700 text-zinc-400 font-sans">
+            <kbd class="inline-flex items-center justify-center h-4 px-1 rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 font-sans">
               Esc
             </kbd>
           </div>

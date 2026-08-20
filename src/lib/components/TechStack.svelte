@@ -118,21 +118,21 @@
   ];
 </script>
 
-<section id="tech-stack" class="py-12 border-b border-zinc-900/50 scroll-mt-14">
-  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-900/50 h-full">
-    <h2 class="text-xl font-bold text-white mb-6">Stack</h2>
+<section id="tech-stack" class="py-12 border-b border-zinc-200 dark:border-zinc-900/50 scroll-mt-14">
+  <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-200 dark:border-zinc-900/50 h-full">
+    <h2 class="text-xl font-bold text-zinc-950 dark:text-white mb-6">Stack</h2>
     
     <div class="flex flex-wrap gap-3">
       {#each stack as tech}
         <a href={tech.url} target="_blank" rel="noopener noreferrer" 
            aria-label={tech.name}
            title={tech.name}
-           class="group relative flex items-center justify-center w-14 h-14 bg-zinc-900/50 border border-zinc-800 rounded-xl hover:bg-zinc-800 hover:border-zinc-700 transition-all hover:scale-110">
+           class="group relative flex items-center justify-center w-14 h-14 bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 shadow-xs dark:shadow-none transition-all hover:scale-110">
           <span class="w-8 h-8 flex items-center justify-center transition-all duration-300">
             {@html tech.icon}
           </span>
           
-          <div class="absolute -top-10 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-zinc-800 text-zinc-300 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10 border border-zinc-700">
+          <div class="absolute -top-10 left-1/2 transform -translate-x-1/2 px-2 py-1 bg-zinc-900 dark:bg-zinc-800 text-white dark:text-zinc-300 text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10 border border-zinc-700 shadow-lg">
             {tech.name}
           </div>
         </a>

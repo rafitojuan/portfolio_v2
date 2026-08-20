@@ -169,13 +169,13 @@
   });
 </script>
 
-<section bind:this={sectionElement} class="py-24 bg-zinc-950 relative overflow-hidden border-y border-zinc-900/50">
+<section bind:this={sectionElement} class="py-24 bg-zinc-100/50 dark:bg-zinc-950 relative overflow-hidden border-y border-zinc-200 dark:border-zinc-900/50 transition-colors duration-200">
   <div class="max-w-4xl mx-auto px-4 sm:px-6 relative z-10 h-full overflow-hidden">
     <div class="mb-16 text-center space-y-3">
-      <h2 class="text-3xl sm:text-4xl font-bold text-white tracking-tight">
+      <h2 class="text-3xl sm:text-4xl font-bold text-zinc-950 dark:text-white tracking-tight">
         Trusted by Teams & Colleagues
       </h2>
-      <p class="text-zinc-400 text-sm md:text-base max-w-lg mx-auto leading-relaxed">
+      <p class="text-zinc-600 dark:text-zinc-400 text-sm md:text-base max-w-lg mx-auto leading-relaxed">
         Building high-quality, reliable software that delivers real-world impact.
       </p>
     </div>
@@ -195,15 +195,15 @@
           <!-- Loop set 1 -->
           <div class="flex shrink-0 gap-6 px-3">
             {#each row1Items as testimonial}
-              <div class="w-[420px] shrink-0 bg-zinc-900/40 p-6 rounded-xl border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/70 transition-all duration-200 flex flex-col justify-between shadow-lg">
+              <div class="w-[420px] shrink-0 bg-white dark:bg-zinc-900/40 p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900/70 transition-all duration-200 flex flex-col justify-between shadow-sm dark:shadow-lg">
                 <div class="mb-5">
-                  <p class="text-zinc-300 text-base leading-relaxed font-normal">
+                  <p class="text-zinc-700 dark:text-zinc-300 text-base leading-relaxed font-normal">
                     "{testimonial.quote}"
                   </p>
                 </div>
                 
-                <div class="border-t border-zinc-800/80 pt-4 flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300 font-semibold overflow-hidden shrink-0">
+                <div class="border-t border-zinc-200 dark:border-zinc-800/80 pt-4 flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-700 dark:text-zinc-300 font-semibold overflow-hidden shrink-0">
                     {#if testimonial.image}
                       <img src={testimonial.image} alt={testimonial.author} class="w-full h-full object-cover" loading="lazy" />
                     {:else}
@@ -211,7 +211,7 @@
                     {/if}
                   </div>
                   <div>
-                    <div class="text-zinc-100 font-semibold text-sm">{testimonial.author}</div>
+                    <div class="text-zinc-900 dark:text-zinc-100 font-semibold text-sm">{testimonial.author}</div>
                     <div class="text-zinc-500 text-xs">{testimonial.role}</div>
                   </div>
                 </div>
@@ -222,15 +222,15 @@
           <!-- Loop set 2 for infinite wrap -->
           <div class="flex shrink-0 gap-6 px-3" aria-hidden="true">
             {#each row1Items as testimonial}
-              <div class="w-[420px] shrink-0 bg-zinc-900/40 p-6 rounded-xl border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/70 transition-all duration-200 flex flex-col justify-between shadow-lg">
+              <div class="w-[420px] shrink-0 bg-white dark:bg-zinc-900/40 p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900/70 transition-all duration-200 flex flex-col justify-between shadow-sm dark:shadow-lg">
                 <div class="mb-5">
-                  <p class="text-zinc-300 text-base leading-relaxed font-normal">
+                  <p class="text-zinc-700 dark:text-zinc-300 text-base leading-relaxed font-normal">
                     "{testimonial.quote}"
                   </p>
                 </div>
                 
-                <div class="border-t border-zinc-800/80 pt-4 flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300 font-semibold overflow-hidden shrink-0">
+                <div class="border-t border-zinc-200 dark:border-zinc-800/80 pt-4 flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-700 dark:text-zinc-300 font-semibold overflow-hidden shrink-0">
                     {#if testimonial.image}
                       <img src={testimonial.image} alt="" class="w-full h-full object-cover" loading="lazy" />
                     {:else}
@@ -238,7 +238,7 @@
                     {/if}
                   </div>
                   <div>
-                    <div class="text-zinc-100 font-semibold text-sm">{testimonial.author}</div>
+                    <div class="text-zinc-900 dark:text-zinc-100 font-semibold text-sm">{testimonial.author}</div>
                     <div class="text-zinc-500 text-xs">{testimonial.role}</div>
                   </div>
                 </div>
@@ -262,15 +262,15 @@
           <!-- Loop set 1 -->
           <div class="flex shrink-0 gap-6 px-3">
             {#each row2Items as testimonial}
-              <div class="w-[420px] shrink-0 bg-zinc-900/40 p-6 rounded-xl border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/70 transition-all duration-200 flex flex-col justify-between shadow-lg">
+              <div class="w-[420px] shrink-0 bg-white dark:bg-zinc-900/40 p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900/70 transition-all duration-200 flex flex-col justify-between shadow-sm dark:shadow-lg">
                 <div class="mb-5">
-                  <p class="text-zinc-300 text-base leading-relaxed font-normal">
+                  <p class="text-zinc-700 dark:text-zinc-300 text-base leading-relaxed font-normal">
                     "{testimonial.quote}"
                   </p>
                 </div>
                 
-                <div class="border-t border-zinc-800/80 pt-4 flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300 font-semibold overflow-hidden shrink-0">
+                <div class="border-t border-zinc-200 dark:border-zinc-800/80 pt-4 flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-700 dark:text-zinc-300 font-semibold overflow-hidden shrink-0">
                     {#if testimonial.image}
                       <img src={testimonial.image} alt={testimonial.author} class="w-full h-full object-cover" loading="lazy" />
                     {:else}
@@ -278,7 +278,7 @@
                     {/if}
                   </div>
                   <div>
-                    <div class="text-zinc-100 font-semibold text-sm">{testimonial.author}</div>
+                    <div class="text-zinc-900 dark:text-zinc-100 font-semibold text-sm">{testimonial.author}</div>
                     <div class="text-zinc-500 text-xs">{testimonial.role}</div>
                   </div>
                 </div>
@@ -289,15 +289,15 @@
           <!-- Loop set 2 for infinite wrap -->
           <div class="flex shrink-0 gap-6 px-3" aria-hidden="true">
             {#each row2Items as testimonial}
-              <div class="w-[420px] shrink-0 bg-zinc-900/40 p-6 rounded-xl border border-zinc-800 hover:border-zinc-700 hover:bg-zinc-900/70 transition-all duration-200 flex flex-col justify-between shadow-lg">
+              <div class="w-[420px] shrink-0 bg-white dark:bg-zinc-900/40 p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900/70 transition-all duration-200 flex flex-col justify-between shadow-sm dark:shadow-lg">
                 <div class="mb-5">
-                  <p class="text-zinc-300 text-base leading-relaxed font-normal">
+                  <p class="text-zinc-700 dark:text-zinc-300 text-base leading-relaxed font-normal">
                     "{testimonial.quote}"
                   </p>
                 </div>
                 
-                <div class="border-t border-zinc-800/80 pt-4 flex items-center gap-3">
-                  <div class="w-10 h-10 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-zinc-300 font-semibold overflow-hidden shrink-0">
+                <div class="border-t border-zinc-200 dark:border-zinc-800/80 pt-4 flex items-center gap-3">
+                  <div class="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-700 dark:text-zinc-300 font-semibold overflow-hidden shrink-0">
                     {#if testimonial.image}
                       <img src={testimonial.image} alt="" class="w-full h-full object-cover" loading="lazy" />
                     {:else}
@@ -305,7 +305,7 @@
                     {/if}
                   </div>
                   <div>
-                    <div class="text-zinc-100 font-semibold text-sm">{testimonial.author}</div>
+                    <div class="text-zinc-900 dark:text-zinc-100 font-semibold text-sm">{testimonial.author}</div>
                     <div class="text-zinc-500 text-xs">{testimonial.role}</div>
                   </div>
                 </div>
