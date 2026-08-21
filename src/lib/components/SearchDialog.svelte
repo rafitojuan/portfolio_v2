@@ -1,16 +1,24 @@
-<script>
+<script lang="ts">
   import { isSearchOpen } from '../stores/search.js';
   import { fade, scale } from 'svelte/transition';
   import { tick } from 'svelte';
+
+  interface SearchItem {
+    id: string;
+    label: string;
+    href: string;
+    type: 'Section' | 'Link';
+    icon: string;
+  }
   
   let query = '';
-  let inputElement;
+  let inputElement: HTMLInputElement | undefined;
   let selectedIndex = 0;
-  let scrollContainer;
-  let dialogElement;
+  let scrollContainer: HTMLDivElement | undefined;
+  let dialogElement: HTMLDivElement | undefined;
   let scrollPosition = 0;
 
-  const items = [
+  const items: SearchItem[] = [
     { id: 'home', label: 'Home', href: '#home', type: 'Section', icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>` },
     { id: 'about', label: 'About', href: '#about', type: 'Section', icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>` },
     { id: 'techstack', label: 'Tech Stack', href: '#tech-stack', type: 'Section', icon: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>` },
@@ -64,7 +72,7 @@
     }
   }
 
-  function handleKeydown(e) {
+  function handleKeydown(e: KeyboardEvent) {
     if (e.key === 'k' && (e.metaKey || e.ctrlKey)) {
       e.preventDefault();
       $isSearchOpen = !$isSearchOpen;
@@ -94,10 +102,10 @@
 
   $: if ($isSearchOpen && inputElement) {
     open();
-    setTimeout(() => inputElement.focus(), 50);
+    setTimeout(() => inputElement?.focus(), 50);
   }
 
-  function handleSelect(item) {
+  function handleSelect(item: SearchItem) {
     close();
     document.body.style.position = '';
     document.body.style.top = '';
@@ -153,7 +161,7 @@
         {#if query}
           <button 
             type="button"
-            on:click={() => { query = ''; inputElement.focus(); }}
+            on:click={() => { query = ''; inputElement?.focus(); }}
             class="p-1 rounded-sm hover:bg-zinc-100 dark:hover:bg-zinc-800 text-zinc-400 dark:text-zinc-500 hover:text-zinc-600 dark:hover:text-zinc-300 transition-colors"
             aria-label="Clear search"
           >

@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
   import SocialGrid from "./SocialGrid.svelte";
   import { onMount, onDestroy } from "svelte";
 
   let time = "";
-  let interval;
+  let interval: ReturnType<typeof setInterval> | undefined;
   let isSlowed = false;
   let isPlaying = false;
 
@@ -49,44 +49,39 @@
 <section id="home" class="pt-6 sm:pt-10 pb-8 border-b border-zinc-200 dark:border-zinc-900/50 scroll-mt-14">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-200 dark:border-zinc-900/50 h-full">
     
-    <!-- Hallmark Masthead Card -->
-    <div class="relative overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 p-6 sm:p-8 shadow-xs dark:shadow-none transition-colors duration-200">
+    <!-- Top Editorial Header Grid -->
+    <div class="space-y-6">
       
-      <!-- Top Meta Bar: Status & Time -->
-      <div class="flex flex-wrap items-center justify-between gap-3 pb-6 mb-6 border-b border-zinc-100 dark:border-zinc-800/80 text-xs font-mono">
-        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800/50 text-emerald-700 dark:text-emerald-400">
-          <span class="relative flex h-2 w-2">
-            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-          </span>
-          <span class="font-medium">Available for select projects</span>
+      <!-- Live Status & Node Bar -->
+      <div class="flex flex-wrap items-center justify-between gap-3 text-xs font-mono pb-4 border-b border-zinc-100 dark:border-zinc-800/80">
+        <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-500/10 dark:bg-emerald-500/10 border border-emerald-500/20 text-emerald-700 dark:text-emerald-400">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span class="font-medium text-[11px]">Available for select projects</span>
         </div>
 
-        <div class="inline-flex items-center gap-2 text-zinc-500 dark:text-zinc-400">
-          <svg class="w-3.5 h-3.5 text-zinc-400 dark:text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span>Jakarta, ID · <strong class="text-zinc-800 dark:text-zinc-200 font-semibold">{time || '12:00'} (GMT+7)</strong></span>
+        <div class="flex items-center gap-4 text-zinc-500 dark:text-zinc-400 text-xs">
+          <span>Jakarta, ID <strong class="text-zinc-700 dark:text-zinc-200 font-normal">GMT+7</strong></span>
+          <span>·</span>
+          <span class="font-mono text-zinc-900 dark:text-zinc-100">{time || "00:00"}</span>
         </div>
       </div>
 
-      <!-- Identity & Portrait Layout -->
-      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 mb-6">
-        <!-- Avatar with Indonesia Flag Badge -->
+      <!-- Main Identity Masthead (Split Editorial Layout) -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-8">
+        
+        <!-- Portrait Frame -->
         <div class="relative shrink-0">
-          <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl border-2 border-zinc-200 dark:border-zinc-800 overflow-hidden bg-zinc-100 dark:bg-zinc-900 shadow-xs">
+          <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl overflow-hidden border-2 border-zinc-200 dark:border-zinc-800 bg-zinc-100 dark:bg-zinc-900 shadow-sm">
             <img
-              src="https://github.com/rafitojuan.png"
-              alt="Portrait of Rafito Juan"
-              class="w-full h-full object-cover"
+              src="/pfp.png"
+              alt="Rafito Juan"
+              class="w-full h-full object-cover grayscale contrast-105 hover:grayscale-0 transition-all duration-500"
+              loading="eager"
             />
           </div>
-          <div class="absolute -bottom-1 -right-1 w-8 h-5.5 rounded overflow-hidden shadow-xs border border-white dark:border-zinc-900">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Flag_of_Indonesia.svg"
-              alt="Indonesia Flag"
-              class="w-full h-full object-cover"
-            />
+          <!-- Tactile craft corner badge -->
+          <div class="absolute -bottom-1 -right-1 px-1.5 py-0.5 rounded-md bg-zinc-900 dark:bg-zinc-100 text-[9px] font-mono text-white dark:text-zinc-950 font-bold shadow-xs">
+            SE
           </div>
         </div>
 
@@ -97,7 +92,8 @@
               Rafito Juan
             </h1>
             
-            <svg class="w-5 h-5 text-blue-500 shrink-0 fill-current" viewBox="0 0 24 24" title="Verified Engineer">
+            <svg class="w-5 h-5 text-blue-500 shrink-0 fill-current" viewBox="0 0 24 24" aria-label="Verified Engineer">
+              <title>Verified Engineer</title>
               <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .495.083.965.238 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z"/>
             </svg>
 

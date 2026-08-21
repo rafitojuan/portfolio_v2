@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import Lenis from 'lenis';
   import { lenis as lenisStore } from './lib/stores/lenis.js';
@@ -58,7 +58,7 @@
 
     lenisStore.set(lenis);
 
-    function raf(time) {
+    function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
