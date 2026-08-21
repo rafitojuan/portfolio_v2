@@ -82,11 +82,11 @@
   
   {#if currentRoute === 'home'}
     <Hero />
-    <About />
     <TechStack />
+    <Projects />
+    <About />
     <Experience />
     <Education />
-    <Projects />
     <HonorsAwards />
     <Certifications />
     <Testimonials />

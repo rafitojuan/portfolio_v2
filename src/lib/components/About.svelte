@@ -10,12 +10,12 @@
   
   function getColor(level) {
     switch(level) {
-      case 0: return 'bg-[#ebedf0] dark:bg-[#161b22]';
-      case 1: return 'bg-[#9be9a8] dark:bg-[#0e4429]';
-      case 2: return 'bg-[#40c463] dark:bg-[#006d32]';
-      case 3: return 'bg-[#30a14e] dark:bg-[#26a641]';
-      case 4: return 'bg-[#216e39] dark:bg-[#39d353]';
-      default: return 'bg-[#ebedf0] dark:bg-[#161b22]';
+      case 0: return 'bg-zinc-200/80 dark:bg-zinc-800/80';
+      case 1: return 'bg-emerald-300 dark:bg-emerald-900';
+      case 2: return 'bg-emerald-400 dark:bg-emerald-700';
+      case 3: return 'bg-emerald-500 dark:bg-emerald-600';
+      case 4: return 'bg-emerald-600 dark:bg-emerald-500';
+      default: return 'bg-zinc-200/80 dark:bg-zinc-800/80';
     }
   }
 
@@ -67,98 +67,121 @@
   });
 </script>
 
-<section id="about" class="pb-12 border-b border-zinc-200 dark:border-zinc-900/50 scroll-mt-14">
+<section id="about" class="py-12 border-b border-zinc-200 dark:border-zinc-900/50 scroll-mt-14">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-200 dark:border-zinc-900/50 h-full">
-    <h2 class="text-xl font-bold text-zinc-950 dark:text-white mb-6">About</h2>
     
-    <div class="prose max-w-none text-zinc-600 dark:text-zinc-400 mb-8 space-y-4 text-sm sm:text-base leading-relaxed">
+    <!-- Section Header with Explicit Hallmark Indexing -->
+    <div class="flex items-baseline justify-between mb-8 pb-4 border-b border-zinc-200 dark:border-zinc-800/80">
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-mono font-bold text-zinc-400 dark:text-zinc-500">03 /</span>
+        <h2 class="text-xl sm:text-2xl font-bold font-display tracking-tight text-zinc-950 dark:text-white">
+          Background & Activity
+        </h2>
+      </div>
+      <span class="text-xs font-mono text-zinc-500">Engineering Focus</span>
+    </div>
+    
+    <!-- Narrative Prose -->
+    <div class="space-y-4 text-sm sm:text-base text-zinc-600 dark:text-zinc-400 leading-relaxed mb-8">
       <p>
-        As a Software Engineer, I focus on building digital solutions that balance technical precision with a strong understanding of user needs. I currently oversee data management and IT infrastructure at 
-        <strong class="text-zinc-900 dark:text-zinc-100">PT Energi Pelabuhan Indonesia (State-Owned Enterprise)</strong>, ensuring mission-critical systems run efficiently and reliably.
+        As a Software Engineer, I focus on building digital solutions that balance technical precision with deep empathy for user workflows. I oversee data management and IT infrastructure at 
+        <strong class="text-zinc-950 dark:text-white font-semibold">PT Energi Pelabuhan Indonesia (State-Owned Enterprise)</strong>, keeping mission-critical systems and port operations reliable.
       </p>
 
       <p>
-        Beyond my full-time role, I actively work in remote environments and have delivered 17 projects across web platforms (PWA, Next.js, Livewire), mobile applications (Flutter), and technical tools including data scraping, penetration testing, and load testing. My core stack includes Laravel, React, and Next.js, with an emphasis on scalable and maintainable architecture.
+        Across my engineering work, I have delivered over 17 projects spanning high-concurrency Laravel architectures, modern React/Next.js/Svelte client interfaces, Flutter mobile apps, and developer automation suites (data scraping, penetration testing, load testing).
       </p>
 
-      <h3 class="text-base sm:text-lg font-bold text-zinc-900 dark:text-zinc-100 pt-2">Professional Highlights</h3>
-      <ul class="list-disc list-inside space-y-1.5 pl-1">
-        <li><strong class="text-zinc-900 dark:text-zinc-200">SATUASA Student Award</strong> – Best Innovation & 3rd Place IT Product</li>
-        <li><strong class="text-zinc-900 dark:text-zinc-200">TOEIC Score: 895</strong> – Professional Proficiency level for international collaboration</li>
-        <li>
-          Bachelor’s candidate at <strong class="text-zinc-900 dark:text-zinc-200">Universitas Terbuka</strong>, where distance learning has strengthened my time management, discipline, and ability to balance full-time work with remote projects.
-        </li>
-      </ul>
+      <!-- Key Professional Highlights Bento Card -->
+      <div class="p-4 sm:p-5 rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-zinc-200/80 dark:border-zinc-800 text-xs sm:text-sm my-6 space-y-2">
+        <h3 class="text-xs font-mono font-bold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+          Core Highlights
+        </h3>
+        <ul class="space-y-2 pl-1">
+          <li class="flex items-start gap-2">
+            <span class="text-emerald-600 dark:text-emerald-400 shrink-0 font-bold">✓</span>
+            <span><strong class="text-zinc-900 dark:text-zinc-100 font-semibold">SATUASA Student Award:</strong> Best Innovation & 3rd Place IT Product.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-emerald-600 dark:text-emerald-400 shrink-0 font-bold">✓</span>
+            <span><strong class="text-zinc-900 dark:text-zinc-100 font-semibold">TOEIC Score 895:</strong> Professional working proficiency for international teams.</span>
+          </li>
+          <li class="flex items-start gap-2">
+            <span class="text-emerald-600 dark:text-emerald-400 shrink-0 font-bold">✓</span>
+            <span><strong class="text-zinc-900 dark:text-zinc-100 font-semibold">Universitas Terbuka Candidate:</strong> Demonstrating rigorous independent discipline, self-direction, and remote productivity.</span>
+          </li>
+        </ul>
+      </div>
 
       <p>
-        Although my primary focus is software development, winning a national short film competition (FLS2N) shaped my visual perspective, which contributes to designing intuitive and user-centered interfaces.
-      </p>
-
-      <p>
-        I’m experienced in asynchronous collaboration and independent project ownership. If you’re seeking a disciplined and communicative developer who delivers impact remotely, I’d welcome the opportunity to connect.
+        My background also includes winning a national short film competition (FLS2N), which sharpens my eye for visual rhythm, spatial layout, and intuitive human-centered design.
       </p>
     </div>
 
-    <div class="bg-white dark:bg-zinc-900/30 p-4 rounded-xl border border-zinc-200 dark:border-zinc-800 overflow-x-auto shadow-xs dark:shadow-none">
+    <!-- GitHub Contribution Activity Heatmap -->
+    <div class="bg-white dark:bg-zinc-900/30 p-5 rounded-2xl border border-zinc-200 dark:border-zinc-800 overflow-x-auto shadow-xs dark:shadow-none transition-colors">
       <div class="min-w-max">
-        <div class="flex justify-between items-end mb-2">
-            <div class="flex flex-col mb-2">
-              <span class="text-xs text-zinc-600 dark:text-zinc-400">Contributions in the last year</span>
-              <span class="text-zinc-900 dark:text-white font-bold text-sm">{loading ? '...' : totalContributions} total</span>
-            </div>
+        <div class="flex justify-between items-end mb-4">
+          <div class="flex flex-col">
+            <span class="text-xs font-mono font-medium text-zinc-500 dark:text-zinc-400">GitHub Contributions (Past Year)</span>
+            <span class="text-zinc-950 dark:text-white font-bold font-display text-base">{loading ? 'Loading activity...' : `${totalContributions} Total Commits & Contributions`}</span>
+          </div>
+          <a href="https://github.com/rafitojuan" target="_blank" rel="noopener noreferrer" class="text-xs font-mono text-zinc-500 hover:text-zinc-950 dark:hover:text-white transition-colors">
+            @rafitojuan ↗
+          </a>
         </div>
         
         {#if !loading}
-        <div class="flex gap-[3px] mb-2 text-[10px] text-zinc-600 dark:text-zinc-400 h-4">
-             {#each contributionWeeks as week, i}
-                {@const date = new Date(week[0].date)}
-                {@const month = date.toLocaleString('default', { month: 'short' })}
-                {@const prevDate = i > 0 ? new Date(contributionWeeks[i-1][0].date) : null}
-                {@const prevMonth = prevDate ? prevDate.toLocaleString('default', { month: 'short' }) : null}
-                <div class="flex-1 w-2.5 relative overflow-visible">
-                     {#if i === 0 || month !== prevMonth}
-                         <span class="absolute top-0 left-0">{month}</span>
-                     {/if}
-                </div>
-             {/each}
+        <div class="flex gap-[3px] mb-2 text-[10px] font-mono text-zinc-500 dark:text-zinc-400 h-4">
+          {#each contributionWeeks as week, i}
+            {@const date = new Date(week[0].date)}
+            {@const month = date.toLocaleString('default', { month: 'short' })}
+            {@const prevDate = i > 0 ? new Date(contributionWeeks[i-1][0].date) : null}
+            {@const prevMonth = prevDate ? prevDate.toLocaleString('default', { month: 'short' }) : null}
+            <div class="flex-1 w-2.5 relative overflow-visible">
+              {#if i === 0 || month !== prevMonth}
+                <span class="absolute top-0 left-0">{month}</span>
+              {/if}
+            </div>
+          {/each}
         </div>
         {/if}
 
         {#if loading}
-            <div class="flex gap-[3px] h-[84px] animate-pulse">
-                {#each Array(52) as _}
-                    <div class="flex flex-col gap-[3px]">
-                        {#each Array(7) as _}
-                            <div class="w-2.5 h-2.5 rounded-[2px] bg-zinc-200 dark:bg-zinc-800"></div>
-                        {/each}
-                    </div>
+          <div class="flex gap-[3px] h-[84px] animate-pulse">
+            {#each Array(52) as _}
+              <div class="flex flex-col gap-[3px]">
+                {#each Array(7) as _}
+                  <div class="w-2.5 h-2.5 rounded-[2px] bg-zinc-200 dark:bg-zinc-800"></div>
                 {/each}
-            </div>
+              </div>
+            {/each}
+          </div>
         {:else}
-            <div class="flex gap-[3px]" role="region" aria-label="GitHub contribution graph">
-              {#each contributionWeeks as week}
-                <div class="flex flex-col gap-[3px]">
-                  {#each week as day}
-            <div 
-                role="img"
-                class="w-2.5 h-2.5 rounded-[2px] {getColor(day.level)}"
-                aria-label="{day.count} contributions on {day.date}"
-                on:mouseenter={(e) => handleMouseEnter(e, day)}
-                on:mouseleave={handleMouseLeave}
-            ></div>
-          {/each}
-                </div>
-              {/each}
-            </div>
+          <div class="flex gap-[3px]" role="region" aria-label="GitHub contribution graph">
+            {#each contributionWeeks as week}
+              <div class="flex flex-col gap-[3px]">
+                {#each week as day}
+                  <div 
+                    role="img"
+                    class="w-2.5 h-2.5 rounded-[2px] {getColor(day.level)} transition-colors cursor-pointer hover:ring-1 hover:ring-zinc-400 dark:hover:ring-zinc-500"
+                    aria-label="{day.count} contributions on {day.date}"
+                    on:mouseenter={(e) => handleMouseEnter(e, day)}
+                    on:mouseleave={handleMouseLeave}
+                  ></div>
+                {/each}
+              </div>
+            {/each}
+          </div>
         {/if}
 
-        <div class="flex justify-end items-center gap-2 mt-4 text-[10px] text-zinc-600 dark:text-zinc-400">
+        <div class="flex justify-end items-center gap-2 mt-4 text-[10px] font-mono text-zinc-500">
           <span>Less</span>
-          <div class="w-2.5 h-2.5 rounded-[2px] bg-[#ebedf0] dark:bg-[#161b22]" aria-hidden="true"></div>
-          <div class="w-2.5 h-2.5 rounded-[2px] bg-[#9be9a8] dark:bg-[#0e4429]" aria-hidden="true"></div>
-          <div class="w-2.5 h-2.5 rounded-[2px] bg-[#40c463] dark:bg-[#006d32]" aria-hidden="true"></div>
-          <div class="w-2.5 h-2.5 rounded-[2px] bg-[#30a14e] dark:bg-[#26a641]" aria-hidden="true"></div>
-          <div class="w-2.5 h-2.5 rounded-[2px] bg-[#216e39] dark:bg-[#39d353]" aria-hidden="true"></div>
+          <div class="w-2.5 h-2.5 rounded-[2px] bg-zinc-200/80 dark:bg-zinc-800/80" aria-hidden="true"></div>
+          <div class="w-2.5 h-2.5 rounded-[2px] bg-emerald-300 dark:bg-emerald-900" aria-hidden="true"></div>
+          <div class="w-2.5 h-2.5 rounded-[2px] bg-emerald-400 dark:bg-emerald-700" aria-hidden="true"></div>
+          <div class="w-2.5 h-2.5 rounded-[2px] bg-emerald-500 dark:bg-emerald-600" aria-hidden="true"></div>
+          <div class="w-2.5 h-2.5 rounded-[2px] bg-emerald-600 dark:bg-emerald-500" aria-hidden="true"></div>
           <span>More</span>
         </div>
       </div>
@@ -167,15 +190,15 @@
 
   {#if hoveredDay}
     <div 
-      class="fixed z-50 bg-zinc-900 dark:bg-zinc-700 text-[10px] text-white px-2 py-1 rounded shadow-xl pointer-events-none transform -translate-x-1/2 -translate-y-full"
+      class="fixed z-50 bg-zinc-900 dark:bg-zinc-800 text-[11px] font-mono text-white px-2.5 py-1.5 rounded-lg shadow-xl pointer-events-none transform -translate-x-1/2 -translate-y-full border border-zinc-700"
       style="top: {tooltipPosition.y}px; left: {tooltipPosition.x}px;"
       transition:fade={{ duration: 100 }}
     >
       <div class="whitespace-nowrap font-medium text-zinc-200">
-        <span class="text-white font-bold">{hoveredDay.count} contributions</span> on {formatDate(hoveredDay.date)}
+        <strong class="text-white font-bold">{hoveredDay.count} commits</strong> on {formatDate(hoveredDay.date)}
       </div>
       <div 
-        class="absolute left-1/2 bottom-0 w-2 h-2 bg-zinc-900 dark:bg-zinc-700 transform -translate-x-1/2 translate-y-1/2 rotate-45"
+        class="absolute left-1/2 bottom-0 w-2 h-2 bg-zinc-900 dark:bg-zinc-800 transform -translate-x-1/2 translate-y-1/2 rotate-45 border-r border-b border-zinc-700"
       ></div>
     </div>
   {/if}

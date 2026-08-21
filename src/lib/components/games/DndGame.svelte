@@ -79,7 +79,7 @@
   });
 
   onDestroy(() => {
-    if (audioCtx && audioCtx.state !== 'closed') {
+    if (audioCtx && audioCtx.state !== "closed") {
       audioCtx.close();
     }
   });
@@ -105,7 +105,7 @@
   let currentChoices: string[] = [];
   let freeInput = "";
   let logContainer: HTMLDivElement;
-  
+
   let cheatBuffer: string[] = [];
   let isDungeonMaster = false;
   let showMobileSheet = false;
@@ -126,7 +126,7 @@
         messages.push({ role: "system", content: systemPrompt });
         chatHistory.push({ role: "system", content: systemPrompt });
       } else {
-        // Only send the last 10 messages to save context limit and cost
+        // Send the last 10 messages for context efficiency
         const recentHistory = chatHistory.slice(-10);
         messages.push(...recentHistory);
       }
@@ -178,11 +178,11 @@
 
     let formattedText = strippedText.replace(
       /\*\*(.*?)\*\*/g,
-      '<strong class="text-cyan-400">$1</strong>',
+      '<strong class="text-zinc-100 font-semibold">$1</strong>',
     );
     formattedText = formattedText.replace(
       /\*(.*?)\*/g,
-      '<em class="text-emerald-400">$1</em>',
+      '<em class="text-emerald-400 font-normal">$1</em>',
     );
     formattedText = formattedText.replace(/\n/g, "<br/>");
 
@@ -200,11 +200,11 @@
         current += token;
         narrativeLog[lastIndex] = current;
       } else {
-        const words = token.split(/(\s+)/); // split by spaces, preserving spaces
+        const words = token.split(/(\s+)/);
         for (let i = 0; i < words.length; i++) {
           current += words[i];
           narrativeLog[lastIndex] = current;
-          await new Promise((r) => setTimeout(r, 20)); // Delay per word/space
+          await new Promise((r) => setTimeout(r, 20));
           scrollToBottom();
         }
       }
@@ -244,7 +244,7 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
   function submitAction(action: string) {
     if (!action.trim() || isWaitingForAI || isAnimating) return;
 
-    const actionHtml = `<div class="text-zinc-500 italic mt-4 mb-2">> You chose: <span class="text-emerald-400">${action}</span></div>`;
+    const actionHtml = `<div class="text-xs font-mono text-zinc-500 my-3 pb-1 border-b border-zinc-800/80">› Action chosen: <span class="text-emerald-400 font-medium">${action}</span></div>`;
     narrativeLog = [...narrativeLog, actionHtml];
 
     currentChoices = [];
@@ -275,20 +275,24 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
 
   function godModeStats() {
     stats = { str: 99, dex: 99, con: 99, int: 99, wis: 99, cha: 99 };
-    const actionHtml = `<div class="text-rose-500 font-bold italic mt-4 mb-2">> SYSTEM OVERRIDE: GOD MODE ACTIVATED</div>`;
+    const actionHtml = `<div class="text-xs font-mono text-rose-400 font-bold my-2">› SYSTEM OVERRIDE: GOD MODE ACTIVATED (ALL STATS 99)</div>`;
     narrativeLog = [...narrativeLog, actionHtml];
   }
 
   function restoreStats() {
     if (originalStats) {
       stats = { ...originalStats };
-      const actionHtml = `<div class="text-cyan-500 font-bold italic mt-4 mb-2">> SYSTEM OVERRIDE: STATS RESTORED</div>`;
+      const actionHtml = `<div class="text-xs font-mono text-zinc-400 font-bold my-2">› SYSTEM OVERRIDE: ORIGINAL STATS RESTORED</div>`;
       narrativeLog = [...narrativeLog, actionHtml];
     }
   }
 
   function resetGame() {
-    if (confirm("Are you sure you want to delete this character and start over?")) {
+    if (
+      confirm(
+        "Are you sure you want to restart your adventure? Current progress will be cleared.",
+      )
+    ) {
       localStorage.removeItem("dndGameSave");
       chatHistory = [];
       narrativeLog = [];
@@ -306,42 +310,43 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
 
   function toggleMusic() {
     if (!audioCtx) {
-      audioCtx = new (window.AudioContext || (window as any).webkitAudioContext)();
+      audioCtx = new (window.AudioContext ||
+        (window as any).webkitAudioContext)();
       const masterGain = audioCtx.createGain();
-      masterGain.gain.value = 0.08; 
+      masterGain.gain.value = 0.05;
       masterGain.connect(audioCtx.destination);
-      
-      // C Major 7 / 9
-      const frequencies = [130.81, 164.81, 196.00, 246.94, 293.66];
-      
+
+      // C Major 7 / 9 Ambient Pad
+      const frequencies = [130.81, 164.81, 196.0, 246.94, 293.66];
+
       frequencies.forEach((freq, i) => {
         const osc = audioCtx!.createOscillator();
         const filter = audioCtx!.createBiquadFilter();
         const gain = audioCtx!.createGain();
 
-        osc.type = 'triangle';
+        osc.type = "triangle";
         osc.frequency.value = freq;
-        
-        filter.type = 'lowpass';
-        filter.frequency.value = 400 + i * 50;
+
+        filter.type = "lowpass";
+        filter.frequency.value = 350 + i * 40;
 
         const lfo = audioCtx!.createOscillator();
-        lfo.type = 'sine';
+        lfo.type = "sine";
         lfo.frequency.value = 0.05 + Math.random() * 0.05;
-        
+
         lfo.connect(gain.gain);
-        gain.gain.value = 0.5;
+        gain.gain.value = 0.4;
 
         osc.connect(filter);
         filter.connect(gain);
         gain.connect(masterGain);
-        
+
         osc.start();
         lfo.start();
       });
       isPlayingMusic = true;
     } else {
-      if (audioCtx.state === 'running') {
+      if (audioCtx.state === "running") {
         audioCtx.suspend();
         isPlayingMusic = false;
       } else {
@@ -355,84 +360,132 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
 <svelte:window on:keydown={handleGlobalKeydown} />
 
 <div
-  class="w-full flex flex-col items-center justify-center pt-16 sm:pt-24 px-2 sm:px-4 gap-3 sm:gap-6 min-h-[80vh]"
+  class="w-full max-w-4xl mx-auto flex flex-col items-center justify-center pt-8 sm:pt-14 pb-16 px-4 gap-4 min-h-[85vh]"
 >
-  <!-- Header -->
+  <!-- Top Navigation & Controls Bar -->
   <div
-    class="w-full max-w-4xl flex justify-between items-center text-zinc-400 font-mono text-xs sm:text-base"
+    class="w-full flex items-center justify-between pb-4 border-b border-zinc-200 dark:border-zinc-800/80"
   >
     <button
+      type="button"
       on:click={() => dispatch("back")}
-      class="hover:text-cyan-400 transition-colors flex items-center gap-2"
+      class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 transition-colors cursor-pointer"
     >
-      <span class="text-cyan-500">&lt;</span> RETREAT
+      <span>← Back to Games</span>
     </button>
-    <div class="flex items-center gap-4">
-      <button on:click={toggleMusic} class="text-xs text-zinc-500 hover:text-cyan-400 transition-colors flex items-center gap-2">
-        {isPlayingMusic ? '🔊 BGM ON' : '🔈 BGM OFF'}
+
+    <div class="flex items-center gap-3">
+      <button
+        type="button"
+        on:click={toggleMusic}
+        class="px-2.5 py-1 rounded-lg text-xs font-mono text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 transition-colors flex items-center gap-1.5 cursor-pointer"
+      >
+        <span>{isPlayingMusic ? "🔊 Music: ON" : "🔈 Music: OFF"}</span>
       </button>
-      <div class="text-sm">RPG_SYSTEM.exe</div>
+
+      <span class="text-xs font-mono text-zinc-500 hidden sm:inline">
+        Terminal RPG
+      </span>
     </div>
   </div>
 
+  <!-- Tactile Adventure Console Frame -->
   <div
-    class="w-full max-w-4xl bg-[#0a0a0c] border border-zinc-800 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.05)] h-[calc(100dvh-140px)] sm:h-[600px] flex flex-col relative font-mono"
+    class="w-full p-3 sm:p-5 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-xs dark:shadow-none space-y-3"
   >
-    <!-- Top Bar -->
+    <!-- Functional Module Subheader -->
     <div
-      class="w-full h-8 bg-zinc-900 border-b border-zinc-800 flex items-center px-4 justify-between shrink-0"
+      class="flex items-center justify-between px-2 text-xs font-mono text-zinc-500"
     >
-      <div class="flex gap-2">
-        <div class="w-3 h-3 rounded-full bg-rose-500/50"></div>
-        <div class="w-3 h-3 rounded-full bg-amber-500/50"></div>
-        <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+      <div class="flex items-center gap-2">
+        <span
+          class="inline-block w-2 h-2 rounded-full {gameState === 'ADVENTURE'
+            ? 'bg-emerald-500 animate-pulse'
+            : 'bg-zinc-400'}"
+        ></span>
+        <span class="font-bold text-zinc-700 dark:text-zinc-300">
+          {gameState === "CHARACTER_CREATION"
+            ? "CHARACTER CREATION"
+            : gameState === "ERROR"
+              ? "SYSTEM NOTICE"
+              : "DUNGEON MASTER SESSION"}
+        </span>
       </div>
-      <div class="text-xs text-zinc-500 uppercase tracking-widest">
-        Dungeons & Dragons AI Module
-      </div>
+
+      {#if gameState === "ADVENTURE"}
+        <button
+          type="button"
+          on:click={() => (showMobileSheet = !showMobileSheet)}
+          class="md:hidden px-2 py-0.5 rounded text-[11px] bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700"
+        >
+          {showMobileSheet ? "✕ Close Stats" : "⚔ Character Stats"}
+        </button>
+      {/if}
     </div>
 
-    <!-- Content Area -->
-    <div class="flex-1 flex overflow-hidden">
+    <!-- Main Game Window -->
+    <div
+      class="w-full bg-zinc-950 border border-zinc-800 rounded-xl overflow-hidden h-[540px] sm:h-[580px] flex flex-col relative font-mono shadow-inner"
+    >
       {#if gameState === "CHARACTER_CREATION"}
+        <!-- Character Creation Grimoire Form -->
         <div
-          class="flex-1 flex flex-col items-center justify-start sm:justify-center p-4 sm:p-8 overflow-y-auto"
+          class="flex-1 flex flex-col items-center justify-center p-4 sm:p-8 overflow-y-auto"
         >
-          <h2 class="text-lg sm:text-2xl font-black text-cyan-400 mb-4 sm:mb-8 tracking-widest">
-            CHARACTER CREATION
-          </h2>
+          <div class="w-full max-w-md flex flex-col gap-5">
+            <div class="text-center space-y-1">
+              <h2 class="text-xl font-bold font-display text-white">
+                Create Your Adventurer
+              </h2>
+              <p class="text-xs text-zinc-400 font-sans">
+                Set up your character identity and roll starting D&D 5e
+                attributes.
+              </p>
+            </div>
 
-          <div class="w-full max-w-md flex flex-col gap-6">
-            <div class="flex flex-col gap-2">
-              <label for="char-name" class="text-zinc-400 text-sm font-medium">CHARACTER NAME</label>
+            <!-- Name Input -->
+            <div class="flex flex-col gap-1.5">
+              <label
+                for="char-name"
+                class="text-xs font-mono text-zinc-400 uppercase"
+                >Character Name</label
+              >
               <input
                 id="char-name"
                 type="text"
                 bind:value={charName}
-                placeholder="Enter name..."
-                class="bg-zinc-900 border border-zinc-700 rounded px-4 py-2 text-zinc-100 focus:outline-none focus:border-cyan-500"
+                placeholder="e.g. Eldrin Shadowbane"
+                class="bg-zinc-900 border border-zinc-800 rounded-xl px-3.5 py-2.5 text-sm text-zinc-100 focus:outline-none focus:border-zinc-500 font-sans transition-colors"
               />
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
-              <div class="flex flex-col gap-2">
-                <label for="char-race" class="text-zinc-400 text-sm font-medium">RACE</label>
+            <!-- Race & Class Select -->
+            <div class="grid grid-cols-2 gap-3">
+              <div class="flex flex-col gap-1.5">
+                <label
+                  for="char-race"
+                  class="text-xs font-mono text-zinc-400 uppercase">Race</label
+                >
                 <select
                   id="char-race"
                   bind:value={charRace}
-                  class="bg-zinc-900 border border-zinc-700 rounded px-4 py-2 text-zinc-100 focus:outline-none focus:border-cyan-500"
+                  class="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 focus:outline-none focus:border-zinc-500 font-sans transition-colors cursor-pointer"
                 >
                   {#each races as r}
                     <option value={r}>{r}</option>
                   {/each}
                 </select>
               </div>
-              <div class="flex flex-col gap-2">
-                <label for="char-class" class="text-zinc-400 text-sm font-medium">CLASS</label>
+
+              <div class="flex flex-col gap-1.5">
+                <label
+                  for="char-class"
+                  class="text-xs font-mono text-zinc-400 uppercase">Class</label
+                >
                 <select
                   id="char-class"
                   bind:value={charClass}
-                  class="bg-zinc-900 border border-zinc-700 rounded px-4 py-2 text-zinc-100 focus:outline-none focus:border-cyan-500"
+                  class="bg-zinc-900 border border-zinc-800 rounded-xl px-3 py-2 text-sm text-zinc-100 focus:outline-none focus:border-zinc-500 font-sans transition-colors cursor-pointer"
                 >
                   {#each classes as c}
                     <option value={c}>{c}</option>
@@ -441,218 +494,290 @@ Do NOT deviate from this format for choices. If you forget the choices, the game
               </div>
             </div>
 
+            <!-- Attributes & Dice Roller -->
             <div
-              class="flex flex-col gap-2 mt-4 p-4 border border-zinc-800 bg-zinc-900/30 rounded-lg"
+              class="p-3.5 border border-zinc-800/90 bg-zinc-900/60 rounded-xl space-y-3"
             >
-              <div class="flex justify-between items-center mb-2">
-                <span class="text-zinc-400 text-sm font-medium">ATTRIBUTES</span>
+              <div class="flex justify-between items-center">
+                <span
+                  class="text-xs font-mono text-zinc-400 uppercase font-bold"
+                  >Attributes (3d6)</span
+                >
                 <button
                   type="button"
                   on:click={rollStats}
-                  class="text-xs text-cyan-400 hover:text-cyan-300 border border-cyan-900 hover:border-cyan-500 rounded px-2 py-1 transition-colors cursor-pointer"
+                  class="text-xs font-mono text-zinc-300 hover:text-white bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 px-2.5 py-1 rounded-lg transition-colors cursor-pointer flex items-center gap-1"
                 >
-                  REROLL (3d6)
+                  <span>🎲 Reroll Stats</span>
                 </button>
               </div>
-              <div class="grid grid-cols-3 gap-2 text-center text-sm">
-                <div class="bg-zinc-900 p-2 rounded border border-zinc-800">
-                  <span class="text-zinc-500">STR</span> <br /><span
-                    class="text-zinc-200 font-bold">{stats.str}</span
-                  >
+
+              <div class="grid grid-cols-3 gap-2 text-center text-xs font-mono">
+                <div
+                  class="bg-zinc-900/90 p-2 rounded-lg border border-zinc-800"
+                >
+                  <span class="text-zinc-500 text-[10px]">STR</span>
+                  <div class="text-zinc-100 font-bold text-sm">{stats.str}</div>
                 </div>
-                <div class="bg-zinc-900 p-2 rounded border border-zinc-800">
-                  <span class="text-zinc-500">DEX</span> <br /><span
-                    class="text-zinc-200 font-bold">{stats.dex}</span
-                  >
+                <div
+                  class="bg-zinc-900/90 p-2 rounded-lg border border-zinc-800"
+                >
+                  <span class="text-zinc-500 text-[10px]">DEX</span>
+                  <div class="text-zinc-100 font-bold text-sm">{stats.dex}</div>
                 </div>
-                <div class="bg-zinc-900 p-2 rounded border border-zinc-800">
-                  <span class="text-zinc-500">CON</span> <br /><span
-                    class="text-zinc-200 font-bold">{stats.con}</span
-                  >
+                <div
+                  class="bg-zinc-900/90 p-2 rounded-lg border border-zinc-800"
+                >
+                  <span class="text-zinc-500 text-[10px]">CON</span>
+                  <div class="text-zinc-100 font-bold text-sm">{stats.con}</div>
                 </div>
-                <div class="bg-zinc-900 p-2 rounded border border-zinc-800">
-                  <span class="text-zinc-500">INT</span> <br /><span
-                    class="text-zinc-200 font-bold">{stats.int}</span
-                  >
+                <div
+                  class="bg-zinc-900/90 p-2 rounded-lg border border-zinc-800"
+                >
+                  <span class="text-zinc-500 text-[10px]">INT</span>
+                  <div class="text-zinc-100 font-bold text-sm">{stats.int}</div>
                 </div>
-                <div class="bg-zinc-900 p-2 rounded border border-zinc-800">
-                  <span class="text-zinc-500">WIS</span> <br /><span
-                    class="text-zinc-200 font-bold">{stats.wis}</span
-                  >
+                <div
+                  class="bg-zinc-900/90 p-2 rounded-lg border border-zinc-800"
+                >
+                  <span class="text-zinc-500 text-[10px]">WIS</span>
+                  <div class="text-zinc-100 font-bold text-sm">{stats.wis}</div>
                 </div>
-                <div class="bg-zinc-900 p-2 rounded border border-zinc-800">
-                  <span class="text-zinc-500">CHA</span> <br /><span
-                    class="text-zinc-200 font-bold">{stats.cha}</span
-                  >
+                <div
+                  class="bg-zinc-900/90 p-2 rounded-lg border border-zinc-800"
+                >
+                  <span class="text-zinc-500 text-[10px]">CHA</span>
+                  <div class="text-zinc-100 font-bold text-sm">{stats.cha}</div>
                 </div>
               </div>
             </div>
 
+            <!-- Start Button -->
             <button
+              type="button"
               on:click={startGame}
-              class="mt-4 w-full bg-cyan-500/10 border border-cyan-500 text-cyan-400 hover:bg-cyan-500/20 font-bold py-2 sm:py-3 rounded transition-all text-sm sm:text-base"
+              class="w-full bg-zinc-100 hover:bg-white text-zinc-950 font-bold py-2.5 rounded-xl transition-colors text-sm font-sans cursor-pointer shadow-sm"
             >
-              BEGIN ADVENTURE
+              Begin Adventure →
             </button>
           </div>
         </div>
       {:else if gameState === "ERROR"}
-        <div class="flex-1 flex flex-col items-center justify-center p-8 gap-4">
-          <div class="text-rose-500 text-xl font-bold">API ERROR</div>
-          <div class="text-zinc-400 text-sm max-w-md text-center">
-            {errorMessage}
+        <!-- Error Screen -->
+        <div
+          class="flex-1 flex flex-col items-center justify-center p-8 gap-3 text-center"
+        >
+          <div
+            class="px-3 py-1 rounded-full bg-rose-950/60 border border-rose-800 text-rose-400 text-xs font-bold font-mono"
+          >
+            API CONNECTION ISSUE
+          </div>
+          <div class="text-zinc-400 text-xs max-w-sm font-mono leading-relaxed">
+            {errorMessage ||
+              "Unable to establish connection with AI Dungeon Master."}
           </div>
           <button
+            type="button"
             on:click={() => (gameState = "CHARACTER_CREATION")}
-            class="mt-4 px-4 py-2 border border-zinc-700 text-zinc-300 hover:text-white rounded"
-            >Retry</button
+            class="mt-2 px-4 py-2 bg-zinc-900 border border-zinc-700 text-zinc-200 hover:text-white rounded-xl text-xs font-mono transition-colors cursor-pointer"
           >
+            ← Return to Character Screen
+          </button>
         </div>
       {:else if gameState === "ADVENTURE"}
-        <!-- Mobile Character Toggle -->
-        <button
-          on:click={() => showMobileSheet = !showMobileSheet}
-          class="md:hidden absolute top-10 left-2 z-20 text-[10px] bg-zinc-900 border border-zinc-700 text-zinc-400 px-2 py-1 rounded hover:text-cyan-400 transition-colors"
-        >
-          {showMobileSheet ? '✕ CLOSE' : '⚔ STATS'}
-        </button>
+        <!-- Adventure Live View -->
+        <div class="flex-1 flex overflow-hidden">
+          <!-- Character Sheet Sidebar -->
+          <div
+            class="{showMobileSheet
+              ? 'flex absolute inset-0 z-20 w-full'
+              : 'hidden'} md:flex md:relative md:w-60 bg-zinc-900/95 md:bg-zinc-900/60 border-r border-zinc-800/80 p-4 flex-col shrink-0 overflow-y-auto"
+          >
+            <div class="space-y-1 pb-4 border-b border-zinc-800">
+              <h3 class="text-sm font-bold font-display text-white truncate">
+                {charName}
+              </h3>
+              <p class="text-xs text-zinc-400 font-mono">
+                {charRace} · {charClass}
+              </p>
+            </div>
 
-        <!-- Left Sidebar: Character Sheet -->
-        <div
-          class="{showMobileSheet ? 'flex absolute inset-0 z-10 w-full' : 'hidden'} md:flex md:relative md:w-64 bg-zinc-900/95 md:bg-zinc-900/50 border-r border-zinc-800 p-4 flex-col shrink-0 overflow-y-auto overscroll-none"
-        >
-          <h3 class="text-cyan-400 font-bold uppercase truncate">{charName}</h3>
-          <div class="text-xs text-zinc-500 mb-6">{charRace} {charClass}</div>
+            <div
+              class="text-[10px] text-zinc-500 font-mono font-bold uppercase mt-4 mb-2"
+            >
+              Attributes
+            </div>
 
-          <div class="text-xs text-zinc-600 mb-2 font-bold">ATTRIBUTES</div>
-          <div class="grid grid-cols-2 gap-2 text-xs mb-6">
-            <div class="flex justify-between border-b border-zinc-800 pb-1">
-              <span class="text-zinc-500">STR</span>
-              <span class="text-zinc-300">{stats.str}</span>
-            </div>
-            <div class="flex justify-between border-b border-zinc-800 pb-1">
-              <span class="text-zinc-500">DEX</span>
-              <span class="text-zinc-300">{stats.dex}</span>
-            </div>
-            <div class="flex justify-between border-b border-zinc-800 pb-1">
-              <span class="text-zinc-500">CON</span>
-              <span class="text-zinc-300">{stats.con}</span>
-            </div>
-            <div class="flex justify-between border-b border-zinc-800 pb-1">
-              <span class="text-zinc-500">INT</span>
-              <span class="text-zinc-300">{stats.int}</span>
-            </div>
-            <div class="flex justify-between border-b border-zinc-800 pb-1">
-              <span class="text-zinc-500">WIS</span>
-              <span class="text-zinc-300">{stats.wis}</span>
-            </div>
-            <div class="flex justify-between border-b border-zinc-800 pb-1">
-              <span class="text-zinc-500">CHA</span>
-              <span class="text-zinc-300">{stats.cha}</span>
-            </div>
-          </div>
-
-          {#if isDungeonMaster}
-            <div class="mt-4 pt-4 border-t border-rose-900/50 mb-6">
-              <div class="text-[10px] text-rose-500 font-bold mb-3 animate-pulse tracking-widest">DM_TOOLS.exe</div>
-              <div class="flex flex-col gap-2">
-                <button on:click={godModeStats} class="text-xs bg-rose-900/20 text-rose-400 border border-rose-900/50 hover:bg-rose-900/50 p-2 rounded transition-colors text-left font-mono">
-                  > SET_ALL_STATS(99)
-                </button>
-                <button on:click={restoreStats} class="text-xs bg-cyan-900/20 text-cyan-400 border border-cyan-900/50 hover:bg-cyan-900/50 p-2 rounded transition-colors text-left font-mono">
-                  > RESTORE_STATS()
-                </button>
+            <div class="grid grid-cols-2 gap-2 text-xs font-mono mb-6">
+              <div
+                class="flex justify-between p-1.5 rounded bg-zinc-900 border border-zinc-800/60"
+              >
+                <span class="text-zinc-500">STR</span>
+                <span class="text-zinc-200 font-bold">{stats.str}</span>
+              </div>
+              <div
+                class="flex justify-between p-1.5 rounded bg-zinc-900 border border-zinc-800/60"
+              >
+                <span class="text-zinc-500">DEX</span>
+                <span class="text-zinc-200 font-bold">{stats.dex}</span>
+              </div>
+              <div
+                class="flex justify-between p-1.5 rounded bg-zinc-900 border border-zinc-800/60"
+              >
+                <span class="text-zinc-500">CON</span>
+                <span class="text-zinc-200 font-bold">{stats.con}</span>
+              </div>
+              <div
+                class="flex justify-between p-1.5 rounded bg-zinc-900 border border-zinc-800/60"
+              >
+                <span class="text-zinc-500">INT</span>
+                <span class="text-zinc-200 font-bold">{stats.int}</span>
+              </div>
+              <div
+                class="flex justify-between p-1.5 rounded bg-zinc-900 border border-zinc-800/60"
+              >
+                <span class="text-zinc-500">WIS</span>
+                <span class="text-zinc-200 font-bold">{stats.wis}</span>
+              </div>
+              <div
+                class="flex justify-between p-1.5 rounded bg-zinc-900 border border-zinc-800/60"
+              >
+                <span class="text-zinc-500">CHA</span>
+                <span class="text-zinc-200 font-bold">{stats.cha}</span>
               </div>
             </div>
-          {/if}
 
-          <button on:click={resetGame} class="mt-auto text-[10px] text-rose-500/70 hover:text-rose-500 transition-colors border border-rose-900/30 hover:border-rose-900/80 p-1.5 rounded w-full mb-3 font-bold">
-            [ RESET PROGRESS ]
-          </button>
-
-          <div
-            class="pt-4 border-t border-zinc-800 text-[10px] text-zinc-600"
-          >
-            Powered by Juan Dungeon Master
-          </div>
-        </div>
-
-        <!-- Main Content Area -->
-        <div class="flex-1 flex flex-col relative overflow-hidden bg-[#050505] min-w-0">
-          <!-- Narrative Log -->
-          <div
-            bind:this={logContainer}
-            class="flex-1 overflow-y-auto p-3 sm:p-6 scroll-smooth overscroll-none"
-          >
-            {#each narrativeLog as log}
+            {#if isDungeonMaster}
               <div
-                class="text-zinc-300 leading-relaxed mb-4 whitespace-pre-wrap font-serif text-sm sm:text-lg"
+                class="p-2.5 rounded-lg border border-rose-900/60 bg-rose-950/20 mb-4 space-y-2"
               >
-                {@html log}
-              </div>
-            {/each}
-
-            {#if isWaitingForAI}
-              <div
-                class="flex items-center gap-2 text-zinc-400 mt-4 bg-zinc-900/50 self-start p-3 rounded-2xl rounded-tl-sm w-fit border border-zinc-800"
-              >
-                <div class="flex gap-1.5">
-                  <div
-                    class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"
-                    style="animation-delay: 0ms"
-                  ></div>
-                  <div
-                    class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"
-                    style="animation-delay: 150ms"
-                  ></div>
-                  <div
-                    class="w-2 h-2 bg-cyan-400 rounded-full animate-pulse"
-                    style="animation-delay: 300ms"
-                  ></div>
+                <div
+                  class="text-[10px] text-rose-400 font-bold font-mono uppercase"
+                >
+                  DM God Tools
                 </div>
+                <button
+                  on:click={godModeStats}
+                  class="w-full text-left text-[11px] font-mono text-rose-300 hover:text-rose-100 p-1 rounded hover:bg-rose-900/40 transition-colors"
+                >
+                  › God Mode (99 All)
+                </button>
+                <button
+                  on:click={restoreStats}
+                  class="w-full text-left text-[11px] font-mono text-zinc-300 hover:text-white p-1 rounded hover:bg-zinc-800 transition-colors"
+                >
+                  › Restore Stats
+                </button>
               </div>
             {/if}
+
+            <div class="mt-auto space-y-2 pt-4 border-t border-zinc-800/80">
+              <button
+                type="button"
+                on:click={resetGame}
+                class="w-full text-[11px] font-mono text-zinc-400 hover:text-rose-400 py-1.5 rounded border border-zinc-800 hover:border-rose-900/60 transition-colors cursor-pointer"
+              >
+                Restart Campaign
+              </button>
+              <div class="text-[10px] text-zinc-600 font-mono text-center">
+                Autosaved
+              </div>
+            </div>
           </div>
 
-          <!-- Bottom Action Area -->
-          <div class="shrink-0 border-t border-zinc-800 bg-zinc-900/80 p-2 sm:p-4">
-            <!-- Dynamic Buttons -->
-            {#if currentChoices.length > 0}
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 sm:gap-2 mb-2 sm:mb-4">
-                {#each currentChoices as choice}
-                  <button
-                    type="button"
-                    on:click={() => submitAction(choice)}
-                    class="text-left text-xs sm:text-sm p-2 sm:p-3 bg-zinc-800 hover:bg-zinc-700/80 border border-zinc-700 hover:border-cyan-500/50 text-zinc-100 hover:text-white rounded transition-colors active:bg-zinc-700 cursor-pointer"
-                  >
-                    {choice}
-                  </button>
-                {/each}
-              </div>
-            {/if}
+          <!-- Main Narrative Log View -->
+          <div
+            class="flex-1 flex flex-col relative overflow-hidden bg-zinc-950 min-w-0"
+          >
+            <!-- Story Scrolling Container -->
+            <div
+              bind:this={logContainer}
+              class="flex-1 overflow-y-auto p-4 sm:p-6 scroll-smooth overscroll-none"
+            >
+              {#each narrativeLog as log}
+                <div
+                  class="text-zinc-300 leading-relaxed mb-4 whitespace-pre-wrap font-serif text-sm sm:text-base selection:bg-emerald-950 selection:text-emerald-200"
+                >
+                  {@html log}
+                </div>
+              {/each}
 
-            <!-- Free Typing Input -->
-            <div class="flex gap-2">
-              <span class="text-emerald-500 pt-2">></span>
-              <input
-                bind:value={freeInput}
-                on:keydown={handleInputKeydown}
-                type="text"
-                placeholder="Type action..."
-                disabled={isWaitingForAI || isAnimating}
-                class="flex-1 bg-transparent border-b border-zinc-700 hover:border-zinc-500 focus:border-cyan-500 text-zinc-200 py-2 outline-none transition-colors disabled:opacity-50"
-              />
-              <button
-                on:click={() => submitAction(freeInput)}
-                disabled={isWaitingForAI || isAnimating}
-                class="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded text-zinc-300 text-sm font-bold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                ROLL
-              </button>
+              {#if isWaitingForAI}
+                <div
+                  class="flex items-center gap-2 text-zinc-400 mt-3 p-2.5 rounded-xl bg-zinc-900/60 border border-zinc-800/80 w-fit"
+                >
+                  <span class="text-xs font-mono text-zinc-400"
+                    >Dungeon Master is composing</span
+                  >
+                  <div class="flex gap-1">
+                    <span
+                      class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"
+                    ></span>
+                    <span
+                      class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"
+                      style="animation-delay: 150ms"
+                    ></span>
+                    <span
+                      class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"
+                      style="animation-delay: 300ms"
+                    ></span>
+                  </div>
+                </div>
+              {/if}
+            </div>
+
+            <!-- Bottom Actions & Input Area -->
+            <div
+              class="shrink-0 border-t border-zinc-800/90 bg-zinc-900/90 p-3 sm:p-4 space-y-3"
+            >
+              <!-- Choice Action Buttons -->
+              {#if currentChoices.length > 0}
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {#each currentChoices as choice}
+                    <button
+                      type="button"
+                      on:click={() => submitAction(choice)}
+                      class="text-left text-xs font-mono p-2.5 rounded-xl bg-zinc-800/90 hover:bg-zinc-700/80 border border-zinc-700/80 hover:border-zinc-500 text-zinc-200 hover:text-white transition-colors active:scale-[0.99] cursor-pointer"
+                    >
+                      {choice}
+                    </button>
+                  {/each}
+                </div>
+              {/if}
+
+              <!-- Custom Text Input -->
+              <div class="flex items-center gap-2 pt-1">
+                <span class="text-zinc-500 font-mono text-sm pl-1">›</span>
+                <input
+                  bind:value={freeInput}
+                  on:keydown={handleInputKeydown}
+                  type="text"
+                  placeholder="Or enter custom action..."
+                  disabled={isWaitingForAI || isAnimating}
+                  class="flex-1 bg-zinc-950 border border-zinc-800 rounded-lg px-3 py-1.5 text-xs font-mono text-zinc-100 placeholder:text-zinc-600 focus:outline-none focus:border-zinc-600 transition-colors disabled:opacity-50"
+                />
+                <button
+                  type="button"
+                  on:click={() => submitAction(freeInput)}
+                  disabled={isWaitingForAI || isAnimating || !freeInput.trim()}
+                  class="px-3 py-1.5 bg-zinc-100 hover:bg-white text-zinc-950 rounded-lg text-xs font-mono font-bold transition-colors disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                >
+                  Act ↗
+                </button>
+              </div>
             </div>
           </div>
         </div>
       {/if}
+    </div>
+  </div>
+
+  <!-- Bottom Details -->
+  <div
+    class="w-full flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-zinc-500 pt-2"
+  >
+    <div class="inline-flex items-center gap-1.5">
+      <span>D&D 5th Edition Ruleset</span>
     </div>
   </div>
 </div>

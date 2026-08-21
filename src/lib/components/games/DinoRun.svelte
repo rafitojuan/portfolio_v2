@@ -346,18 +346,19 @@
   function drawDino() {
     if (dino.activePowerUp === "SPEED") ctx.fillStyle = "#facc15";
     else if (dino.activePowerUp === "GHOST") ctx.fillStyle = "#c084fc";
-    else if (dino.activePowerUp === "FLY") ctx.fillStyle = "#4ade80";
-    else ctx.fillStyle = "#22d3ee"; // cyan-400
+    else if (dino.activePowerUp === "FLY") ctx.fillStyle = "#38bdf8";
+    else if (dino.activePowerUp === "JUAN") ctx.fillStyle = "#ec4899";
+    else ctx.fillStyle = "#10b981"; // emerald-500
 
     if (dino.activePowerUp === "GHOST") {
       ctx.globalAlpha = 0.5; // Ghostly effect
     }
 
-    // Hacker aesthetic dino (simple rectangle with a "head")
+    // Dino body
     ctx.fillRect(dino.x, dino.y, dino.width, dino.height);
 
-    // Curly black hair
-    ctx.fillStyle = "#000000";
+    // Head / hair detail
+    ctx.fillStyle = "#18181b";
     ctx.beginPath();
     ctx.arc(dino.x + 4, dino.y, 4, 0, Math.PI * 2);
     ctx.arc(dino.x + 10, dino.y - 2, 5, 0, Math.PI * 2);
@@ -365,7 +366,7 @@
     ctx.fill();
 
     // Eye
-    ctx.fillStyle = "#09090b"; // bg color for eye
+    ctx.fillStyle = "#ffffff";
     ctx.fillRect(dino.x + 12, dino.y + 6, 4, 4);
 
     ctx.globalAlpha = 1.0; // Reset alpha
@@ -377,25 +378,26 @@
           ? "#facc15"
           : dino.activePowerUp === "GHOST"
             ? "#c084fc"
-            : "#4ade80";
+            : dino.activePowerUp === "FLY"
+              ? "#38bdf8"
+              : "#ec4899";
       let barWidth = (dino.powerUpTimer / 5000) * dino.width;
       ctx.fillRect(dino.x, dino.y - 8, barWidth, 4);
     }
   }
 
   function drawObstacles() {
-    ctx.fillStyle = "#a1a1aa"; // zinc-400
     for (let obs of obstacles) {
       if (obs.isFlying) {
         ctx.fillStyle = "#f43f5e"; // rose-500 for drones
       } else {
-        ctx.fillStyle = "#a1a1aa";
+        ctx.fillStyle = "#71717a"; // zinc-500
       }
       ctx.fillRect(obs.x, obs.y, obs.width, obs.height);
 
       // Eye for flying drone
       if (obs.isFlying) {
-        ctx.fillStyle = "#09090b";
+        ctx.fillStyle = "#ffffff";
         ctx.fillRect(obs.x + 4, obs.y + 4, 4, 4);
       }
     }
@@ -403,15 +405,13 @@
 
   function drawPowerups() {
     for (let pu of powerups) {
-      if (pu.type === "SPEED")
-        ctx.fillStyle = "#facc15"; // yellow-400
-      else if (pu.type === "GHOST")
-        ctx.fillStyle = "#c084fc"; // purple-400
-      else if (pu.type === "FLY") ctx.fillStyle = "#4ade80"; // green-400
+      if (pu.type === "SPEED") ctx.fillStyle = "#facc15"; // yellow-400
+      else if (pu.type === "GHOST") ctx.fillStyle = "#c084fc"; // purple-400
+      else if (pu.type === "FLY") ctx.fillStyle = "#38bdf8"; // sky-400
 
       ctx.fillRect(pu.x, pu.y, pu.width, pu.height);
 
-      // glowing center
+      // Glowing center
       ctx.fillStyle = "#ffffff";
       ctx.fillRect(pu.x + 4, pu.y + 4, pu.width - 8, pu.height - 8);
     }
@@ -521,7 +521,7 @@
         if (isDoubleTall) height = 65; // Very tall
         if (isFlying) height = 15;
 
-        // Flying obstacles sit exactly at head height so you must NOT jump
+        // Flying obstacles sit at head height
         let yPos = canvas.height - height;
         if (isFlying) yPos = canvas.height - 65;
 
@@ -536,7 +536,6 @@
         });
       }
 
-      // Randomize next spawn time slightly based on speed
       obstacleTimer = Math.random() * -400;
     }
 
@@ -547,12 +546,12 @@
       const type = types[Math.floor(Math.random() * types.length)];
       powerups.push({
         x: canvas.width,
-        y: canvas.height - 40 - Math.random() * 60, // floating in air
+        y: canvas.height - 40 - Math.random() * 60,
         width: 15,
         height: 15,
         type: type,
       });
-      powerupSpawnTimer = Math.random() * -5000; // Wait 5-10 seconds
+      powerupSpawnTimer = Math.random() * -5000;
     }
 
     for (let i = powerups.length - 1; i >= 0; i--) {
@@ -561,7 +560,7 @@
 
       if (checkCollision(pu)) {
         dino.activePowerUp = pu.type;
-        dino.powerUpTimer = 5000; // 5 seconds
+        dino.powerUpTimer = 5000;
         playPowerUpSound();
         powerups.splice(i, 1);
         continue;
@@ -600,66 +599,66 @@
 
   function draw() {
     // Clear canvas
-    ctx.fillStyle = "#18181b"; // zinc-900
+    ctx.fillStyle = "#09090b"; // dark zinc-950
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Draw ground line
     ctx.strokeStyle = "#27272a"; // zinc-800
     ctx.lineWidth = 2;
     ctx.beginPath();
-    ctx.moveTo(0, canvas.height);
-    ctx.lineTo(canvas.width, canvas.height);
+    ctx.moveTo(0, canvas.height - 1);
+    ctx.lineTo(canvas.width, canvas.height - 1);
     ctx.stroke();
 
     drawDino();
     drawPowerups();
     drawObstacles();
 
-    // Score & Level
+    // In-Canvas Score display
     ctx.fillStyle = "#a1a1aa"; // zinc-400
-    ctx.font = "16px monospace";
+    ctx.font = "14px 'GeistMono-Variable', monospace";
     ctx.textAlign = "right";
     let scoreText = `SCORE: ${Math.floor(score).toString().padStart(5, "0")}`;
     if (highScore > 0) {
       scoreText = `HI: ${Math.floor(highScore).toString().padStart(5, "0")}  ` + scoreText;
     }
-    ctx.fillText(scoreText, canvas.width - 20, 30);
+    ctx.fillText(scoreText, canvas.width - 20, 26);
     ctx.textAlign = "left"; // reset
 
     if (!gameStarted) {
-      ctx.fillStyle = "#22d3ee"; // cyan-400
-      ctx.font = "bold 24px monospace";
+      ctx.fillStyle = "#10b981"; // emerald-500
+      ctx.font = "bold 20px 'Plus Jakarta Sans', sans-serif";
       ctx.textAlign = "center";
       ctx.fillText(
-        "READY TO INITIATE",
+        "KIBO RUNNER",
         canvas.width / 2,
-        canvas.height / 2 - 10,
+        canvas.height / 2 - 12,
       );
 
-      ctx.fillStyle = "#a1a1aa";
-      ctx.font = "14px monospace";
+      ctx.fillStyle = "#71717a"; // zinc-500
+      ctx.font = "13px 'GeistMono-Variable', monospace";
       ctx.fillText(
-        "Press SPACE or Tap to start",
+        "Press SPACE or Tap to Start",
         canvas.width / 2,
-        canvas.height / 2 + 25,
+        canvas.height / 2 + 20,
       );
       ctx.textAlign = "left"; // reset
     } else if (isGameOver) {
       ctx.fillStyle = "#f43f5e"; // rose-500
-      ctx.font = "bold 28px monospace";
+      ctx.font = "bold 22px 'Plus Jakarta Sans', sans-serif";
       ctx.textAlign = "center";
       ctx.fillText(
-        "SYSTEM COMPROMISED",
+        "GAME OVER",
         canvas.width / 2,
-        canvas.height / 2 - 10,
+        canvas.height / 2 - 12,
       );
 
       ctx.fillStyle = "#a1a1aa";
-      ctx.font = "14px monospace";
+      ctx.font = "13px 'GeistMono-Variable', monospace";
       ctx.fillText(
-        "Press SPACE or Tap to reboot",
+        "Press SPACE or Tap to Retry",
         canvas.width / 2,
-        canvas.height / 2 + 25,
+        canvas.height / 2 + 20,
       );
       ctx.textAlign = "left"; // reset
     }
@@ -669,7 +668,6 @@
     const dt = time - lastTime;
     lastTime = time;
 
-    // Cap dt to prevent massive jumps when tab is inactive
     if (dt > 100) {
       update(16);
     } else {
@@ -681,7 +679,7 @@
     if (!isGameOver) {
       animationId = requestAnimationFrame(gameLoop);
     } else {
-      draw(); // Ensure game over frame is drawn
+      draw();
     }
   }
 
@@ -690,11 +688,9 @@
     if (savedScore) highScore = parseInt(savedScore, 10);
     
     ctx = canvas.getContext("2d") as CanvasRenderingContext2D;
-    // Set internal resolution
     canvas.width = 600;
     canvas.height = 200;
 
-    // Initial draw without starting
     initGame();
     draw();
 
@@ -721,7 +717,7 @@
         }
       }
     } else {
-      // Tap / swipe up → jump
+      // Tap → jump
       jump();
     }
   }
@@ -733,47 +729,86 @@
   });
 </script>
 
-<div
-  class="w-full flex flex-col items-center justify-center pt-16 sm:pt-24 px-2 sm:px-4 gap-3 sm:gap-6 min-h-[80vh]"
->
-  <div
-    class="w-full max-w-3xl flex justify-between items-center text-zinc-400 font-mono text-xs sm:text-base"
-  >
+<div class="w-full max-w-4xl mx-auto flex flex-col items-center justify-center pt-8 sm:pt-14 pb-16 px-4 gap-4 min-h-[85vh]">
+  
+  <!-- Top Navigation & Return Link -->
+  <div class="w-full flex items-center justify-between pb-4 border-b border-zinc-200 dark:border-zinc-800/80">
     <button
+      type="button"
       on:click={() => dispatch("back")}
-      class="hover:text-cyan-400 transition-colors flex items-center gap-2"
+      class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 transition-colors cursor-pointer"
     >
-      <span class="text-cyan-500">&lt;</span> TERMINATE
+      <span>← Back to Games</span>
     </button>
-    <div class="text-sm">DINO_RUN.exe</div>
+
+    <div class="flex items-center gap-3 text-xs font-mono">
+      <span class="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">
+        LEVEL {level}
+      </span>
+      <span class="text-zinc-500">Kibo Run</span>
+    </div>
   </div>
 
-  <div
-    class="w-full max-w-3xl border border-zinc-800 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.05)] cursor-pointer focus:outline-none focus:border-cyan-500/50 transition-colors select-none touch-none"
-    on:click={jump}
-    on:touchstart={handleTouchStart}
-    on:touchend={handleTouchEnd}
-    on:contextmenu|preventDefault
-    on:keydown={(e) => e.key === "Enter" && jump()}
-    role="button"
-    tabindex="0"
-    aria-label="Game Area. Press Space or Tap to Jump, Swipe Down to Crouch"
-  >
-    <!-- Use aspect-video or fixed aspect ratio for consistency -->
-    <canvas
-      bind:this={canvas}
-      class="w-full h-full bg-zinc-900 block"
-      style="aspect-ratio: 3/1;"
-    ></canvas>
+  <!-- Tactile Arcade Console Frame -->
+  <div class="w-full p-3 sm:p-5 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-xs dark:shadow-none space-y-3">
+    
+    <!-- Header HUD stats -->
+    <div class="flex items-center justify-between px-2 text-xs font-mono text-zinc-500">
+      <div class="flex items-center gap-3">
+        <span>STATUS: <strong class="{isGameOver ? 'text-rose-500 font-bold' : gameStarted ? 'text-emerald-600 dark:text-emerald-400 font-bold' : 'text-zinc-400'}">{isGameOver ? 'GAME OVER' : gameStarted ? 'RUNNING' : 'STANDBY'}</strong></span>
+        {#if dino.activePowerUp}
+          <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 border border-amber-300 dark:border-amber-700">
+            PWR: {dino.activePowerUp} ({Math.ceil(dino.powerUpTimer / 1000)}s)
+          </span>
+        {/if}
+      </div>
+
+      <div class="flex items-center gap-3">
+        <span>HI: <strong class="text-zinc-900 dark:text-zinc-200">{Math.floor(highScore)}</strong></span>
+        <span>SCORE: <strong class="text-zinc-950 dark:text-white font-bold">{Math.floor(score)}</strong></span>
+      </div>
+    </div>
+
+    <!-- Canvas Screen -->
+    <div
+      class="relative w-full border border-zinc-300 dark:border-zinc-800 rounded-xl overflow-hidden bg-zinc-950 shadow-inner cursor-pointer focus:outline-none select-none touch-none"
+      on:click={jump}
+      on:touchstart={handleTouchStart}
+      on:touchend={handleTouchEnd}
+      on:contextmenu|preventDefault
+      on:keydown={(e) => e.key === "Enter" && jump()}
+      role="button"
+      tabindex="0"
+      aria-label="Kibo Run Game Area. Press Space or Tap to Jump, Down Arrow to Crouch"
+    >
+      <canvas
+        bind:this={canvas}
+        class="w-full h-full bg-zinc-950 block"
+        style="aspect-ratio: 3/1;"
+      ></canvas>
+    </div>
   </div>
 
-  <div
-    class="text-zinc-500 font-mono text-xs sm:text-sm max-w-3xl w-full text-center mt-2 flex flex-col gap-1"
-  >
-    <div>
-      <span class="hidden sm:inline text-zinc-400">Press SPACE to jump. ↓ to crouch. </span>
-      <span class="sm:hidden text-zinc-400">Tap to jump. Swipe down to crouch. </span>
-      Avoid the obstacles.
+  <!-- Control Hints / Keycaps -->
+  <div class="w-full flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-zinc-500 pt-2">
+    <div class="inline-flex items-center gap-1.5">
+      <kbd class="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 text-[11px]">SPACE</kbd>
+      <span>or</span>
+      <kbd class="px-1.5 py-1 rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 text-[11px]">▲</kbd>
+      <span>Jump</span>
+    </div>
+
+    <span class="text-zinc-300 dark:text-zinc-700">•</span>
+
+    <div class="inline-flex items-center gap-1.5">
+      <kbd class="px-1.5 py-1 rounded bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-800 dark:text-zinc-200 text-[11px]">▼</kbd>
+      <span>Crouch</span>
+    </div>
+
+    <span class="text-zinc-300 dark:text-zinc-700 hidden sm:inline">•</span>
+
+    <div class="hidden sm:inline-flex items-center gap-1">
+      <span>Mobile: Tap to Jump · Swipe Down to Crouch</span>
     </div>
   </div>
 </div>

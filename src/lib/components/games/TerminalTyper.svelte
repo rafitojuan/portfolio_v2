@@ -1,4 +1,3 @@
-
 <script lang="ts">
   import { onMount, createEventDispatcher, onDestroy } from 'svelte';
 
@@ -64,16 +63,16 @@
       const gain = audioCtx.createGain();
       
       osc.type = 'triangle';
-      osc.frequency.setValueAtTime(400 + Math.random() * 200, audioCtx.currentTime); // Random pitch for mechanical feel
+      osc.frequency.setValueAtTime(400 + Math.random() * 200, audioCtx.currentTime); // Random pitch for mechanical switch feel
       
-      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.05);
+      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.005, audioCtx.currentTime + 0.04);
       
       osc.connect(gain);
       gain.connect(audioCtx.destination);
       
       osc.start();
-      osc.stop(audioCtx.currentTime + 0.05);
+      osc.stop(audioCtx.currentTime + 0.04);
     } catch(e) {}
   }
 
@@ -89,8 +88,8 @@
       osc.frequency.setValueAtTime(150, audioCtx.currentTime);
       osc.frequency.exponentialRampToValueAtTime(50, audioCtx.currentTime + 0.2);
       
-      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-      gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.2);
+      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.005, audioCtx.currentTime + 0.2);
       
       osc.connect(gain);
       gain.connect(audioCtx.destination);
@@ -109,17 +108,17 @@
       const gain = audioCtx.createGain();
       
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(800, audioCtx.currentTime);
-      osc.frequency.setValueAtTime(1200, audioCtx.currentTime + 0.1);
+      osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+      osc.frequency.setValueAtTime(1320, audioCtx.currentTime + 0.08);
       
-      gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-      gain.gain.linearRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+      gain.gain.setValueAtTime(0.08, audioCtx.currentTime);
+      gain.gain.linearRampToValueAtTime(0.005, audioCtx.currentTime + 0.25);
       
       osc.connect(gain);
       gain.connect(audioCtx.destination);
       
       osc.start();
-      osc.stop(audioCtx.currentTime + 0.3);
+      osc.stop(audioCtx.currentTime + 0.25);
     } catch(e) {}
   }
 
@@ -128,8 +127,8 @@
     currentTyped = "";
     nextExpectedChar = currentWord[0];
     
-    // Make it harder as score goes up
-    maxTimeMs = Math.max(1500, 5000 - (score * 150)); 
+    // Gradual difficulty scaling
+    maxTimeMs = Math.max(1600, 5000 - (score * 140)); 
     currentTimeMs = maxTimeMs;
     timeLeft = 100;
   }
@@ -158,31 +157,31 @@
       
       osc.type = 'square';
       osc.frequency.setValueAtTime(300, audioCtx.currentTime);
-      osc.frequency.setValueAtTime(400, audioCtx.currentTime + 0.15);
-      osc.frequency.setValueAtTime(500, audioCtx.currentTime + 0.3);
-      osc.frequency.setValueAtTime(600, audioCtx.currentTime + 0.45);
-      osc.frequency.setValueAtTime(800, audioCtx.currentTime + 0.6);
+      osc.frequency.setValueAtTime(400, audioCtx.currentTime + 0.12);
+      osc.frequency.setValueAtTime(500, audioCtx.currentTime + 0.24);
+      osc.frequency.setValueAtTime(600, audioCtx.currentTime + 0.36);
+      osc.frequency.setValueAtTime(800, audioCtx.currentTime + 0.48);
       
       gain.gain.setValueAtTime(0, audioCtx.currentTime);
-      gain.gain.linearRampToValueAtTime(0.1, audioCtx.currentTime + 0.05);
-      gain.gain.setValueAtTime(0.1, audioCtx.currentTime + 0.7);
-      gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.2);
+      gain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 0.05);
+      gain.gain.setValueAtTime(0.08, audioCtx.currentTime + 0.55);
+      gain.gain.linearRampToValueAtTime(0, audioCtx.currentTime + 1.0);
       
       osc.connect(gain);
       gain.connect(audioCtx.destination);
       
       osc.start();
-      osc.stop(audioCtx.currentTime + 1.2);
+      osc.stop(audioCtx.currentTime + 1.0);
     } catch(e) {}
   }
 
   function getRating(wpm: number) {
-    if (wpm <= 20) return "Grandma Typist";
-    if (wpm <= 40) return "Keyboard Pecker";
-    if (wpm <= 60) return "Junior Developer";
-    if (wpm <= 80) return "Senior Engineer";
-    if (wpm <= 100) return "10x Hacker";
-    return "CYBER GOD";
+    if (wpm <= 25) return { title: "Novice Typist", badge: "bg-zinc-800 text-zinc-300" };
+    if (wpm <= 45) return { title: "Touch Typist", badge: "bg-blue-900/60 text-blue-300" };
+    if (wpm <= 65) return { title: "Proficient Developer", badge: "bg-emerald-900/60 text-emerald-300" };
+    if (wpm <= 85) return { title: "Senior Systems Engineer", badge: "bg-purple-900/60 text-purple-300" };
+    if (wpm <= 105) return { title: "10x Speed Demon", badge: "bg-amber-900/60 text-amber-300" };
+    return { title: "Keyboard Virtuoso", badge: "bg-rose-900/60 text-rose-300" };
   }
 
   function gameOver() {
@@ -194,7 +193,6 @@
   function calculateWpm(now: number) {
     const elapsedMinutes = (now - startTime) / 60000;
     if (elapsedMinutes > 0) {
-      // Standard WPM formula: (chars / 5) / minutes
       wpm = Math.round((totalCharsTyped / 5) / elapsedMinutes);
     }
   }
@@ -234,7 +232,6 @@
       }
       
       timeLeft = (currentTimeMs / maxTimeMs) * 100;
-      
       calculateWpm(timestamp);
       
       if (currentTimeMs <= 0) {
@@ -270,16 +267,10 @@
       }
     }
 
-    // Prevent default browser shortcuts except for essential ones
     if (e.key.length === 1 && !e.ctrlKey && !e.altKey && !e.metaKey) {
       e.preventDefault();
       
-      if (!gameStarted) {
-        startGame();
-        return;
-      }
-
-      if (isGameOver) {
+      if (!gameStarted || isGameOver) {
         startGame();
         return;
       }
@@ -299,10 +290,8 @@
           nextExpectedChar = currentWord[currentTyped.length];
         }
       } else {
-        // Wrong key
         playErrorSound();
-        // Time penalty for typos
-        currentTimeMs -= 200; 
+        currentTimeMs -= 200; // Time penalty for typos
       }
     } else if (e.code === 'Space') {
       e.preventDefault();
@@ -320,79 +309,155 @@
   });
 </script>
 
-<div class="w-full flex flex-col items-center justify-center pt-16 sm:pt-24 px-2 sm:px-4 gap-3 sm:gap-6 min-h-[80vh]">
-  <div class="w-full max-w-3xl flex justify-between items-center text-zinc-400 font-mono text-xs sm:text-base">
-    <button on:click={() => dispatch('back')} class="hover:text-cyan-400 transition-colors flex items-center gap-2">
-      <span class="text-cyan-500">&lt;</span> TERMINATE
+<div class="w-full max-w-4xl mx-auto flex flex-col items-center justify-center pt-8 sm:pt-14 pb-16 px-4 gap-4 min-h-[85vh]">
+  
+  <!-- Top Navigation & Return Link -->
+  <div class="w-full flex items-center justify-between pb-4 border-b border-zinc-200 dark:border-zinc-800/80">
+    <button
+      type="button"
+      on:click={() => dispatch('back')}
+      class="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-mono text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900 hover:bg-zinc-200 dark:hover:bg-zinc-800 hover:text-zinc-950 dark:hover:text-white border border-zinc-200 dark:border-zinc-800 transition-colors cursor-pointer"
+    >
+      <span>← Back to Games</span>
     </button>
-    <div class="text-sm">WARRIROR.exe</div>
+
+    <div class="flex items-center gap-3 text-xs font-mono">
+      <span class="px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">
+        WPM ENGINE
+      </span>
+      <span class="text-zinc-500">Terminal Warrior</span>
+    </div>
   </div>
 
-  <div class="w-full max-w-3xl bg-[#0a0a0c] border border-zinc-800 rounded-xl overflow-hidden shadow-[0_0_15px_rgba(34,211,238,0.05)] h-[300px] sm:h-[400px] flex flex-col relative font-mono">
+  <!-- Tactile Terminal Console Frame -->
+  <div class="w-full p-3 sm:p-5 rounded-2xl bg-white dark:bg-zinc-900/40 border border-zinc-200 dark:border-zinc-800 shadow-xs dark:shadow-none space-y-3">
     
-    <!-- Top Bar -->
-    <div class="w-full h-8 bg-zinc-900 border-b border-zinc-800 flex items-center px-4 justify-between">
-      <div class="flex gap-2">
-        <div class="w-3 h-3 rounded-full bg-rose-500/50"></div>
-        <div class="w-3 h-3 rounded-full bg-amber-500/50"></div>
-        <div class="w-3 h-3 rounded-full bg-green-500/50"></div>
+    <!-- Functional Terminal Header -->
+    <div class="flex items-center justify-between px-2 text-xs font-mono text-zinc-500">
+      <div class="flex items-center gap-2.5">
+        <span class="inline-block w-2 h-2 rounded-full {gameStarted && !isGameOver ? 'bg-emerald-500 animate-pulse' : isGameOver ? 'bg-rose-500' : 'bg-zinc-400'}"></span>
+        <span class="font-bold text-zinc-700 dark:text-zinc-300">
+          {isGameOver ? 'SESSION EXPIRED' : gameStarted ? 'BENCHMARK RUNNING' : 'INPUT READY'}
+        </span>
       </div>
-      <div class="text-xs text-zinc-500">
-        root@terminal:~
+
+      <div class="flex items-center gap-4">
+        <span>SCORE: <strong class="text-zinc-950 dark:text-white font-bold">{score}</strong></span>
+        <span>WPM: <strong class="text-emerald-600 dark:text-emerald-400 font-bold">{wpm}</strong></span>
       </div>
     </div>
 
-    <!-- Game Area -->
-    <div class="flex-1 p-3 sm:p-6 flex flex-col relative">
+    <!-- Terminal Screen -->
+    <div class="w-full bg-zinc-950 border border-zinc-800 rounded-xl overflow-hidden min-h-[300px] sm:min-h-[360px] flex flex-col relative font-mono shadow-inner">
       
-      <!-- Stats -->
-      <div class="flex justify-between text-zinc-400 mb-4 sm:mb-8 text-sm sm:text-base">
-        <div>SCORE: <span class="text-cyan-400 font-bold">{score}</span></div>
-        <div>WPM: <span class="text-emerald-400 font-bold">{wpm}</span></div>
+      <!-- Terminal Subheader -->
+      <div class="w-full h-8 bg-zinc-900/90 border-b border-zinc-800/80 flex items-center px-4 justify-between text-xs text-zinc-400">
+        <span class="text-zinc-400 font-mono text-[11px]">rafitojuan@terminal:~ (bash)</span>
+        <span class="text-[11px] text-zinc-400">Keystroke Synth: Active</span>
       </div>
 
-      <!-- Main Typing Area -->
-      <div class="flex-1 flex flex-col items-center justify-center">
+      <!-- Main Interactive Display Area -->
+      <div class="flex-1 p-4 sm:p-8 flex flex-col items-center justify-center relative">
         {#if !gameStarted && !isGameOver}
-          <div class="text-cyan-400 text-lg sm:text-2xl font-bold mb-2 sm:mb-4 animate-pulse">SYSTEM READY</div>
-          <div class="text-zinc-500 text-xs sm:text-base">Start typing to initiate bypass...</div>
+          <div class="flex flex-col items-center text-center space-y-3">
+            <div class="px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-800/60 text-emerald-400 text-xs font-bold tracking-wider">
+              READY TO BENCHMARK
+            </div>
+            <h2 class="text-xl sm:text-2xl font-bold text-white font-display">
+              Terminal Speed Typer
+            </h2>
+            <p class="text-xs sm:text-sm text-zinc-400 max-w-sm leading-relaxed">
+              Type real-world Linux, Docker, and Git shell commands against the countdown timer.
+            </p>
+            <div class="pt-3">
+              <kbd class="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-700 text-white text-xs font-mono inline-flex items-center gap-1.5 shadow-sm">
+                Press ANY KEY or SPACE to Begin
+              </kbd>
+            </div>
+          </div>
         {:else if isGameOver}
-          <div class="text-rose-500 text-xl sm:text-3xl font-bold mb-2 sm:mb-4">ACCESS DENIED</div>
-          <div class="text-zinc-500 mb-2 text-sm sm:text-base">TIMEOUT REACHED</div>
-          
-          <div class="mt-4 p-3 sm:p-4 border border-zinc-800 bg-zinc-900/50 rounded-lg text-center min-w-[200px] sm:min-w-[300px] shadow-[0_0_15px_rgba(34,211,238,0.05)]">
-            <div class="text-xs text-zinc-500 mb-1">FINAL RATING</div>
-            <div class="text-xl font-black text-cyan-400 uppercase tracking-widest">{getRating(wpm)}</div>
-          </div>
+          <!-- Professional Speedcard Summary -->
+          <div class="flex flex-col items-center text-center space-y-4 w-full max-w-md animate-fade-in">
+            <div class="px-3 py-0.5 rounded-full bg-rose-950/60 border border-rose-800/60 text-rose-400 text-[11px] font-bold tracking-wider">
+              TIMEOUT REACHED
+            </div>
+            
+            <div class="space-y-1">
+              <div class="text-xs text-zinc-500 uppercase tracking-widest font-mono">Typing Speed Benchmark</div>
+              <div class="text-4xl sm:text-5xl font-black text-white font-mono tracking-tight">
+                {wpm} <span class="text-base text-zinc-500 font-normal">WPM</span>
+              </div>
+            </div>
 
-          <div class="text-zinc-400 mt-4 sm:mt-6 font-bold text-sm sm:text-lg">Final Score: <span class="text-cyan-400">{score}</span> | WPM: <span class="text-emerald-400">{wpm}</span></div>
-          <div class="text-zinc-600 mt-4 sm:mt-8 text-xs sm:text-sm animate-pulse">Press any key to retry</div>
-        {:else}
-          <!-- Timeout Bar -->
-          <div class="w-full max-w-xs sm:max-w-md h-2 sm:h-3 bg-zinc-800 rounded-full mb-4 sm:mb-8 overflow-hidden relative border border-zinc-700">
-            <div 
-              class="h-full rounded-full {timeLeft > 30 ? 'bg-cyan-400' : 'bg-rose-500 shadow-[0_0_10px_rgba(244,63,94,0.5)]'}"
-              style="width: {Math.max(0, timeLeft)}%"
-            ></div>
+            <!-- Tier Rating Badge -->
+            <div class="px-3 py-1 rounded-lg border border-zinc-700 text-xs font-bold uppercase tracking-wider {getRating(wpm).badge}">
+              {getRating(wpm).title}
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-2 gap-3 w-full pt-2">
+              <div class="p-2.5 rounded-lg bg-zinc-900/80 border border-zinc-800 text-left">
+                <div class="text-[10px] text-zinc-400 uppercase">Commands Solved</div>
+                <div class="text-lg font-bold text-zinc-100 font-mono">{score}</div>
+              </div>
+              <div class="p-2.5 rounded-lg bg-zinc-900/80 border border-zinc-800 text-left">
+                <div class="text-[10px] text-zinc-400 uppercase">Total Characters</div>
+                <div class="text-lg font-bold text-emerald-400 font-mono">{totalCharsTyped}</div>
+              </div>
+            </div>
+
+            <div class="pt-2 text-xs text-zinc-400 font-mono animate-pulse">
+              Press any key or Space to retry
+            </div>
           </div>
-          
-          <!-- Word -->
-          <div class="text-xl sm:text-3xl tracking-widest flex items-center justify-center break-all text-center">
-            <span class="text-emerald-400">
-              {currentTyped}
-            </span>
-            <span class="text-zinc-100 bg-zinc-800 relative">
-              {currentWord.substring(currentTyped.length, currentTyped.length + 1)}
-              <!-- Cursor blink under expected char -->
-              <span class="absolute bottom-0 left-0 w-full h-[2px] bg-cyan-400 animate-pulse"></span>
-            </span>
-            <span class="text-zinc-600">
-              {currentWord.substring(currentTyped.length + 1)}
-            </span>
+        {:else}
+          <!-- Active Typing Game Loop -->
+          <div class="w-full flex flex-col items-center space-y-6 sm:space-y-8">
+            
+            <!-- Dynamic Countdown Progress Bar -->
+            <div class="w-full max-w-md h-2 bg-zinc-900 rounded-full overflow-hidden border border-zinc-800 relative">
+              <div 
+                class="h-full rounded-full transition-all duration-75 {timeLeft > 30 ? 'bg-emerald-500' : 'bg-rose-500'}"
+                style="width: {Math.max(0, timeLeft)}%"
+              ></div>
+            </div>
+            
+            <!-- Word Display with Character Highlighting -->
+            <div class="text-xl sm:text-3xl tracking-wider font-mono flex items-center justify-center flex-wrap gap-y-2 text-center select-none">
+              <!-- Successfully Typed Characters -->
+              <span class="text-emerald-400 font-bold">
+                {currentTyped}
+              </span>
+              
+              <!-- Next Expected Character (Cursor Box) -->
+              <span class="text-zinc-950 bg-emerald-400 px-1 py-0.5 rounded-xs font-bold relative mx-0.5 animate-pulse">
+                {currentWord.substring(currentTyped.length, currentTyped.length + 1) === ' ' ? '␣' : currentWord.substring(currentTyped.length, currentTyped.length + 1)}
+              </span>
+              
+              <!-- Remaining Untyped Characters -->
+              <span class="text-zinc-600">
+                {currentWord.substring(currentTyped.length + 1)}
+              </span>
+            </div>
+
+            <!-- Typing Instructions Micro-hint -->
+            <div class="text-xs text-zinc-600 font-mono">
+              -200ms penalty for typo mistakes
+            </div>
           </div>
         {/if}
       </div>
+    </div>
+  </div>
 
+  <!-- Control Hints & Info -->
+  <div class="w-full flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-zinc-500 pt-2">
+    <div class="inline-flex items-center gap-1.5">
+      <span>Audio: Procedural Mechanical Key Switch Synthesis</span>
+    </div>
+    <span class="text-zinc-300 dark:text-zinc-700">•</span>
+    <div class="inline-flex items-center gap-1.5">
+      <span>Standard WPM: <code class="text-zinc-700 dark:text-zinc-300">(chars ÷ 5) ÷ min</code></span>
     </div>
   </div>
 </div>

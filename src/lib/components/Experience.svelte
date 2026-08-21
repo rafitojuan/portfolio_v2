@@ -1,31 +1,39 @@
 <script>
   const experiences = [
     {
-      company: 'Energi Pelabuhan Indonesia Ltd.',
-      role: 'Data Management and IT Infrastructure',
+      company: 'PT Energi Pelabuhan Indonesia (SOE)',
+      role: 'Data Management & IT Infrastructure Engineer',
       period: '2024 - Present',
-      description: 'Architect and ship scalable web apps, PWAs, mobile clients, and cloud-native APIs using cutting-edge tech. Own full-stack development, DevOps automation, and cloud infrastructure while providing hands-on hardware, network, and data-management support.',
+      badge: 'Current Role',
+      description: 'Architect and ship scalable web apps, PWAs, mobile clients, and cloud-native APIs. Oversee full-stack system development, DevOps automation pipelines, and core cloud infrastructure while managing critical enterprise data workflows.',
+      tags: ['Laravel', 'Clean Architecture', 'Grafana', 'Sentry', 'Docker', 'Cloudflare', 'MySQL'],
       logo: '/pt_energi_pelabuhan_indonesia_logo.jpg'
     },
     {
-      company: 'Gravix (Freelance)',
-      role: 'Fullstack and Devops Engineer',
+      company: 'Gravix (Remote / Contract)',
+      role: 'Fullstack & DevOps Engineer',
       period: '2024 - 2025',
-      description: 'Collaborated with various clients to deliver production-ready web and pwa solutions. Focused on solving complex frontend challenges and building robust backend systems.',
+      badge: 'Client Work',
+      description: 'Collaborated with international clients across Singapore and Malaysia to deliver production-ready web platforms and PWAs. Resolved complex frontend state challenges and engineered robust high-throughput backend APIs.',
+      tags: ['ReactJS', 'NextJS', 'Laravel', 'REST API', 'GCP', 'GitHub Actions'],
       logo: '/idgravix_logo.jpg'
     },
     {
       company: 'SEMUDAH',
-      role: 'Head Technician',
+      role: 'Head Technician & Systems Lead',
       period: '2023 - 2024',
-      description: 'Led the technical team at SEMUDAH, overseeing hardware, software, and network operations across vocational workshops. Architected internal tools, streamlined deployment pipelines, and delivered UI/UX & web-dev services to external clients—turning maintenance chaos into a scalable, self-healing ecosystem.',
+      badge: 'Team Lead',
+      description: 'Led the technical team overseeing hardware, software, and network operations across vocational workshops. Architected internal automation tools and delivered web development services to external clients.',
+      tags: ['Network Operations', 'Internal Tooling', 'System Administration'],
       logo: '/semudah.jpg'
     },
     {
       company: 'Korpolairud Baharkam Polri',
       role: 'IT Staff Intern',
       period: 'Jan 2023 - Apr 2023',
-      description: 'Contributed to the development and enhancement of internal applications, automated deployment workflows, and streamlined IT operations. Provided hands-on support for hardware diagnostics, network optimization, and software provisioning—transforming legacy processes into efficient, scalable solutions.',
+      badge: 'Internship',
+      description: 'Contributed to internal application development, deployment workflow automations, network optimization, and software provisioning.',
+      tags: ['Network Support', 'Application Maintenance', 'Hardware Diagnostics'],
       logo: '/korps_mariniers_logo.jpg'
     }
   ];
@@ -33,33 +41,58 @@
 
 <section id="experience" class="py-12 border-b border-zinc-200 dark:border-zinc-900/50 scroll-mt-14">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-200 dark:border-zinc-900/50 h-full">
-    <h2 class="text-xl font-bold text-zinc-950 dark:text-white mb-8">Experience</h2>
     
-    <div class="space-y-12">
+    <!-- Section Header -->
+    <div class="flex items-baseline justify-between mb-8 pb-4 border-b border-zinc-200 dark:border-zinc-800/80">
+      <div class="flex items-center gap-3">
+        <span class="text-xs font-mono font-bold text-zinc-400 dark:text-zinc-500">04 /</span>
+        <h2 class="text-xl sm:text-2xl font-bold font-display tracking-tight text-zinc-950 dark:text-white">
+          Professional Experience
+        </h2>
+      </div>
+      <span class="text-xs font-mono text-zinc-500">Track Record</span>
+    </div>
+    
+    <div class="space-y-8">
       {#each experiences as exp}
-        <div class="group relative flex gap-6">
-          <div class="absolute left-[27px] top-14 bottom-0 w-px bg-zinc-200 dark:bg-zinc-800 -mb-6 last:hidden"></div>
+        <div class="group relative flex gap-4 sm:gap-6 p-5 rounded-2xl bg-white dark:bg-zinc-900/20 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-zinc-300 dark:hover:border-zinc-700 shadow-xs dark:shadow-none transition-all">
           
+          <!-- Logo Column -->
           <div class="relative shrink-0">
-            <div class="w-14 h-14 rounded-full bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-600 dark:text-zinc-400 font-bold group-hover:border-zinc-400 dark:group-hover:border-zinc-700 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors overflow-hidden shadow-xs dark:shadow-none">
+            <div class="w-12 h-12 sm:w-14 sm:h-14 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 overflow-hidden shadow-xs">
               <img src={exp.logo} alt={exp.company} class="w-full h-full object-cover" />
             </div>
           </div>
 
-          <div class="flex-1 pt-1">
-            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
+          <!-- Content Column -->
+          <div class="flex-1 space-y-2">
+            <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1">
               <div>
-                <h3 class="font-semibold text-zinc-900 dark:text-white group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors">
-                  {exp.company}
-                </h3>
-                <div class="text-sm text-zinc-600 dark:text-zinc-400">{exp.role}</div>
+                <div class="flex items-center gap-2">
+                  <h3 class="font-bold font-display text-zinc-900 dark:text-white group-hover:text-zinc-950 dark:group-hover:text-zinc-100 transition-colors text-base sm:text-lg">
+                    {exp.company}
+                  </h3>
+                  <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700">
+                    {exp.badge}
+                  </span>
+                </div>
+                <div class="text-xs sm:text-sm font-medium text-zinc-700 dark:text-zinc-300 mt-0.5">{exp.role}</div>
               </div>
-              <span class="text-xs font-mono text-zinc-500 pt-1">{exp.period}</span>
+              <span class="text-xs font-mono text-zinc-500 shrink-0">{exp.period}</span>
             </div>
             
-            <p class="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
+            <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
               {exp.description}
             </p>
+
+            <!-- Role Technologies -->
+            <div class="flex flex-wrap gap-1.5 pt-2">
+              {#each exp.tags as tag}
+                <span class="px-2 py-0.5 text-[11px] font-mono text-zinc-500 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded">
+                  {tag}
+                </span>
+              {/each}
+            </div>
           </div>
         </div>
       {/each}

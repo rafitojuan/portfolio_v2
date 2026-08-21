@@ -1,180 +1,173 @@
 <script>
-  import { fade, fly } from 'svelte/transition';
   import { onMount } from 'svelte';
   import { lenis } from '../stores/lenis.js';
 
   let showAllProjects = false;
   let isStuck = false;
   let sentinel;
+  let searchQuery = '';
+  let selectedCategory = 'all';
 
-  const projects = [
+  const flagshipProjects = [
     {
       title: 'MPSOnline',
-      description: 'A comprehensive cloud-based School Management System streamlining administrative tasks for Malaysian educational institutions.',
-      tags: ['Laravel', 'RestAPI', 'Microservice Architecture', 'Toyyibpay', 'GCP', 'Github Actions','OpenAI'],
+      badge: 'Malaysia · EdTech',
+      subtitle: 'Cloud School Management System',
+      description: 'Comprehensive cloud-based School Management System streamlining administrative workflows, fee collections, and student data for Malaysian educational institutions.',
+      tags: ['Laravel', 'RestAPI', 'Microservices', 'Toyyibpay', 'GCP', 'OpenAI'],
       link: 'https://mpsonline.cloud/',
-      icon: 'https://mpsonline.cloud/images/Logo_MPS.png'
+      featured: true,
+      role: 'Backend Architect & DevOps'
     },
     {
       title: 'Qarirhack',
-      description: 'An AI-powered career acceleration platform offering personalized roadmaps, CV reviews, and global job matching strategies for a Singaporean client.',
-      tags: ['ReactJS', 'Laravel', 'RestAPI', 'OpenAI','Github Actions'],
+      badge: 'Singapore · Career AI',
+      subtitle: 'AI Career Acceleration Platform',
+      description: 'AI-driven career acceleration engine delivering personalized roadmaps, automated CV diagnostic reviews, and international job-matching pipelines.',
+      tags: ['ReactJS', 'Laravel', 'RestAPI', 'OpenAI', 'Github Actions'],
       link: 'https://qarirhack.gravix.my.id/',
-      icon: 'https://qarirhack.gravix.my.id/assets/favicon-Ch12LfCe.svg'
+      featured: true,
+      role: 'Fullstack Engineer'
     },
     {
-      title: 'RPHClick',
-      description: 'AI-driven Daily Lesson Plan (RPH) generator tailored for Malaysian educators, automating curriculum planning with intelligent suggestions.',
-      tags: ['Laravel', 'RestAPI', 'Microservice Architecture', 'Toyyibpay', 'GCP', 'Github Actions','OpenAI'],
-      link: 'http://rphclick.cloud/',
-      icon: 'https://bo.mpsonline.cloud/images/iconWebMaster.png'
+      title: 'AP2EPI Suite',
+      badge: 'BUMN · SOE Infrastructure',
+      subtitle: 'Integrated Enterprise Portal',
+      description: 'Unified customer service and operational support system for PT Energi Pelabuhan Indonesia, centralizing enterprise ticketing, fleet logistics, and analytics.',
+      tags: ['Laravel', 'Clean Architecture', 'Grafana', 'Sentry', 'Nginx', 'Cloudflare'],
+      link: 'https://epionline.id/',
+      featured: true,
+      role: 'Lead Systems Engineer'
     },
     {
       title: 'Webapp Backoffice',
-      description: 'Centralized administrative dashboard managing multiple ecosystem products including MPSOnline and RPHClick, featuring real-time analytics.',
-      tags: ['Laravel', 'RestAPI', 'Microservice Architecture', 'Toyyibpay', 'GCP', 'Github Actions','OpenAI'],
+      badge: 'Enterprise Hub',
+      subtitle: 'Multi-Tenant Product Dashboard',
+      description: 'Centralized administrative backoffice managing ecosystem products including MPSOnline and RPHClick with real-time operational telemetry.',
+      tags: ['Laravel', 'Microservices', 'GCP', 'Toyyibpay', 'Livewire'],
       link: 'https://bo.mpsonline.cloud/',
-      icon: 'https://bo.mpsonline.cloud/images/iconWebMaster.png'
+      featured: true,
+      role: 'Fullstack Developer'
     },
   ];
 
-  const additionalProjects = [
+  const archiveProjects = [
     {
-      title: 'AP2EPI',
-      description: 'Integrated internal Customer Service application for Energi Pelabuhan Indonesia (EPI), unifying support tickets and operational workflows.',
-      tags: ['Laravel', 'RestAPI', 'Grafana', 'Centralized Backend', 'Cloud Server', 'Github Actions','Nginx','Sentry','Cloudflare'],
-      link: 'https://epionline.id/',
-      icon: 'https://epionline.id/assets/img/logoepi.jpg'
+      title: 'RPHClick',
+      category: 'web',
+      description: 'AI-driven Daily Lesson Plan generator for Malaysian educators with intelligent curriculum structuring.',
+      tags: ['Laravel', 'OpenAI', 'GCP', 'RestAPI'],
+      link: 'http://rphclick.cloud/',
+      year: '2024'
     },
     {
-      title: 'Glide',
-      description: 'Efficient project management tool designed to streamline team collaboration, task tracking, and workflow optimization.',
-      tags: ['Laravel', 'Livewire', 'AlpineJS', 'Github Actions','Cloudflare'],
+      title: 'Glide PM',
+      category: 'enterprise',
+      description: 'Project management & task orchestration system for team collaboration and sprint planning.',
+      tags: ['Laravel', 'Livewire', 'AlpineJS', 'Cloudflare'],
       link: 'https://glide.epionline.id/',
-      icon: 'https://glide.epionline.id/build/images/logo_project_board.png'
-    },
-    {
-      title: 'Company Profile',
-      description: 'Official corporate website for Energi Pelabuhan Indonesia (EPI), showcasing company services, milestones, and operational excellence.',
-      tags: ['Wordpress', 'Elementor', 'Cloudflare'],
-      link: 'https://energipelabuhan.co.id/',
-      icon: 'https://epionline.id/assets/img/logoepi.jpg'
-    },
-    {
-      title: 'EPILog',
-      description: 'Operational expense management system for tracking HR and general administrative costs at Energi Pelabuhan Indonesia.',
-      tags: ['ReactJS', 'Tailwind', 'PWA'],
-      link: 'https://epilog.rafitojuan.my.id/data',
-      icon: 'https://epionline.id/assets/img/logoepi.jpg'
-    },
-    {
-      title: 'General Affairs',
-      description: 'Internal portal for managing corporate resources, including meeting room reservations, vehicle fleet scheduling, and general affairs requests.',
-      tags: ['Laravel', 'RestAPI', 'Grafana', 'Centralized Backend', 'Cloud Server', 'Github Actions','Nginx','Sentry','Cloudflare'],
-      link: 'https://epionline.id',
-      icon: 'https://epionline.id/assets/img/logoepi.jpg'
+      year: '2024'
     },
     {
       title: 'EPI Docs',
-      description: 'Comprehensive backend API documentation and developer portal for Energi Pelabuhan Indonesia\'s internal systems.',
-      tags: ['Laravel', 'Scramble Dedoc', 'Markdown', 'Cloudflare'],
+      category: 'enterprise',
+      description: 'Developer portal and comprehensive REST API reference documentation for internal port services.',
+      tags: ['Laravel', 'Scramble Dedoc', 'Markdown'],
       link: 'https://epionline.id/api/v1.0/docs',
-      icon: 'https://epionline.id/assets/img/logoepi.jpg'
+      year: '2024'
+    },
+    {
+      title: 'EPILog',
+      category: 'enterprise',
+      description: 'Operational expense and administrative cost tracking PWA for PT Energi Pelabuhan Indonesia.',
+      tags: ['ReactJS', 'Tailwind', 'PWA'],
+      link: 'https://epilog.rafitojuan.my.id/data',
+      year: '2024'
     },
     {
       title: 'PresenX',
-      description: 'Digital attendance management system designed for interns at Energi Pelabuhan Indonesia, streamlining check-ins and activity reporting.',
-      tags: ['ReactJS', 'NextJS', 'Tailwind','Cloudflare'],
+      category: 'enterprise',
+      description: 'Digital attendance management and daily activity reporting system designed for interns.',
+      tags: ['ReactJS', 'NextJS', 'Tailwind', 'Cloudflare'],
       link: 'https://presenx.epionline.id/',
-      icon: 'https://epionline.id/assets/img/logoepi.jpg'
+      year: '2024'
     },
     {
-      title: 'EPI Backend System',
-      description: 'Core backend infrastructure powering Energi Pelabuhan Indonesia\'s digital ecosystem, handling data processing and service integration.',
-      tags: ['Laravel', 'RestAPI', 'Centralized Backend', 'Clean Architecture', 'Grafana', 'Sentry', 'Nginx', 'Cloudflare'],
-      link: 'https://epionline.id/api/v1.0/docs',
-      icon: 'https://epionline.id/assets/img/logoepi.jpg'
-    },
-    {
-      title: 'EPI Electric',
-      description: 'Customer-facing mobile application for electrical utility management, featuring bill payments, power upgrades, and usage monitoring.',
+      title: 'EPI Electric Mobile',
+      category: 'mobile',
+      description: 'Utility management mobile app for electricity billing, meter telemetry, and account upgrades.',
       tags: ['Flutter', 'Dart', 'RestAPI'],
       link: '#',
-      icon: '/Logo-Purple.png'
+      year: '2024'
     },
     {
       title: 'Clinico API',
-      description: 'Robust backend API architecture for Clinico, a healthcare management platform serving the Malaysian market.',
+      category: 'web',
+      description: 'Healthcare management API platform powering clinical workflows for Malaysian clinics.',
       tags: ['Laravel', 'RestAPI', 'Clean Architecture'],
       link: '#',
-      icon: 'https://api.clinico.site/storage/clinic_profile/hsL8rpOYJkm7QXxNOSOxgQXl2qxQNJwUwT9DdhoR.png'
-    },
-    {
-      title: 'Portfolio Website V1',
-      description: 'My inaugural portfolio website, marking the beginning of my journey in web development and design.',
-      tags: ['HTML', 'CSS', 'JavaScript', 'Tailwind', 'Github'],
-      link: 'https://rafitojuan.github.io/portofolio/',
-      icon: '/Logo-Purple.png'
-    },
-    {
-      title: 'AI Portfolio Website',
-      description: 'Interactive portfolio featuring an integrated AI chat assistant, showcasing early experimentation with conversational interfaces.',
-      tags: ['ReactJS', 'NextJS', 'Framer Motion', 'Tailwind', 'OpenAI', 'Vercel'],
-      link: 'https://rafitojuan.my.id/',
-      icon: '/Logo-Purple.png'
-    },
-    {
-      title: 'Portfolio Website V2',
-      description: 'The current iteration of my professional portfolio, built with Svelte and Tailwind CSS to demonstrate modern frontend capabilities.',
-      tags: ['Svelte', 'Tailwind', 'Lenis' , 'Vercel'],
-      link: 'https://portfolio.rafitojuan.my.id',
-      icon: '/Logo-White.png'
+      year: '2024'
     },
     {
       title: 'Wordpress Loadtesting',
-      description: 'Python-based load testing script designed to benchmark and analyze the performance of WordPress installations under high traffic.',
-      tags: ['Python'],
+      category: 'tools',
+      description: 'Python benchmarking suite designed to stress-test high-concurrency WordPress installations.',
+      tags: ['Python', 'Benchmarking', 'CLI'],
       link: 'https://github.com/rafitojuan/wordpress-loadtesting',
-      icon: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 100"><g fill="#00749a" clip-path="url(#a)"><path d="M7.107 49.999c0 16.979 9.867 31.65 24.175 38.604L10.82 32.543a42.7 42.7 0 0 0-3.714 17.456m71.85-2.165c0-5.3-1.904-8.972-3.537-11.83-2.175-3.532-4.212-6.524-4.212-10.058 0-3.943 2.99-7.613 7.202-7.613.19 0 .37.024.557.034-7.632-6.991-17.8-11.26-28.966-11.26-14.985 0-28.169 7.689-35.839 19.334 1.007.03 1.956.05 2.76.05 4.487 0 11.432-.544 11.432-.544 2.312-.136 2.585 3.26.276 3.533 0 0-2.325.274-4.91.41l15.62 46.46 9.387-28.152-6.683-18.31c-2.31-.135-4.498-.409-4.498-.409-2.312-.135-2.04-3.669.27-3.533 0 0 7.084.545 11.299.545 4.486 0 11.431-.545 11.431-.545 2.314-.136 2.586 3.26.275 3.534 0 0-2.328.273-4.909.408l15.5 46.11L75.69 61.7c1.856-5.932 3.267-10.194 3.267-13.866"/><path d="m50.753 53.75-12.87 37.396a42.9 42.9 0 0 0 12.118 1.748 42.9 42.9 0 0 0 14.243-2.43 3.6 3.6 0 0 1-.305-.592zm36.885-24.33c.184 1.366.288 2.834.288 4.41 0 4.353-.812 9.246-3.261 15.364L71.563 87.075C84.315 79.64 92.893 65.824 92.893 50a42.66 42.66 0 0 0-5.255-20.58"/><path d="M50 0C22.43 0 0 22.43 0 49.999 0 77.57 22.43 100 50 100s50.003-22.429 50.003-50.002C100.003 22.429 77.569 0 50.001 0m0 97.708c-26.305 0-47.707-21.402-47.707-47.71C2.293 23.695 23.694 2.294 50 2.294c26.304 0 47.705 21.401 47.705 47.706 0 26.307-21.402 47.71-47.705 47.71"/></g><defs><clipPath id="a"><path fill="#fff" d="M0 0h100v100H0z"/></clipPath></defs></svg>'
+      year: '2024'
     },
     {
-      title: 'CIV VI advanced cheat menu patch',
-      description: 'Community patch for Civilization VI, enhancing the debug menu with advanced cheat functionalities for gameplay testing.',
+      title: 'CIV VI Cheat Menu Patch',
+      category: 'tools',
+      description: 'Community mod enhancement and debug menu expansion for Civilization VI game testing.',
       tags: ['Lua Script', 'Modding', 'GUI'],
       link: 'https://github.com/rafitojuan/civilization-vi-advanced-cheat-menu-fix',
-      icon: '/civvi.png'
+      year: '2023'
     },
     {
-      title: 'Simple NFC',
-      description: 'Desktop utility for reading and writing NFC tags, simplifying hardware interaction for developers and hobbyists.',
-      tags: ['ReactJS', 'Tailwind', 'Vercel'],
+      title: 'Simple NFC Utility',
+      category: 'tools',
+      description: 'Web & desktop utility for reading, writing, and debugging NFC tag payloads.',
+      tags: ['ReactJS', 'Web NFC API', 'Tailwind'],
       link: 'https://nfc.rafitojuan.my.id/',
-      icon: '/Logo-Purple.png'
+      year: '2024'
     },
     {
       title: 'Pomore',
-      description: 'Productivity tool combining a Pomodoro timer with an ad-free YouTube player to maintain focus and flow state.',
-      tags: ['ReactJS', 'Tailwind', 'Youtube API V3', 'Framer Motion' , 'Vercel'],
+      category: 'web',
+      description: 'Flow-state productivity tool combining customizable Pomodoro intervals with audio streaming.',
+      tags: ['ReactJS', 'Tailwind', 'Framer Motion'],
       link: 'https://pomore.rafitojuan.my.id/',
-      icon: '/Logo-Purple.png'
-    },
-    {
-      title: 'Predikta',
-      description: 'Entertaining algorithmic tool that analyzes name compatibility to generate relationship prediction scores.',
-      tags: ['ReactJS', 'Tailwind', 'Framer Motion', 'Vercel'],
-      link: 'https://predikta.rafitojuan.my.id/',
-      icon: 'https://predikta.rafitojuan.my.id/heart.svg'
+      year: '2023'
     },
     {
       title: 'Mutameda',
-      description: 'Mood tracking application designed to help users monitor emotional well-being and identify patterns over time.',
-      tags: ['Ruby', 'Ruby on Rails', 'Tailwind'],
+      category: 'web',
+      description: 'Mental health and emotional pattern tracking application with trend analysis.',
+      tags: ['Ruby on Rails', 'Tailwind', 'PostgreSQL'],
       link: 'https://mutameda.rafitojuan.my.id/',
-      icon: '/Logo-Purple.png'
+      year: '2023'
     },
+    {
+      title: 'AI Portfolio Assistant V1',
+      category: 'web',
+      description: 'Conversational portfolio experiment featuring an integrated intelligent chat assistant.',
+      tags: ['ReactJS', 'NextJS', 'OpenAI', 'Framer Motion'],
+      link: 'https://rafitojuan.my.id/',
+      year: '2024'
+    }
   ];
 
-  function toggleProjects() {
+  $: filteredArchive = archiveProjects.filter(project => {
+    const matchesCategory = selectedCategory === 'all' || project.category === selectedCategory;
+    const matchesSearch = searchQuery.trim() === '' || 
+      project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      project.tags.some(tag => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+    return matchesCategory && matchesSearch;
+  });
+
+  function toggleArchive() {
     showAllProjects = !showAllProjects;
     if (!showAllProjects) {
       if ($lenis) {
@@ -203,95 +196,171 @@
 <section id="projects" class="py-12 border-b border-zinc-200 dark:border-zinc-900/50 scroll-mt-14">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 border-x border-zinc-200 dark:border-zinc-900/50 h-full relative">
     <div bind:this={sentinel} class="absolute -top-14 h-1 w-full pointer-events-none opacity-0"></div>
-    <div class={`flex items-center justify-between mb-8 sticky top-14 z-10 py-4 border-b border-zinc-200 dark:border-zinc-800/50 transition-colors duration-300 ${isStuck ? 'bg-white/90 dark:bg-black/90 backdrop-blur-sm' : ''}`}>
+    
+    <!-- Sticky Section Header -->
+    <div class={`flex items-baseline justify-between mb-8 sticky top-14 z-10 py-4 border-b border-zinc-200 dark:border-zinc-800/80 transition-colors duration-300 ${isStuck ? 'bg-white/95 dark:bg-zinc-950/95 backdrop-blur-md' : ''}`}>
       <div class="flex items-center gap-3">
-        <h2 class="text-xl font-bold text-zinc-950 dark:text-white">Projects</h2>
-        <span class="text-zinc-500 text-sm font-mono">({projects.length + additionalProjects.length})</span>
+        <span class="text-xs font-mono font-bold text-zinc-400 dark:text-zinc-500">02 /</span>
+        <h2 class="text-xl sm:text-2xl font-bold font-display tracking-tight text-zinc-950 dark:text-white">
+          Selected Works & Systems
+        </h2>
+        <span class="text-xs font-mono text-zinc-500">({flagshipProjects.length + archiveProjects.length})</span>
       </div>
-      <button type="button" on:click={toggleProjects} class="text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer">
-        {showAllProjects ? 'See less ↑' : 'View all projects →'}
+
+      <button
+        type="button"
+        on:click={toggleArchive}
+        class="text-xs font-mono text-zinc-600 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white transition-colors cursor-pointer"
+      >
+        {showAllProjects ? 'Close Archive ↑' : 'Explore Archive (' + archiveProjects.length + ') →'}
       </button>
     </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {#each projects as project}
-        <a href={project.link} target="_blank" rel="noopener noreferrer" class="group block p-4 bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:border-zinc-300 dark:hover:border-zinc-700 shadow-xs dark:shadow-none transition-all duration-300">
-          <div class="flex justify-between items-start mb-4">
-            <div class="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-xl group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-              {#if project.icon.startsWith('http') || project.icon.startsWith('/')}
-                <img src={project.icon} alt={project.title} class="w-full h-full object-contain p-1 {project.icon.includes('Logo-White') ? 'dark:invert-0 invert' : ''}" />
-              {:else if project.icon.startsWith('<svg')}
-                <div class="w-full h-full p-1 flex items-center justify-center">
-                  {@html project.icon}
-                </div>
-              {:else}
-                {project.icon}
-              {/if}
+
+    <!-- Flagship Bento Showcase Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+      {#each flagshipProjects as project}
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group relative flex flex-col justify-between p-5 sm:p-6 bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 rounded-2xl hover:border-zinc-400 dark:hover:border-zinc-600 hover:bg-zinc-50/80 dark:hover:bg-zinc-900/60 shadow-xs dark:shadow-none transition-all duration-200"
+        >
+          <div>
+            <!-- Badge & External Link Arrow -->
+            <div class="flex items-center justify-between gap-2 mb-3">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-mono font-medium bg-zinc-100 dark:bg-zinc-800/90 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700/60">
+                {project.badge}
+              </span>
+              <svg class="w-4 h-4 text-zinc-400 dark:text-zinc-500 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
             </div>
-            <svg class="w-4 h-4 text-zinc-400 dark:text-zinc-600 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-            </svg>
+
+            <!-- Title & Subtitle -->
+            <h3 class="text-lg font-bold font-display text-zinc-900 dark:text-white group-hover:text-zinc-950 dark:group-hover:text-zinc-100 transition-colors">
+              {project.title}
+            </h3>
+            <p class="text-xs font-mono text-zinc-500 dark:text-zinc-400 mb-3">
+              {project.subtitle} · {project.role}
+            </p>
+
+            <!-- Description -->
+            <p class="text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
+              {project.description}
+            </p>
           </div>
-          
-          <h3 class="font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors">
-            {project.title}
-          </h3>
-          
-          <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-4 leading-relaxed">
-            {project.description}
-          </p>
-          
-          <div class="flex flex-wrap gap-2">
+
+          <!-- Architecture Tags -->
+          <div class="flex flex-wrap gap-1.5 pt-3 border-t border-zinc-100 dark:border-zinc-800/60">
             {#each project.tags as tag}
-              <span class="px-2 py-1 text-xs font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded">
+              <span class="px-2 py-0.5 text-[11px] font-mono text-zinc-600 dark:text-zinc-400 bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded">
                 {tag}
               </span>
             {/each}
           </div>
         </a>
       {/each}
-
-      {#if showAllProjects}
-        {#each additionalProjects as project, i (i)}
-          <a href={project.link} target="_blank" rel="noopener noreferrer"
-             class="group block p-4 bg-white dark:bg-zinc-900/30 border border-zinc-200 dark:border-zinc-800 rounded-xl hover:bg-zinc-50 dark:hover:bg-zinc-800/50 hover:border-zinc-300 dark:hover:border-zinc-700 shadow-xs dark:shadow-none transition-all duration-300 h-full flex flex-col"
-             in:fly={{ y: 20, delay: (i % 12) * 50, duration: 300 }}>
-            
-            <div class="flex justify-between items-start mb-4">
-              <div class="w-10 h-10 rounded-lg bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-xl group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                {#if project.icon.startsWith('http') || project.icon.startsWith('/')}
-                <img src={project.icon} alt={project.title} class="w-full h-full object-contain p-1 {project.icon.includes('Logo-White') ? 'dark:invert-0 invert' : ''}" />
-              {:else if project.icon.startsWith('<svg')}
-                <div class="w-full h-full p-1 flex items-center justify-center">
-                  {@html project.icon}
-                </div>
-              {:else}
-                {project.icon}
-              {/if}
-              </div>
-              <svg class="w-4 h-4 text-zinc-400 dark:text-zinc-600 group-hover:text-zinc-950 dark:group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </div>
-            
-            <h3 class="font-bold text-zinc-900 dark:text-white mb-2 group-hover:text-zinc-700 dark:group-hover:text-zinc-200 transition-colors line-clamp-1">
-              {project.title}
-            </h3>
-            
-            <p class="text-sm text-zinc-600 dark:text-zinc-400 mb-4 leading-relaxed grow">
-              {project.description}
-            </p>
-            
-            <div class="flex flex-wrap gap-2 mt-auto">
-              {#each project.tags as tag}
-                <span class="px-2 py-1 text-xs font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded">
-                  {tag}
-                </span>
-              {/each}
-            </div>
-          </a>
-        {/each}
-      {/if}
     </div>
+
+    <!-- Expandable Tabular Archive Section -->
+    {#if showAllProjects}
+      <div class="pt-6 pb-2 border-t border-zinc-200 dark:border-zinc-800">
+        
+        <!-- Filter & Search Controls -->
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
+          <div class="flex flex-wrap gap-1.5 text-xs font-mono">
+            <button
+              type="button"
+              on:click={() => selectedCategory = 'all'}
+              class="px-2.5 py-1 rounded-md transition-colors cursor-pointer {selectedCategory === 'all'
+                ? 'bg-zinc-900 text-white dark:bg-white dark:text-black font-semibold'
+                : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200'}"
+            >
+              All ({archiveProjects.length})
+            </button>
+            <button
+              type="button"
+              on:click={() => selectedCategory = 'enterprise'}
+              class="px-2.5 py-1 rounded-md transition-colors cursor-pointer {selectedCategory === 'enterprise'
+                ? 'bg-zinc-900 text-white dark:bg-white dark:text-black font-semibold'
+                : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200'}"
+            >
+              Enterprise / SOE
+            </button>
+            <button
+              type="button"
+              on:click={() => selectedCategory = 'web'}
+              class="px-2.5 py-1 rounded-md transition-colors cursor-pointer {selectedCategory === 'web'
+                ? 'bg-zinc-900 text-white dark:bg-white dark:text-black font-semibold'
+                : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200'}"
+            >
+              Web Platforms
+            </button>
+            <button
+              type="button"
+              on:click={() => selectedCategory = 'tools'}
+              class="px-2.5 py-1 rounded-md transition-colors cursor-pointer {selectedCategory === 'tools'
+                ? 'bg-zinc-900 text-white dark:bg-white dark:text-black font-semibold'
+                : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200'}"
+            >
+              Tools & Scripts
+            </button>
+          </div>
+
+          <!-- Instant Search -->
+          <div class="relative w-full sm:w-48">
+            <input
+              type="text"
+              bind:value={searchQuery}
+              placeholder="Search archive..."
+              class="w-full px-3 py-1 text-xs font-mono rounded-md bg-zinc-50 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 placeholder-zinc-400 focus:outline-none focus:border-zinc-400 dark:focus:border-zinc-600"
+            />
+          </div>
+        </div>
+
+        <!-- Tabular Spec Sheet Archive Items -->
+        <div class="space-y-2">
+          {#each filteredArchive as project}
+            <a
+              href={project.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-xl bg-white dark:bg-zinc-900/20 border border-zinc-200/80 dark:border-zinc-800/80 hover:border-zinc-300 dark:hover:border-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900/50 transition-colors gap-3"
+            >
+              <div class="space-y-1">
+                <div class="flex items-center gap-2">
+                  <h4 class="text-sm font-bold text-zinc-900 dark:text-zinc-100 group-hover:text-black dark:group-hover:text-white">
+                    {project.title}
+                  </h4>
+                  <span class="text-[10px] font-mono text-zinc-400">{project.year}</span>
+                </div>
+                <p class="text-xs text-zinc-600 dark:text-zinc-400">
+                  {project.description}
+                </p>
+              </div>
+
+              <div class="flex items-center gap-2 self-start sm:self-center shrink-0">
+                <div class="flex flex-wrap gap-1">
+                  {#each project.tags.slice(0, 3) as tag}
+                    <span class="px-1.5 py-0.5 text-[10px] font-mono text-zinc-500 dark:text-zinc-400 bg-zinc-100 dark:bg-zinc-800 rounded">
+                      {tag}
+                    </span>
+                  {/each}
+                </div>
+                <svg class="w-3.5 h-3.5 text-zinc-400 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </div>
+            </a>
+          {/each}
+
+          {#if filteredArchive.length === 0}
+            <div class="p-8 text-center text-xs font-mono text-zinc-500">
+              No archive projects match "{searchQuery}".
+            </div>
+          {/if}
+        </div>
+      </div>
+    {/if}
   </div>
 </section>
